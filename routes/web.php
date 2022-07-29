@@ -9,6 +9,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\EmployeesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,6 +84,7 @@ Route::resources([
     'dash/roles' => RoleController::class,
     'dash/menus' => MenuController::class,
     'dash/users' => UserController::class,
+    'dash/security/assistance' => EmployeesController::class,
 ]);
 
 /********************* Dashboard routes :: End **************************************/

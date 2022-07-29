@@ -33,7 +33,7 @@ class PeopleMenuSeeder extends Seeder
 
         $people_section = new Menu();
         $people_section->menu_id = $dash_side_menu->id;
-        $people_section->name = 'People';
+        $people_section->name = 'الأشخاص';
         $people_section->url = '#';
         $people_section->order = 2;
         $people_section->icon = 'flaticon-layers';
@@ -43,7 +43,7 @@ class PeopleMenuSeeder extends Seeder
 
         $people_menu = new Menu();
         $people_menu->menu_id = $dash_side_menu->id;
-        $people_menu->name = 'People';
+        $people_menu->name = 'الأشخاص';
         $people_menu->url = '#';
         $people_menu->order = 2;
         $people_menu->icon = 'fas fa-users-cog';
@@ -53,7 +53,7 @@ class PeopleMenuSeeder extends Seeder
 
         $users = new Menu();
         $users->menu_id = $people_menu->id;
-        $users->name = 'Users';
+        $users->name = 'المستخدمبن';
         $users->url = '#';
         $users->order = 2;
         $users->icon = 'flaticon-layers';
@@ -63,7 +63,7 @@ class PeopleMenuSeeder extends Seeder
 
         $users_index = new Menu();
         $users_index->menu_id = $users->id;
-        $users_index->name = 'Users';
+        $users_index->name = 'المنستخدمين';
         $users_index->url = 'dash/users';
         $users_index->order = 2;
         $users_index->icon = 'flaticon-layers';
@@ -73,7 +73,7 @@ class PeopleMenuSeeder extends Seeder
 
         $users_create = new Menu();
         $users_create->menu_id = $users->id;
-        $users_create->name = 'Add user';
+        $users_create->name = 'إضافة مستخدم';
         $users_create->url = 'dash/users/create';
         $users_create->order = 2;
         $users_create->icon = 'flaticon-layers';

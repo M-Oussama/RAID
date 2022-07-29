@@ -1,0 +1,316 @@
+@extends('layouts.dashboard')
+
+@section('page_meta')
+    <title>إضافة موظف</title>
+    <meta name="keywords" content="Rozaric"/>
+    <meta name="description" content="Rozaric">
+    <meta name="author" content="Rozaric">
+@endsection
+
+@section('styles')
+    <!-- Page styles -->
+@endsection
+
+@section('scripts')
+    <!-- Page scripts -->
+    <script>
+        //Password check
+        var password = $('input[name="password"]');
+        var password2 = $('input[name="password2"]');
+
+        password2.on('keyup', function () {
+            if (password.val()) {
+                if (password2.val() != password.val()) {
+                    password2.removeClass('is-valid');
+                    password2.addClass('is-invalid');
+                } else {
+                    password2.removeClass('is-invalid');
+                    password2.addClass('is-valid');
+                }
+            }
+        })
+
+        //Image uploader
+        var avatar = new KTImageInput('kt_avatar');
+
+        //Select2
+                $('#kt_select2_1').select2();
+
+    </script>
+@endsection
+
+@section('content')
+    <div class="container">
+        <!--begin::Card-->
+        <div class="card card-custom gutter-b example example-compact">
+            <div class="card-header">
+                <h3 class="card-title"> معلومات الموظف</h3>
+            </div>
+            <!--begin::Form-->
+            <form class="form" method="post" action="dash/security/assistance" enctype="multipart/form-data">
+                @csrf
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="image-input image-input-empty image-input-outline d-contents" id="kt_avatar"
+                                 style="background-image: url(assets/media/users/blank.png);margin-left: 36%;">
+                                <div class="image-input-wrapper"></div>
+
+                                <label
+                                    class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                                    data-action="change" data-toggle="tooltip" title=""
+                                    data-original-title="Change avatar">
+                                    <i class="fa fa-pen icon-sm text-muted"></i>
+                                    <input type="file" name="avatar" accept=".png, .jpg, .jpeg" autocomplete="photo"/>
+                                    <input type="hidden" name="avatar_remove"/>
+                                </label>
+
+                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                                      data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+                                    <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                </span>
+
+                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                                      data-action="remove" data-toggle="tooltip" title="Remove avatar">
+                                    <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                </span>
+                            </div>
+                            <span class="form-text text-muted" style="margin-left: 27%;">أنواع الملفات المسموح بها: png، jpg، jpeg.</span>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 row">
+                            <div class="form-group col-sm-12 col-md-12">
+                                <label>الإسم* :</label>
+                                <input type="text" name="name" value="{{old('name')}}" autocomplete="family-name"
+                                       class="form-control form-control-solid" placeholder="أدخل اسم الموظف" required/>
+                                <span class="form-text text-muted">الرجاء إدخال اسم الموظف</span>
+                            </div>
+                            <div class="form-group col-sm-12 col-md-12">
+                                <label>اللقب* :</label>
+                                <input type="text" name="surname" value="{{old('surname')}}" autocomplete="given-name"
+                                       class="form-control form-control-solid" placeholder="أدخل لقب الموظف"
+                                       required/>
+                                <span class="form-text text-muted">الرجاء إدخال لقب الموظف</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="form-group col-sm-12 col-md-4">
+                            <label>تاريح الميلاد :</label>
+                            <input type="date" name="birthdate" value="{{old('birthdate')}}" autocomplete="bday"
+                                   class="form-control form-control-solid" placeholder="أدخل تاريخ ميلاد الموظف"/>
+                            <span class="form-text text-muted">الرجاء إدخال تاريخ ميلاد الموظف</span>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-4">
+                            <label>مكان الميلاد * :</label>
+                            <input type="text" name="surname" value="{{old('surname')}}" autocomplete="given-name"
+                                   class="form-control form-control-solid" placeholder="أدخل مكان الميلاد"
+                                   required/>
+                            <span class="form-text text-muted">الرجاء إدخال مكان الميلاد</span>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-4">
+                            <label>الولاية : </label>
+                            <select class="form-control" id="baladia_select" name="baladia_id" autocomplete="city">
+                                @foreach($wilayas as $wilaya)
+                                    <option value="{{$wilaya->id}}" {{old('baladia_id') == $wilaya->id ? 'selected':''}}>{{$wilaya->WILAYA."- ".$wilaya->name_ar}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6">
+                            <label>إسم الأب* :</label>
+                            <input type="text" name="surname" value="{{old('surname')}}" autocomplete="given-name"
+                                   class="form-control form-control-solid" placeholder="أدخل إسم الأب"
+                                   required/>
+                            <span class="form-text text-muted">الرجاء إدخال إسم الأب</span>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-6">
+                            <label>إسم ولقب الأم* :</label>
+                            <input type="text" name="surname" value="{{old('surname')}}" autocomplete="given-name"
+                                   class="form-control form-control-solid" placeholder="أدخل إسم ولقب الأم"
+                                   required/>
+                            <span class="form-text text-muted">الرجاء إدخال إسم ولقب الأم</span>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-4">
+                            <label>الحالة العائلية* :</label>
+                            <input type="text" name="surname" value="{{old('surname')}}" autocomplete="given-name"
+                                   class="form-control form-control-solid" placeholder="أدخل الحالة العائلية"
+                                   required/>
+                            <span class="form-text text-muted">الرجاء إدخال الحالة العائلية</span>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-4">
+                            <label> عدد الأولاد * :</label>
+                            <input type="number" name="siblings_educated" value="{{old('siblings_educated')}}"
+                                   class="form-control form-control-solid" placeholder="ادخل عدد الأولاد"
+                                   min="0" />
+                            <span class="form-text text-muted">الرجاء ادخال عدد الأولاد </span>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-4">
+                            <label>إسم الزوجة* :</label>
+                            <input type="text" name="surname" value="{{old('surname')}}" autocomplete="given-name"
+                                   class="form-control form-control-solid" placeholder="أدخل إسم الزوجة"
+                                   required/>
+                            <span class="form-text text-muted">الرجاء إدخال إسم الزوجة</span>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-6">
+                            <label> العنوان * :</label>
+                            <input type="text" name="surname" value="{{old('surname')}}" autocomplete="given-name"
+                                   class="form-control form-control-solid" placeholder="أدخل العنوان"
+                                   required/>
+                            <span class="form-text text-muted">الرجاء إدخال العنوان</span>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-6">
+                            <label>الولاية : </label>
+                            <select class="form-control" id="baladia_select" name="baladia_id" autocomplete="city">
+                                @foreach($wilayas as $wilaya)
+                                    <option value="{{$wilaya->id}}" {{old('baladia_id') == $wilaya->id ? 'selected':''}}>{{$wilaya->WILAYA."- ".$wilaya->name_ar}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-6">
+                            <label> رقم عقد الإزدياد * :</label>
+                            <input type="text" name="surname" value="{{old('surname')}}" autocomplete="given-name"
+                                   class="form-control form-control-solid" placeholder="أدخل رقم عقد الإزدياد"
+                                   required/>
+                            <span class="form-text text-muted">الرجاء إدخال رقم عقد الإزدياد</span>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-6">
+                            <label> المستوى الدراسي * :</label>
+                            <input type="text" name="surname" value="{{old('surname')}}" autocomplete="given-name"
+                                   class="form-control form-control-solid" placeholder="أدخل المستوى الدراسي"
+                                   required/>
+                            <span class="form-text text-muted">الرجاء إدخال المستوى الدراسي</span>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-6">
+                            <label> ـ رقم الحساب البريدي الجاري * :</label>
+                            <input type="text" name="surname" value="{{old('surname')}}" autocomplete="given-name"
+                                   class="form-control form-control-solid" placeholder="أدخل ـ رقم الحساب البريدي الجاري"
+                                   required/>
+                            <span class="form-text text-muted">الرجاء إدخال رقم الحساب البريدي الجاري</span>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-6">
+                            <label> رقم الضمان الإجتماعي * :</label>
+                            <input type="text" name="surname" value="{{old('surname')}}" autocomplete="given-name"
+                                   class="form-control form-control-solid" placeholder="أدخل رقم الضمان الإجتماعي"
+                                   required/>
+                            <span class="form-text text-muted">الرجاء إدخال رقم الضمان الإجتماعي</span>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-6">
+                            <label> الوضعية تجاه الخدمة الوطنية * :</label>
+                            <input type="text" name="surname" value="{{old('surname')}}" autocomplete="given-name"
+                                   class="form-control form-control-solid" placeholder="أدخل الوضعية تجاه الخدمة الوطنية"
+                                   required/>
+                            <span class="form-text text-muted">الرجاء إدخال الوضعية تجاه الخدمة الوطنية</span>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-6">
+                            <label> الرتبة * :</label>
+                            <input type="text" name="surname" value="{{old('surname')}}" autocomplete="given-name"
+                                   class="form-control form-control-solid" placeholder="أدخل الرتبة"
+                                   required/>
+                            <span class="form-text text-muted">الرجاء إدخال الرتبة</span>
+                        </div>
+
+
+                        <div class="form-group col-sm-12 col-md-6">
+                            <label> رقم الهاتف * :</label>
+                            <input type="text" name="surname" value="{{old('surname')}}" autocomplete="given-name"
+                                   class="form-control form-control-solid" placeholder="أدخل رقم الهاتف"
+                                   required/>
+                            <span class="form-text text-muted">الرجاء إدخال رقم الهاتف</span>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6">
+                            <label>فصيلة الدم : </label>
+                            <select class="form-control" id="baladia_select" name="baladia_id" autocomplete="city">
+
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
+
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-4">
+                            <label>بطاقة التعريف الوطنية/رخصة السياقة</label>
+                            <select class="form-control" id="baladia_select" name="baladia_id" autocomplete="city">
+
+                                <option value="NC">بطاقة التعريف الوطنية</option>
+                                <option value="DL">رخصة السياقة</option>
+
+
+                            </select>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-4">
+                            <label>رقم بطاقة التعريف الوطنية * :</label>
+                            <input type="text" name="surname" value="{{old('surname')}}" autocomplete="given-name"
+                                   class="form-control form-control-solid" placeholder="أدخل رقم بطاقة التعريف الوطنية"
+                                   required/>
+                            <span class="form-text text-muted">الرجاء إدخال رقم بطاقة التعريف الوطنية</span>
+                        </div>
+
+
+                       {{-- <div class="form-group col-sm-12 col-md-6">
+                            <label> رقم رخصة السياقة * :</label>
+                            <input type="text" name="surname" value="{{old('surname')}}" autocomplete="given-name"
+                                   class="form-control form-control-solid" placeholder="أدخل رقم رخصة السياقة"
+                                   required/>
+                            <span class="form-text text-muted">الرجاء إدخال رقم رخصة السياقة</span>
+                        </div>--}}
+
+                        <div class="form-group col-sm-12 col-md-4">
+                            <label> الصادرة بتاريخ * :</label>
+                            <input type="date" name="surname" value="{{old('surname')}}"
+                                   class="form-control form-control-solid" placeholder="أدخل  التاريخ"
+                                   required/>
+                            <span class="form-text text-muted">الرجاء إدخال التاريخ</span>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="form-group col-sm-12 col-md-6">
+                            <label>الولاية : </label>
+                            <select class="form-control" id="baladia_select" name="baladia_id" autocomplete="city">
+                                @foreach($wilayas as $wilaya)
+                                    <option value="{{$wilaya->id}}" {{old('baladia_id') == $wilaya->id ? 'selected':''}}>{{$wilaya->WILAYA."- ".$wilaya->name_ar}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-6">
+                            <label>البلدية : </label>
+                            <select class="form-control" id="baladia_select" name="baladia_id" autocomplete="city">
+                                @foreach($baladias as $baladia)
+                                    <option value="{{$baladia->id}}" {{old('baladia_id') == $baladia->id ? 'selected':''}}>{{$baladia->BALADIA."- ".$baladia->name_ar}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-footer d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary mr-2">إضافة</button>
+                    <a href="dash/security/assistance" class="btn btn-secondary">إلغاء</a>
+                </div>
+            </form>
+            <!--end::Form-->
+        </div>
+        <!--end::Card-->
+    </div>
+@endsection
