@@ -161,7 +161,7 @@ Theme Version:	8.2.0
 	* Map and Contact Position
 	*/
 	var customContactPos = {
-		$elements: $('.custom-contact-pos'),
+		$elements: $('.custom-contract-pos'),
 		build: function() {
 			var self = this;
 
@@ -183,14 +183,14 @@ Theme Version:	8.2.0
 				})
 			});
 
-			// Set contact-box position over google maps
-			$('.custom-contact-box').css({
+			// Set contract-box position over google maps
+			$('.custom-contract-box').css({
 				'margin-top': -Math.max.apply(null, elementHeight)
 			});
 		}
 	}
 
-	if( $('.custom-contact-pos').get(0) ) {
+	if( $('.custom-contract-pos').get(0) ) {
 		customContactPos.build();
 	}
 

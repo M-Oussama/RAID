@@ -1,0 +1,97 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\Menu;
+use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+
+class ContractSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+
+        $permissions = [
+            'list-contract',
+            'create-contract',
+            'edit-contract',
+            'delete-contract',
+            'confirm-contract'
+        ];
+
+
+
+        foreach ($permissions as $permission) {
+            Permission::create(['name' => $permission]);
+        }
+
+        Role::find(1)->givePermissionTo($permissions);
+        $dash_side_menu = Menu::find(1);
+
+        $people_section = new Menu();
+        $people_section->menu_id = $dash_side_menu->id;
+        $people_section->name = 'العقود';
+        $people_section->url = '#';
+        $people_section->order = 3;
+        $people_section->icon = 'flaticon-layers';
+        $people_section->isSection = true;
+        $people_section->permissions = 'list-contract';
+        $people_section->save();
+
+        $people_menu = new Menu();
+        $people_menu->menu_id = $dash_side_menu->id;
+        $people_menu->name = 'العقود';
+        $people_menu->url = '#';
+        $people_menu->order = 3;
+        $people_menu->icon = 'fas fa-users-cog';
+        $people_menu->isSection = false;
+        $people_menu->permissions = 'list-contract';
+        $people_menu->save();
+
+        $users = new Menu();
+        $users->menu_id = $people_menu->id;
+        $users->name = 'عقود الموظفين';
+        $users->url = '#';
+        $users->order = 3;
+        $users->icon = 'flaticon-layers';
+        $users->isSection = false;
+        $users->permissions = 'list-contract';
+        $users->save();
+
+        $users_index = new Menu();
+        $users_index->menu_id = $users->id;
+        $users_index->name = 'عقود الموظفين';
+        $users_index->url = 'dash/contracts';
+        $users_index->order = 3;
+        $users_index->icon = 'flaticon-layers';
+        $users_index->isSection = false;
+        $users_index->permissions = 'list-contract';
+        $users_index->save();
+
+        $users_create = new Menu();
+        $users_create->menu_id = $users->id;
+        $users_create->name = 'إضافة عقد';
+        $users_create->url = 'dash/contracts/create';
+        $users_create->order = 3;
+        $users_create->icon = 'flaticon-layers';
+        $users_create->isSection = false;
+        $users_create->permissions = 'create-contract';
+        $users_create->save();
+
+        $users_edit = new Menu();
+        $users_edit->menu_id = $users_index->id;
+        $users_edit->name = 'تعديل عقد';
+        $users_edit->url = 'dash/contracts/*/edit';
+        $users_edit->order = 3;
+        $users_edit->icon = 'flaticon-layers';
+        $users_edit->isHidden = true;
+        $users_edit->permissions = 'edit-contract';
+        $users_edit->save();
+    }
+}

@@ -45,7 +45,7 @@ if(isset($_POST['g-recaptcha-response']) && !empty($_POST['g-recaptcha-response'
 	    $responseData = json_decode(curl_exec($verifyResponse));
 	    curl_close($verifyResponse);
 	} else {
-		$arrResult = array ('response'=>'error','errorMessage'=>'You need CURL or file_get_contents() activated in your server. Please contact your host to activate.');
+		$arrResult = array ('response'=>'error','errorMessage'=>'You need CURL or file_get_contents() activated in your server. Please contract your host to activate.');
 		echo json_encode($arrResult);
 		die();
 	}
@@ -58,8 +58,8 @@ if(isset($_POST['g-recaptcha-response']) && !empty($_POST['g-recaptcha-response'
 		// If the e-mail is not working, change the debug option to 2 | $debug = 2;
 		$debug = 0;
 
-		// If contact form don't have the subject input, change the value of subject here
-		$subject = ( isset($_POST['subject']) ) ? $_POST['subject'] : 'Define subject in php/contact-form-recaptcha.php line 62';
+		// If contract form don't have the subject input, change the value of subject here
+		$subject = ( isset($_POST['subject']) ) ? $_POST['subject'] : 'Define subject in php/contract-form-recaptcha.php line 62';
 
 		$message = '';
 
@@ -135,11 +135,11 @@ if(isset($_POST['g-recaptcha-response']) && !empty($_POST['g-recaptcha-response'
 		}
 
 	} else {
-		$arrResult = array ('response'=>'error','errorMessage'=>'reCaptcha Error: Verifcation failed (no success). Please contact the website administrator.');
+		$arrResult = array ('response'=>'error','errorMessage'=>'reCaptcha Error: Verifcation failed (no success). Please contract the website administrator.');
 		echo json_encode($arrResult);
 	}
 
 } else { 
-	$arrResult = array ('response'=>'error','errorMessage'=>'reCaptcha Error: Invalid token. Please contact the website administrator.');
+	$arrResult = array ('response'=>'error','errorMessage'=>'reCaptcha Error: Invalid token. Please contract the website administrator.');
 	echo json_encode($arrResult);
 }

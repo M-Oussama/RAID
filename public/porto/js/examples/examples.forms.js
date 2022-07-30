@@ -33,7 +33,7 @@ Theme Version:	8.2.0
 	/*
 	Contact Form: Basic
 	*/
-	$('.contact-form').each(function(){
+	$('.contract-form').each(function(){
 		$(this).validate({
 			errorPlacement: function(error, element) {
 				if(element.attr('type') == 'radio' || element.attr('type') == 'checkbox') {
@@ -47,8 +47,8 @@ Theme Version:	8.2.0
 			submitHandler: function(form) {
 
 				var $form = $(form),
-					$messageSuccess = $form.find('.contact-form-success'),
-					$messageError = $form.find('.contact-form-error'),
+					$messageSuccess = $form.find('.contract-form-success'),
+					$messageError = $form.find('.contract-form-error'),
 					$submitButton = $(this.submitButton),
 					$errorMessage = $form.find('.mail-error-message'),
 					submitButtonText = $submitButton.val();
@@ -164,7 +164,7 @@ Theme Version:	8.2.0
 	/*
 	Contact Form: reCaptcha v3
 	*/
-	$('.contact-form-recaptcha-v3').each(function(){
+	$('.contract-form-recaptcha-v3').each(function(){
 		$(this).validate({
 			errorPlacement: function(error, element) {
 				if(element.attr('type') == 'radio' || element.attr('type') == 'checkbox') {
@@ -178,8 +178,8 @@ Theme Version:	8.2.0
 			submitHandler: function(form) {
 
 				var $form = $(form),
-					$messageSuccess = $form.find('.contact-form-success'),
-					$messageError = $form.find('.contact-form-error'),
+					$messageSuccess = $form.find('.contract-form-success'),
+					$messageError = $form.find('.contract-form-error'),
 					$submitButton = $(this.submitButton),
 					$errorMessage = $form.find('.mail-error-message'),
 					submitButtonText = $submitButton.val();

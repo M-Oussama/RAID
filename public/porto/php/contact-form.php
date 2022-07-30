@@ -25,8 +25,8 @@ $email = 'you@domain.com';
 // If the e-mail is not working, change the debug option to 2 | $debug = 2;
 $debug = 0;
 
-// If contact form don't has the subject input change the value of subject here
-$subject = ( isset($_POST['subject']) ) ? $_POST['subject'] : 'Define subject in php/contact-form.php line 29';
+// If contract form don't has the subject input change the value of subject here
+$subject = ( isset($_POST['subject']) ) ? $_POST['subject'] : 'Define subject in php/contract-form.php line 29';
 
 $message = '';
 

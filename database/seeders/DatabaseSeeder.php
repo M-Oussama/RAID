@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
             WilayaTableSeeder::class,
             PeopleMenuSeeder::class,
             EmployeeSeeder::class,
+            ContractSeeder::class,
+            PaperSeeder::class,
         ]);
     }
 }

@@ -10,6 +10,8 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\EmployeesController;
+use App\Http\Controllers\ContractController;
+use App\Http\Controllers\PaperController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,6 +79,7 @@ Route::get('dash/ide-helper', [ConsoleController::class, 'ideHelper']);
 Route::get('dash/clear-cache', [ConsoleController::class, 'clearCache']);
 Route::get('dash/optimize-cache', [ConsoleController::class, 'optimizeCache']);
 Route::get('dash/add-model', [ConsoleController::class, 'addModel']);
+Route::get('dash/wilayas/{id}/get_baladias', [ConsoleController::class, 'getBaladias']);
 
 // resources routes
 Route::resources([
@@ -85,6 +88,8 @@ Route::resources([
     'dash/menus' => MenuController::class,
     'dash/users' => UserController::class,
     'dash/security/assistance' => EmployeesController::class,
+    'dash/contracts' => ContractController::class,
+    'dash/papers' => PaperController::class,
 ]);
 
 /********************* Dashboard routes :: End **************************************/

@@ -18,6 +18,8 @@
         var password = $('input[name="password"]');
         var password2 = $('input[name="password2"]');
 
+        $("#driver_license_block").hide();
+
         password2.on('keyup', function () {
             if (password.val()) {
                 if (password2.val() != password.val()) {
@@ -34,7 +36,62 @@
         var avatar = new KTImageInput('kt_avatar');
 
         //Select2
-                $('#kt_select2_1').select2();
+        $('#kt_select2_1').select2();
+
+        $('#document_select').on('change',function () {
+            if($(this).val() == "NC"){
+                $("#driver_license_block").hide();
+                $("#national_card_block").show();
+            }else{
+                $("#driver_license_block").show();
+                $("#national_card_block").hide();
+            }
+
+        })
+
+        $('#document_wilaya').on('change',function () {
+
+            KTApp.blockPage({
+                overlayColor: '#000000',
+                opacity: 0.1,
+                size: 'lg',
+                state: 'danger',
+                message: 'الرجاء الانتظار...'
+            });
+            $.ajaxSetup({
+                headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content') }
+            });
+
+            var id = $(this).val();
+
+            $('#document_baladia').find('option').remove();
+
+            $.ajax({
+                url:'dash/wilayas/'+id+'/get_baladias',
+                type:'GET',
+                dataType:'json',
+                success:function (response) {
+                    var leng = 0;
+                    if (response.baladias != null) {
+                        leng = response.baladias.length;
+                    }
+
+                    if (leng>0) {
+                        for (var i = 0; i<leng; i++) {
+                            var id = response.baladias[i].id;
+                            var name = response.baladias[i].name_ar;
+                            var BALADIA = response.baladias[i].BALADIA;
+
+                            var option = "<option value='"+id+"'>"+BALADIA+"-"+name+"</option>";
+
+                            $("#document_baladia").append(option);
+                        }
+                    }
+
+                    KTApp.unblockPage();
+                }
+            })
+        });
 
     </script>
 @endsection
@@ -257,7 +314,7 @@
                             </select>
                         </div>
 
-                        <div class="form-group col-sm-12 col-md-4">
+                        <div class="form-group col-sm-12 col-md-4" id="national_card_block">
                             <label>رقم بطاقة التعريف الوطنية * :</label>
                             <input type="text" name="document_number" value="{{old('surname')}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل رقم بطاقة التعريف الوطنية"
@@ -266,19 +323,19 @@
                         </div>
 
 
-                       {{-- <div class="form-group col-sm-12 col-md-6">
+                        <div class="form-group col-sm-12 col-md-4" id="driver_license_block">
                             <label> رقم رخصة السياقة * :</label>
                             <input type="text" name="document_number" value="{{old('surname')}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل رقم رخصة السياقة"
-                                   required/>
+                                   />
                             <span class="form-text text-muted">الرجاء إدخال رقم رخصة السياقة</span>
-                        </div>--}}
+                        </div>
 
                         <div class="form-group col-sm-12 col-md-4">
                             <label> الصادرة بتاريخ * :</label>
                             <input type="date" name="document_date" value="{{old('surname')}}"
                                    class="form-control form-control-solid" placeholder="أدخل  التاريخ"
-                                   required/>
+                                   />
                             <span class="form-text text-muted">الرجاء إدخال التاريخ</span>
                         </div>
                     </div>
