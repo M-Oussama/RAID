@@ -106,7 +106,7 @@
 
                         <div class="form-group col-sm-12 col-md-4">
                             <label>مكان الميلاد * :</label>
-                            <input type="text" name="surname" value="{{old('surname')}}" autocomplete="given-name"
+                            <input type="text" name="birthplace" value="{{old('birthplace')}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل مكان الميلاد"
                                    required/>
                             <span class="form-text text-muted">الرجاء إدخال مكان الميلاد</span>
@@ -114,15 +114,15 @@
 
                         <div class="form-group col-sm-12 col-md-4">
                             <label>الولاية : </label>
-                            <select class="form-control" id="baladia_select" name="baladia_id" autocomplete="city">
+                            <select class="form-control" id="wilaya_select" name="wilaya_id" autocomplete="city">
                                 @foreach($wilayas as $wilaya)
-                                    <option value="{{$wilaya->id}}" {{old('baladia_id') == $wilaya->id ? 'selected':''}}>{{$wilaya->WILAYA."- ".$wilaya->name_ar}}</option>
+                                    <option value="{{$wilaya->id}}" {{old('wilaya_id') == $wilaya->id ? 'selected':''}}>{{$wilaya->WILAYA."- ".$wilaya->name_ar}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group col-sm-12 col-md-6">
                             <label>إسم الأب* :</label>
-                            <input type="text" name="surname" value="{{old('surname')}}" autocomplete="given-name"
+                            <input type="text" name="father_name" value="{{old('surname')}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل إسم الأب"
                                    required/>
                             <span class="form-text text-muted">الرجاء إدخال إسم الأب</span>
@@ -130,21 +130,21 @@
 
                         <div class="form-group col-sm-12 col-md-6">
                             <label>إسم ولقب الأم* :</label>
-                            <input type="text" name="surname" value="{{old('surname')}}" autocomplete="given-name"
+                            <input type="text" name="mother_fullname" value="{{old('surname')}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل إسم ولقب الأم"
                                    required/>
                             <span class="form-text text-muted">الرجاء إدخال إسم ولقب الأم</span>
                         </div>
                         <div class="form-group col-sm-12 col-md-4">
                             <label>الحالة العائلية* :</label>
-                            <input type="text" name="surname" value="{{old('surname')}}" autocomplete="given-name"
+                            <input type="text" name="family_status" value="{{old('surname')}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل الحالة العائلية"
                                    required/>
                             <span class="form-text text-muted">الرجاء إدخال الحالة العائلية</span>
                         </div>
                         <div class="form-group col-sm-12 col-md-4">
                             <label> عدد الأولاد * :</label>
-                            <input type="number" name="siblings_educated" value="{{old('siblings_educated')}}"
+                            <input type="number" name="children_number" value="{{old('children_number')}}"
                                    class="form-control form-control-solid" placeholder="ادخل عدد الأولاد"
                                    min="0" />
                             <span class="form-text text-muted">الرجاء ادخال عدد الأولاد </span>
@@ -152,7 +152,7 @@
 
                         <div class="form-group col-sm-12 col-md-4">
                             <label>إسم الزوجة* :</label>
-                            <input type="text" name="surname" value="{{old('surname')}}" autocomplete="given-name"
+                            <input type="text" name="wife_name" value="{{old('surname')}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل إسم الزوجة"
                                    required/>
                             <span class="form-text text-muted">الرجاء إدخال إسم الزوجة</span>
@@ -160,7 +160,7 @@
 
                         <div class="form-group col-sm-12 col-md-6">
                             <label> العنوان * :</label>
-                            <input type="text" name="surname" value="{{old('surname')}}" autocomplete="given-name"
+                            <input type="text" name="address" value="{{old('surname')}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل العنوان"
                                    required/>
                             <span class="form-text text-muted">الرجاء إدخال العنوان</span>
@@ -168,7 +168,7 @@
 
                         <div class="form-group col-sm-12 col-md-6">
                             <label>الولاية : </label>
-                            <select class="form-control" id="baladia_select" name="baladia_id" autocomplete="city">
+                            <select class="form-control" id="wilaya_address" name="wilaya_address" autocomplete="city">
                                 @foreach($wilayas as $wilaya)
                                     <option value="{{$wilaya->id}}" {{old('baladia_id') == $wilaya->id ? 'selected':''}}>{{$wilaya->WILAYA."- ".$wilaya->name_ar}}</option>
                                 @endforeach
@@ -177,7 +177,7 @@
 
                         <div class="form-group col-sm-12 col-md-6">
                             <label> رقم عقد الإزدياد * :</label>
-                            <input type="text" name="surname" value="{{old('surname')}}" autocomplete="given-name"
+                            <input type="text" name="birthday_document_number" value="{{old('surname')}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل رقم عقد الإزدياد"
                                    required/>
                             <span class="form-text text-muted">الرجاء إدخال رقم عقد الإزدياد</span>
@@ -185,7 +185,7 @@
 
                         <div class="form-group col-sm-12 col-md-6">
                             <label> المستوى الدراسي * :</label>
-                            <input type="text" name="surname" value="{{old('surname')}}" autocomplete="given-name"
+                            <input type="text" name="education_level" value="{{old('surname')}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل المستوى الدراسي"
                                    required/>
                             <span class="form-text text-muted">الرجاء إدخال المستوى الدراسي</span>
@@ -193,7 +193,7 @@
 
                         <div class="form-group col-sm-12 col-md-6">
                             <label> ـ رقم الحساب البريدي الجاري * :</label>
-                            <input type="text" name="surname" value="{{old('surname')}}" autocomplete="given-name"
+                            <input type="text" name="postal_account_number" value="{{old('surname')}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل ـ رقم الحساب البريدي الجاري"
                                    required/>
                             <span class="form-text text-muted">الرجاء إدخال رقم الحساب البريدي الجاري</span>
@@ -201,7 +201,7 @@
 
                         <div class="form-group col-sm-12 col-md-6">
                             <label> رقم الضمان الإجتماعي * :</label>
-                            <input type="text" name="surname" value="{{old('surname')}}" autocomplete="given-name"
+                            <input type="text" name="social_security_number" value="{{old('surname')}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل رقم الضمان الإجتماعي"
                                    required/>
                             <span class="form-text text-muted">الرجاء إدخال رقم الضمان الإجتماعي</span>
@@ -209,7 +209,7 @@
 
                         <div class="form-group col-sm-12 col-md-6">
                             <label> الوضعية تجاه الخدمة الوطنية * :</label>
-                            <input type="text" name="surname" value="{{old('surname')}}" autocomplete="given-name"
+                            <input type="text" name="national_service" value="{{old('surname')}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل الوضعية تجاه الخدمة الوطنية"
                                    required/>
                             <span class="form-text text-muted">الرجاء إدخال الوضعية تجاه الخدمة الوطنية</span>
@@ -217,7 +217,7 @@
 
                         <div class="form-group col-sm-12 col-md-6">
                             <label> الرتبة * :</label>
-                            <input type="text" name="surname" value="{{old('surname')}}" autocomplete="given-name"
+                            <input type="text" name="national_service_rank" value="{{old('surname')}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل الرتبة"
                                    required/>
                             <span class="form-text text-muted">الرجاء إدخال الرتبة</span>
@@ -226,14 +226,14 @@
 
                         <div class="form-group col-sm-12 col-md-6">
                             <label> رقم الهاتف * :</label>
-                            <input type="text" name="surname" value="{{old('surname')}}" autocomplete="given-name"
+                            <input type="text" name="phone" value="{{old('surname')}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل رقم الهاتف"
                                    required/>
                             <span class="form-text text-muted">الرجاء إدخال رقم الهاتف</span>
                         </div>
                         <div class="form-group col-sm-12 col-md-6">
                             <label>فصيلة الدم : </label>
-                            <select class="form-control" id="baladia_select" name="baladia_id" autocomplete="city">
+                            <select class="form-control" id="blood_type" name="blood_type" autocomplete="city">
 
                                     <option value="A+">A+</option>
                                     <option value="A-">A-</option>
@@ -248,7 +248,7 @@
                         </div>
                         <div class="form-group col-sm-12 col-md-4">
                             <label>بطاقة التعريف الوطنية/رخصة السياقة</label>
-                            <select class="form-control" id="baladia_select" name="baladia_id" autocomplete="city">
+                            <select class="form-control" id="document_select" name="document_type" autocomplete="city">
 
                                 <option value="NC">بطاقة التعريف الوطنية</option>
                                 <option value="DL">رخصة السياقة</option>
@@ -259,7 +259,7 @@
 
                         <div class="form-group col-sm-12 col-md-4">
                             <label>رقم بطاقة التعريف الوطنية * :</label>
-                            <input type="text" name="surname" value="{{old('surname')}}" autocomplete="given-name"
+                            <input type="text" name="document_number" value="{{old('surname')}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل رقم بطاقة التعريف الوطنية"
                                    required/>
                             <span class="form-text text-muted">الرجاء إدخال رقم بطاقة التعريف الوطنية</span>
@@ -268,7 +268,7 @@
 
                        {{-- <div class="form-group col-sm-12 col-md-6">
                             <label> رقم رخصة السياقة * :</label>
-                            <input type="text" name="surname" value="{{old('surname')}}" autocomplete="given-name"
+                            <input type="text" name="document_number" value="{{old('surname')}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل رقم رخصة السياقة"
                                    required/>
                             <span class="form-text text-muted">الرجاء إدخال رقم رخصة السياقة</span>
@@ -276,7 +276,7 @@
 
                         <div class="form-group col-sm-12 col-md-4">
                             <label> الصادرة بتاريخ * :</label>
-                            <input type="date" name="surname" value="{{old('surname')}}"
+                            <input type="date" name="document_date" value="{{old('surname')}}"
                                    class="form-control form-control-solid" placeholder="أدخل  التاريخ"
                                    required/>
                             <span class="form-text text-muted">الرجاء إدخال التاريخ</span>
@@ -286,18 +286,18 @@
 
                         <div class="form-group col-sm-12 col-md-6">
                             <label>الولاية : </label>
-                            <select class="form-control" id="baladia_select" name="baladia_id" autocomplete="city">
+                            <select class="form-control" id="document_wilaya" name="document_wilaya" autocomplete="city">
                                 @foreach($wilayas as $wilaya)
-                                    <option value="{{$wilaya->id}}" {{old('baladia_id') == $wilaya->id ? 'selected':''}}>{{$wilaya->WILAYA."- ".$wilaya->name_ar}}</option>
+                                    <option value="{{$wilaya->id}}" {{old('document_wilaya') == $wilaya->id ? 'selected':''}}>{{$wilaya->WILAYA."- ".$wilaya->name_ar}}</option>
                                 @endforeach
                             </select>
                         </div>
 
                         <div class="form-group col-sm-12 col-md-6">
                             <label>البلدية : </label>
-                            <select class="form-control" id="baladia_select" name="baladia_id" autocomplete="city">
+                            <select class="form-control" id="document_baladia" name="document_baladia" autocomplete="city">
                                 @foreach($baladias as $baladia)
-                                    <option value="{{$baladia->id}}" {{old('baladia_id') == $baladia->id ? 'selected':''}}>{{$baladia->BALADIA."- ".$baladia->name_ar}}</option>
+                                    <option value="{{$baladia->id}}" {{old('document_baladia') == $baladia->id ? 'selected':''}}>{{$baladia->BALADIA."- ".$baladia->name_ar}}</option>
                                 @endforeach
                             </select>
                         </div>

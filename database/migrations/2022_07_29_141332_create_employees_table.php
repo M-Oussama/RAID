@@ -19,12 +19,10 @@ class CreateEmployeesTable extends Migration
             $table->string('surname')->nullable();
             $table->date('birthdate')->nullable();
             $table->unsignedBigInteger('birthplace_id')->nullable();
-            $table->unsignedBigInteger('address_id')->nullable();
-            $table->smallInteger('gender')->nullable();
             $table->string('family_status')->nullable();
             $table->integer('children_number')->nullable();
             $table->string('wife_name')->nullable();
-            $table->string('birthday_number')->nullable();
+            $table->string('birthday_document_number')->nullable();
             $table->string('education_level')->nullable();
             $table->string('blood_type')->nullable();
             $table->string('postal_account_number')->nullable();
@@ -34,12 +32,11 @@ class CreateEmployeesTable extends Migration
             $table->string('national_service')->nullable();
             $table->string('national_service_rank')->nullable();
             $table->string('phone')->nullable();
-            $table->string('national_card')->nullable();
-            $table->date('national_card_date')->nullable();
-            $table->unsignedBigInteger('national_card_address')->nullable();
-            $table->string('driver_license')->nullable();
-            $table->date('driver_license_date')->nullable();
-            $table->unsignedBigInteger('driver_license_address')->nullable();
+            $table->boolean('national_card')->default(0)->nullable();
+            $table->boolean('driver_license')->default(0)->nullable();
+            $table->string('document_number')->nullable();
+            $table->date('document_date')->nullable();
+            $table->unsignedBigInteger('document_address')->nullable();
             $table->timestamps();
         });
     }
