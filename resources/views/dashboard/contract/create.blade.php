@@ -109,7 +109,7 @@
                 <div class="card-body">
                     <div class="row">
 
-                        <div class="form-group col-sm-12 col-md-6">
+                        <div class="form-group col-sm-12 col-md-4">
                             <label>الموظف : </label>
                             <select class="form-control"  name="employee_id" autocomplete="city" required>
                                 @foreach($employees as $employee)
@@ -118,13 +118,13 @@
                             </select>
                         </div>
 
-                        <div class="form-group col-sm-12 col-md-6">
+                        <div class="form-group col-sm-12 col-md-4">
                             <label>المنصب* :</label>
                             <input type="text" name="post" value="{{old('name')}}" autocomplete="family-name"
                                    class="form-control form-control-solid" placeholder="أدخل المنصب" required/>
                             <span class="form-text text-muted">الرجاء إدخال المنصب</span>
                         </div>
-                        <div class="form-group col-sm-12 col-md-6">
+                        <div class="form-group col-sm-12 col-md-4">
                             <label>الموقع* :</label>
                             <input type="text" name="post_location" value="{{old('surname')}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل الموقع"
@@ -154,11 +154,20 @@
                         </div>
 
                         <div class="form-group col-sm-12 col-md-6">
+                            <label>مدة العقد : </label>
+                            <select class="form-control"  name="contract_length" autocomplete="city" required>
+
+                                    <option value="1" >عام واحد (12 شهر)</option>
+                                    <option value="2" >ستة أشهر  (6 أشهر)</option>
+
+                            </select>
+                        </div>
+                        {{--<div class="form-group col-sm-12 col-md-6">
                             <label>تاريح نهاية العقد :</label>
                             <input type="date" name="end_date" value="{{old('end_date')}}" autocomplete="bday"
                                    class="form-control form-control-solid" placeholder="أدخل تاريخ  نهاية العقد "/>
                             <span class="form-text text-muted">الرجاء إدخال تاريخ  نهاية العقد </span>
-                        </div>
+                        </div>--}}
 
 
                 </div>

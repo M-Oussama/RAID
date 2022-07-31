@@ -54,7 +54,7 @@
                     className: 'text-center',
                     render: function (data, type, row) {
                         return '\
-                        \<a href="dash/papers/' + row.id + '/create" class="btn btn-sm btn-clean btn-icon" title="استخراج ">\
+                        \<a href="dash/papers/' + row.id + '/create" target="_blank" class="btn btn-sm btn-clean btn-icon" title="استخراج ">\
                             <i class="far fa-file-pdf">\
                             </i>\
                         </a>\

@@ -15,6 +15,9 @@ class CreatePapersTable extends Migration
     {
         Schema::create('papers', function (Blueprint $table) {
             $table->id();
+            $table->string('paper_type');
+            $table->unsignedInteger('employee_id');
+            $table->date('date');
             $table->timestamps();
         });
     }

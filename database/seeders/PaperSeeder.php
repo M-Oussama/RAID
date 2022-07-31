@@ -63,7 +63,7 @@ class PaperSeeder extends Seeder
         $users->permissions = 'list-paper';
         $users->save();
 
-       /* $users_index = new Menu();
+        $users_index = new Menu();
         $users_index->menu_id = $users->id;
         $users_index->name = 'الأوراق الادارية';
         $users_index->url = 'dash/papers';
@@ -71,9 +71,9 @@ class PaperSeeder extends Seeder
         $users_index->icon = 'flaticon-layers';
         $users_index->isSection = false;
         $users_index->permissions = 'list-paper';
-        $users_index->save();*/
+        $users_index->save();
 
-        $users_create = new Menu();
+        /*$users_create = new Menu();
         $users_create->menu_id = $users->id;
         $users_create->name = 'استخراج';
         $users_create->url = 'dash/papers/create';
@@ -81,7 +81,7 @@ class PaperSeeder extends Seeder
         $users_create->icon = 'flaticon-layers';
         $users_create->isSection = false;
         $users_create->permissions = 'create-paper';
-        $users_create->save();
+        $users_create->save();*/
 
 
     }

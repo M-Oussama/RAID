@@ -80,6 +80,9 @@ Route::get('dash/clear-cache', [ConsoleController::class, 'clearCache']);
 Route::get('dash/optimize-cache', [ConsoleController::class, 'optimizeCache']);
 Route::get('dash/add-model', [ConsoleController::class, 'addModel']);
 Route::get('dash/wilayas/{id}/get_baladias', [ConsoleController::class, 'getBaladias']);
+Route::get('dash/papers/{id}/create', [PaperController::class, 'exportPaper']);
+Route::get('dash/papers/{id}/create', [PaperController::class, 'exportPaper']);
+Route::get('dash/contracts/chief/create', [ContractController::class, 'createChiefContract']);
 
 // resources routes
 Route::resources([
