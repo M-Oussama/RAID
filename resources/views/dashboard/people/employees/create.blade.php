@@ -47,7 +47,7 @@
                 $("#national_card_block").hide();
             }
 
-        })
+        });
 
         $('#document_wilaya').on('change',function () {
 
@@ -68,6 +68,164 @@
 
             $.ajax({
                 url:'dash/wilayas/'+id+'/get_baladias',
+                type:'GET',
+                dataType:'json',
+                success:function (response) {
+                    var leng = 0;
+                    if (response.baladias != null) {
+                        leng = response.baladias.length;
+                    }
+
+                    if (leng>0) {
+                        for (var i = 0; i<leng; i++) {
+                            var id = response.baladias[i].id;
+                            var name = response.baladias[i].name_ar;
+                            var BALADIA = response.baladias[i].BALADIA;
+
+                            var option = "<option value='"+id+"'>"+BALADIA+"-"+name+"</option>";
+
+                            $("#document_baladia").append(option);
+                        }
+                    }
+
+                    if (leng>0) {
+                        for (var i = 0; i<leng; i++) {
+                            var id = response.baladias[i].id;
+                            var name = response.baladias[i].name_ar;
+                            var DAIRA = response.baladias[i].BALADIA;
+
+                            var option = "<option value='"+id+"'>"+BALADIA+"-"+name+"</option>";
+
+                            $("#birthplace_daira").append(option);
+                        }
+                    }
+
+                    KTApp.unblockPage();
+                }
+            })
+        });
+
+        $('#birthplace_wilaya').on('change',function () {
+
+            KTApp.blockPage({
+                overlayColor: '#000000',
+                opacity: 0.1,
+                size: 'lg',
+                state: 'danger',
+                message: 'الرجاء الانتظار...'
+            });
+            $.ajaxSetup({
+                headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content') }
+            });
+
+            var id = $(this).val();
+
+            $('#birthplace_daira').find('option').remove();
+            $('#birthplace_baladia').find('option').remove();
+
+            $.ajax({
+                url:'dash/wilayas/'+id+'/get_baladias_dairas',
+                type:'GET',
+                dataType:'json',
+                success:function (response) {
+                    var leng = 0;
+                    if (response.baladias != null) {
+                        leng = response.baladias.length;
+                    }
+
+                    if (leng>0) {
+                        for (var i = 0; i<leng; i++) {
+                            var id = response.baladias[i].id;
+                            var name = response.baladias[i].name_ar;
+                            var BALADIA = response.baladias[i].BALADIA;
+
+                            var option = "<option value='"+id+"'>"+BALADIA+"-"+name+"</option>";
+
+                            $("#birthplace_baladia").append(option);
+                        }
+                    }
+
+                    if (leng>0) {
+                        for (var i = 0; i<leng; i++) {
+                            var id = response.baladias[i].id;
+                            var name = response.baladias[i].name_ar;
+                            var DAIRA = response.baladias[i].BALADIA;
+
+                            var option = "<option value='"+id+"'>"+BALADIA+"-"+name+"</option>";
+
+                            $("#birthplace_daira").append(option);
+                        }
+                    }
+
+                    KTApp.unblockPage();
+                }
+            })
+        });
+
+
+        $('#birthplace_daira').on('change',function () {
+
+            KTApp.blockPage({
+                overlayColor: '#000000',
+                opacity: 0.1,
+                size: 'lg',
+                state: 'danger',
+                message: 'الرجاء الانتظار...'
+            });
+            $.ajaxSetup({
+                headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content') }
+            });
+
+            var id = $(this).val();
+
+            $('#birthplace_baladia').find('option').remove();
+
+            $.ajax({
+                url:'dash/dairas/'+id+'/get_baladias_from_dairas',
+                type:'GET',
+                dataType:'json',
+                success:function (response) {
+                    var leng = 0;
+                    if (response.baladias != null) {
+                        leng = response.baladias.length;
+                    }
+
+                    if (leng>0) {
+                        for (var i = 0; i<leng; i++) {
+                            var id = response.baladias[i].id;
+                            var name = response.baladias[i].name_ar;
+                            var BALADIA = response.baladias[i].BALADIA;
+
+                            var option = "<option value='"+id+"'>"+BALADIA+"-"+name+"</option>";
+
+                            $("#birthplace_baladia").append(option);
+                        }
+                    }
+
+                    KTApp.unblockPage();
+                }
+            })
+        });
+
+        $('#document_daira').on('change',function () {
+
+            KTApp.blockPage({
+                overlayColor: '#000000',
+                opacity: 0.1,
+                size: 'lg',
+                state: 'danger',
+                message: 'الرجاء الانتظار...'
+            });
+            $.ajaxSetup({
+                headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content') }
+            });
+
+            var id = $(this).val();
+
+            $('#document_baladia').find('option').remove();
+
+            $.ajax({
+                url:'dash/dairas/'+id+'/get_baladias_from_dairas',
                 type:'GET',
                 dataType:'json',
                 success:function (response) {
@@ -154,14 +312,14 @@
                     </div>
                     <div class="row">
 
-                        <div class="form-group col-sm-12 col-md-4">
+                        <div class="form-group col-sm-12 col-md-6">
                             <label>تاريح الميلاد :</label>
                             <input type="date" name="birthdate" value="{{old('birthdate')}}" autocomplete="bday"
                                    class="form-control form-control-solid" placeholder="أدخل تاريخ ميلاد الموظف"/>
                             <span class="form-text text-muted">الرجاء إدخال تاريخ ميلاد الموظف</span>
                         </div>
 
-                        <div class="form-group col-sm-12 col-md-4">
+                        <div class="form-group col-sm-12 col-md-6">
                             <label>مكان الميلاد * :</label>
                             <input type="text" name="birthplace" value="{{old('birthplace')}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل مكان الميلاد"
@@ -171,9 +329,27 @@
 
                         <div class="form-group col-sm-12 col-md-4">
                             <label>الولاية : </label>
-                            <select class="form-control" id="wilaya_select" name="wilaya_id" autocomplete="city">
+                            <select class="form-control" id="birthplace_wilaya" name="wilaya_id" autocomplete="city">
                                 @foreach($wilayas as $wilaya)
                                     <option value="{{$wilaya->id}}" {{old('wilaya_id') == $wilaya->id ? 'selected':''}}>{{$wilaya->WILAYA."- ".$wilaya->name_ar}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-4">
+                            <label>الدائرة : </label>
+                            <select class="form-control" id="birthplace_daira" name="daira_id" autocomplete="city">
+                                @foreach($dairas as $daira)
+                                    <option value="{{$daira->id}}" {{old('$daira') == $daira->id ? 'selected':''}}>{{$daira->DAIRA."- ".$daira->name_ar}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-4">
+                            <label>البلدية : </label>
+                            <select class="form-control" id="birthplace_baladia" name="baladia_id" autocomplete="city">
+                                @foreach($baladias as $baladia)
+                                    <option value="{{$baladia->id}}" {{old('$baladia') == $baladia->id ? 'selected':''}}>{{$baladia->BALADIA."- ".$baladia->name_ar}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -231,6 +407,9 @@
                                 @endforeach
                             </select>
                         </div>
+
+
+
 
                         <div class="form-group col-sm-12 col-md-6">
                             <label> رقم عقد الإزدياد * :</label>
@@ -341,7 +520,7 @@
                     </div>
                     <div class="row">
 
-                        <div class="form-group col-sm-12 col-md-6">
+                        <div class="form-group col-sm-12 col-md-4">
                             <label>الولاية : </label>
                             <select class="form-control" id="document_wilaya" name="document_wilaya" autocomplete="city">
                                 @foreach($wilayas as $wilaya)
@@ -350,13 +529,41 @@
                             </select>
                         </div>
 
-                        <div class="form-group col-sm-12 col-md-6">
+                        <div class="form-group col-sm-12 col-md-4">
+                            <label>الدائرة : </label>
+                            <select class="form-control" id="document_daira" name="document_daira" autocomplete="city">
+                                @foreach($dairas as $daira)
+                                    <option value="{{$daira->id}}" {{old('$daira') == $daira->id ? 'selected':''}}>{{$daira->DAIRA."- ".$daira->name_ar}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-4">
                             <label>البلدية : </label>
                             <select class="form-control" id="document_baladia" name="document_baladia" autocomplete="city">
                                 @foreach($baladias as $baladia)
                                     <option value="{{$baladia->id}}" {{old('document_baladia') == $baladia->id ? 'selected':''}}>{{$baladia->BALADIA."- ".$baladia->name_ar}}</option>
                                 @endforeach
                             </select>
+                        </div>
+
+
+
+
+                        <div class="form-group col-sm-12 col-md-6">
+                            <label> تاريخ التوظيف * :</label>
+                            <input type="date" name="recruitment_date"
+                                   class="form-control form-control-solid" placeholder="أدخل  التاريخ"
+                            />
+                            <span class="form-text text-muted">الرجاء إدخال التاريخ</span>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-6">
+                            <label> تاريخ التأمين * :</label>
+                            <input type="date" name="insurance_date"
+                                   class="form-control form-control-solid" placeholder="أدخل  التاريخ"
+                            />
+                            <span class="form-text text-muted">الرجاء إدخال التاريخ</span>
                         </div>
                     </div>
 

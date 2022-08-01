@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePapersTable extends Migration
+class CreatePaperTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreatePapersTable extends Migration
      */
     public function up()
     {
-        Schema::create('papers', function (Blueprint $table) {
+        Schema::create('paper_types', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('paper_type_id')->nullable();
-            $table->unsignedInteger('employee_id')->nullable();
-            $table->unsignedInteger('contract_id')->nullable();
-            $table->date('date')->nullable();
+            $table->string("name")->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class CreatePapersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('papers');
+        Schema::dropIfExists('paper_types');
     }
 }

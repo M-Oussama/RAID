@@ -80,9 +80,17 @@ Route::get('dash/clear-cache', [ConsoleController::class, 'clearCache']);
 Route::get('dash/optimize-cache', [ConsoleController::class, 'optimizeCache']);
 Route::get('dash/add-model', [ConsoleController::class, 'addModel']);
 Route::get('dash/wilayas/{id}/get_baladias', [ConsoleController::class, 'getBaladias']);
+Route::get('dash/wilayas/{id}/get_baladias_dairas', [ConsoleController::class, 'getBaladias']);
+Route::get('dash/dairas/{id}/get_baladias_from_dairas', [ConsoleController::class, 'get_baladias_from_dairas']);
 Route::get('dash/papers/{id}/create', [PaperController::class, 'exportPaper']);
 Route::get('dash/papers/{id}/create', [PaperController::class, 'exportPaper']);
+Route::post('dash/papers/{id}/export', [PaperController::class, 'exportPaper']);
+Route::get('dash/contracts/{id}/pdf', [PaperController::class, 'exportContract']);
 Route::get('dash/contracts/chief/create', [ContractController::class, 'createChiefContract']);
+Route::get('dash/papers/list', [PaperController::class, 'papersList']);
+Route::get('dash/papers/{paper_type}/{id}/exportFile', [PaperController::class, 'export']);
+
+
 
 // resources routes
 Route::resources([

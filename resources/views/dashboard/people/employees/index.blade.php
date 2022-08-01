@@ -64,17 +64,15 @@
                     width: '30px',
                 },
                 {
+                    data: 'MATRICULE',
+                },
+                {
                     data: 'name',
                 },
                 {
                     data: 'surname',
                 },
-                {
-                    data: 'phone',
-                },
-                {
-                    data: 'phone',
-                },
+
                 {
                     data: null,
                     title: 'Actions',
@@ -283,7 +281,7 @@
                             <th>الرقم التسلسلي</th>
                             <th>الاسم</th>
                             <th>اللقب</th>
-                            <th>الرتبة</th>
+
                             <th>Actions</th>
                         </tr>
                         </thead>

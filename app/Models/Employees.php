@@ -41,4 +41,12 @@ use Illuminate\Database\Eloquent\Model;
 class Employees extends Model
 {
     use HasFactory;
+
+    public function address(){
+        return $this->belongsTo(Address::class,'birthplace_id');
+    }
+
+    public function documentAddress(){
+        return $this->belongsTo(Address::class,'document_address');
+    }
 }

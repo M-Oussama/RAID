@@ -21,6 +21,8 @@ class CreateContractsTable extends Migration
             $table->string('post')->nullable();
             $table->integer('contract_length')->nullable();
             $table->string('post_location')->nullable();
+            $table->unsignedInteger('work_address')->nullable();
+            $table->string('salary')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->timestamps();

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Contract;
 use App\Models\Employees;
+use App\Models\Paper;
 use Illuminate\Http\Request;
 
 class ContractController extends Controller
@@ -28,9 +29,16 @@ class ContractController extends Controller
     }
 
     public function createChiefContract(){
-        $employees = Employees::whereIN('id',function ($query){
-            $query->select('employee_id')->from(with (new Contract)->getTable())->where('end_date','<',date('Y-m-d'))->pluck('employee_id')->toArray();
-        })->get();
+
+        $contract = Contract::all();
+
+        if(count($contract) > 0)
+            $employees = Employees::whereIN('id',function ($query){
+                $query->select('employee_id')->from(with (new Contract)->getTable())->where('end_date','<',date('Y-m-d'))->pluck('employee_id')->toArray();
+            })->get();
+        else
+            $employees = Employees::all();
+
         return view('dashboard.contract.create')->with('employees',$employees);
     }
 
@@ -61,6 +69,11 @@ class ContractController extends Controller
 
         $contract->save();
 
+        $paper = new Paper();
+        //$paper->paper_type = "contract";
+        $paper->employee_id = $request->employee_id;
+        $paper->date = date('Y-m-d');
+        $paper->save();
         return redirect("/dash/contracts");
     }
 }

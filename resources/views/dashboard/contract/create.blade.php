@@ -132,7 +132,7 @@
                             <span class="form-text text-muted">الرجاء ادخال الموقع</span>
                         </div>
 
-                        <div class="form-group col-sm-12 col-md-6">
+                        {{--<div class="form-group col-sm-12 col-md-6">
                             <label>تاريح الإنخراط الفعلي بالشركة :</label>
                             <input type="date" name="recruitment_date" value="{{old('recruitment_date')}}" autocomplete="bday"
                                    class="form-control form-control-solid" placeholder="أدخل تاريخ الإنخراط الفعلي بالشركة "/>
@@ -144,7 +144,7 @@
                             <input type="date" name="insurance_date" value="{{old('insurance_date')}}" autocomplete="bday"
                                    class="form-control form-control-solid" placeholder="أدخل تاريخ التأمين بالشركة "/>
                             <span class="form-text text-muted">الرجاء إدخال تاريخ التأمين بالشركة </span>
-                        </div>
+                        </div>--}}
 
                         <div class="form-group col-sm-12 col-md-6">
                             <label>تاريح بداية العقد :</label>

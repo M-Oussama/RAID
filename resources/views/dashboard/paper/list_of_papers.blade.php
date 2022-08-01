@@ -42,9 +42,11 @@
                   data:"id"
                 },
                 {
-                    data: 'title'
+                    data: 'paper_type.name'
                 },
-
+                {
+                    data: 'employee.name'
+                },
 
                 {
                     data: null,
@@ -54,21 +56,17 @@
                     className: 'text-center',
                     render: function (data, type, row) {
 
-                        if(data.id >= 1 && data.id <= 4){
+
+                        console.log(data.paper_type_id);
+
+
                             return '\
-                            \<a href="dash/papers/' + row.id + '/create" target="_blank" class="btn btn-sm btn-clean btn-icon" title="استخراج ">\
-                                <i class="far fa-file-pdf">\
-                                </i>\
-                            </a>\
-                            ';
-                        }else{
-                            return '\
-                               <a href="#" data-toggle="modal"  data-target="#paiementModal"  class="btn btn-sm btn-clean btn-icon" title="استخراج ">\
+                               <a href="dash/papers/' + data.paper_type_id + '/' + data.id + '/exportFile"  class="btn btn-sm btn-clean btn-icon" title="استخراج ">\
                                     <i class="far fa-file-pdf">\
                                     </i>\
                                 </a>\
                                 ';
-                        }
+
 
 
 
@@ -148,7 +146,8 @@
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>الأوراق الإدارية</th>
+                            <th>نوع الأوراق الإدارية</th>
+                            <th>العامل</th>
                             <th>اجراءات</th>
                         </tr>
                         </thead>
@@ -164,33 +163,5 @@
     </div>
 
 
-    <div class="modal fade" id="paiementModal" tabindex="-1" aria-labelledby="exampleModalFormTitle"
-         aria-hidden="true" style="display: none;">
-        <div class="modal-dialog" role="document">
-            <form id="deleteForm" action="dash/papers/5/export" method="post">
-                @csrf
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalFormTitle">هل تريد حقا استخراج محضر تقاضي المستحقات؟</h5>
-                    </div>
 
-                    <div class="form-group col-sm-12 col-md-12">
-                        <label>الموظف : </label>
-                        <select class="form-control" id="employee_id" name="employee_id" autocomplete="city" required>
-                            @foreach($employees as $employee)
-                                <option value="{{$employee->id}}" {{old('employee') == $employee->id ? 'selected':''}}>{{$employee->name." ".$employee->surname}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">
-                            اغلق
-                        </button>
-                        <button type="submit" class="btn btn-danger font-weight-bold">نعم</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
 @endsection

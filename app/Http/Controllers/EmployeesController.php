@@ -29,11 +29,13 @@ class EmployeesController extends Controller
     {
         $wilayas = Wilaya::all();
 
+        $dairas = Daira::where('wilaya_id',$wilayas->first()->id)->get();
+
         $baladias = Baladia::whereIn('daira_id',function ($query) use ($wilayas){
             $query->select('id')->from(with(new Daira)->getTable())->where('wilaya_id',$wilayas->first()->id)->pluck('id')->toArray();
         })->get();
 
-        return view('dashboard.people.employees.create')->with('wilayas',$wilayas)->with('baladias',$baladias);
+        return view('dashboard.people.employees.create')->with('wilayas',$wilayas)->with('baladias',$baladias)->with('dairas',$dairas);
     }
 
     public function store(Request $request){
@@ -41,7 +43,10 @@ class EmployeesController extends Controller
         $birthdplace = new Address();
         $birthdplace->address = $request->birthplace;
         $birthdplace->wilaya_id = $request->wilaya_id;
+        $birthdplace->baladia_id = $request->baladia_id;
+        $birthdplace->daira_id = $request->daira_id;
         $birthdplace->save();
+
 
         $employee = new Employees();
 
@@ -53,6 +58,8 @@ class EmployeesController extends Controller
         $employee->children_number = $request->children_number;
         $employee->wife_name = $request->wife_name;
         $employee->birthday_document_number = $request->birthday_document_number;
+        $employee->father_name = $request->father_name;
+        $employee->mother_fullname = $request->mother_fullname;
         $employee->education_level = $request->education_level;
         $employee->blood_type = $request->blood_type;
         $employee->postal_account_number = $request->postal_account_number;
@@ -71,6 +78,7 @@ class EmployeesController extends Controller
         $document_address = new Address();
         $document_address->address = $request->document_address;
         $document_address->wilaya_id = $request->document_wilaya;
+        $document_address->daira_id = $request->document_daira;
         $document_address->baladia_id =$request->document_baladia;
         $document_address->save();
 
@@ -80,6 +88,23 @@ class EmployeesController extends Controller
 
         $employee->save();
 
+        $employee_id = "";
+        if($employee->id < 10){
+            $employee_id = str_pad($employee->id, 3, '0', STR_PAD_LEFT);
+        }
+
+        if($employee->id <100 && $employee->id >= 10){
+            $employee_id = str_pad($employee->id, 2, '0', STR_PAD_LEFT);
+        }
+        $wilaya_id =$request->wilaya_id;
+
+        if($request->wilaya_id < 10){
+            $wilaya_id = str_pad($request->wilaya_id, 2, '0', STR_PAD_LEFT);
+        }
+        $matricule = "MATR.".date('m',strtotime($request->recruitment_date))."/".substr( date("Y",strtotime($request->recruitment_date)), -2)."/".$wilaya_id."/".$employee_id;
+
+        $employee->MATRICULE = $matricule;
+        $employee->save();
         return redirect("/dash/security/assistance");
 
 

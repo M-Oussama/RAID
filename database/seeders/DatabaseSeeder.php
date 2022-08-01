@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             EmployeeSeeder::class,
             ContractSeeder::class,
             PaperSeeder::class,
+            PaperTypeSeeder::class,
         ]);
     }
 }

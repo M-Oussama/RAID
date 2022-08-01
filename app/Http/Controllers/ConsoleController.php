@@ -51,4 +51,26 @@ class ConsoleController extends Controller
 
         return response()->json(["baladias"=>$baladias]);
     }
+
+    public function get_baladias_dairas($id){
+
+        $dairas = Daira::where('wilaya_id',$id)->get();
+
+        $baladias = Baladia::whereIn('daira_id',function ($query) use ($id){
+            $query->select('id')->from(with(new Daira)->getTable())->where('wilaya_id',$id)->pluck('id')->toArray();
+        })->get();
+        return response()->json(["baladias"=>$baladias,"dairas"=>$dairas]);
+
+
+    }
+
+    public function get_baladias_from_dairas($id){
+
+
+
+        $baladias = Baladia::where('daira_id',$id)->get();
+        return response()->json(["baladias"=>$baladias]);
+
+
+    }
 }
