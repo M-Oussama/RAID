@@ -135,7 +135,14 @@ class PaperController extends Controller
             }
             case 8: {
                 // بطاقـــــة معلومــــات
-                $view = "dashboard.paper.papers.information_card";
+
+                $paper = new Paper();
+                $paper->paper_type_id = $id;
+                $paper->employee_id = $request->employee_id;
+                $paper->save();
+
+                return redirect("/dash/papers/list");
+                //$view = "dashboard.paper.papers.information_card";
                 break;
             }
             case 9: {

@@ -54,21 +54,114 @@
                     className: 'text-center',
                     render: function (data, type, row) {
 
-                        if(data.id >= 1 && data.id <= 4){
-                            return '\
+                        switch (data.id) {
+                            case 1:{
+                                return '\
                             \<a href="dash/papers/' + row.id + '/create" target="_blank" class="btn btn-sm btn-clean btn-icon" title="استخراج ">\
                                 <i class="far fa-file-pdf">\
                                 </i>\
                             </a>\
                             ';
-                        }else{
-                            return '\
+                            }
+
+                            case 2:{
+                                return '\
+                            \<a href="dash/papers/' + row.id + '/create" target="_blank" class="btn btn-sm btn-clean btn-icon" title="استخراج ">\
+                                <i class="far fa-file-pdf">\
+                                </i>\
+                            </a>\
+                            ';
+                            }
+
+                            case 3:{
+                                return '\
+                            \<a href="dash/papers/' + row.id + '/create" target="_blank" class="btn btn-sm btn-clean btn-icon" title="استخراج ">\
+                                <i class="far fa-file-pdf">\
+                                </i>\
+                            </a>\
+                            ';                            }
+
+                            case 4:{
+                                return '\
+                            \<a href="dash/papers/' + row.id + '/create" target="_blank" class="btn btn-sm btn-clean btn-icon" title="استخراج ">\
+                                <i class="far fa-file-pdf">\
+                                </i>\
+                            </a>\
+                            ';
+                            }
+
+                            case 5:{
+                                return '\
                                <a href="#" data-toggle="modal"  data-target="#paiementModal"  class="btn btn-sm btn-clean btn-icon" title="استخراج ">\
                                     <i class="far fa-file-pdf">\
                                     </i>\
                                 </a>\
                                 ';
+                            }
+                            case 6:{
+                                return '\
+                               <a href="#" data-toggle="modal"  data-target="#mutationModal"  class="btn btn-sm btn-clean btn-icon" title="استخراج ">\
+                                    <i class="far fa-file-pdf">\
+                                    </i>\
+                                </a>\
+                                ';
+                            }
+                            case 7:{
+                                return '\
+                               <a href="#" data-toggle="modal"  data-target="#businessCertificateModal"  class="btn btn-sm btn-clean btn-icon" title="استخراج ">\
+                                    <i class="far fa-file-pdf">\
+                                    </i>\
+                                </a>\
+                                ';
+                            }
+                            case 8:{
+                                return '\
+                               <a href="#" data-toggle="modal"  data-target="#informationModal"  class="btn btn-sm btn-clean btn-icon" title="استخراج">\
+                                    <i class="far fa-file-pdf">\
+                                    </i>\
+                                </a>\
+                                ';
+                            }
+                            case 9:{
+                                return '\
+                               <a href="#" data-toggle="modal"  data-target="#clothesModal"  class="btn btn-sm btn-clean btn-icon" title="استخراج">\
+                                    <i class="far fa-file-pdf">\
+                                    </i>\
+                                </a>\
+                                ';
+                            }
+
+                            case 10:{
+                                return '\
+                               <a href="#" data-toggle="modal"  data-target="#vacationModal"  class="btn btn-sm btn-clean btn-icon" title="استخراج">\
+                                    <i class="far fa-file-pdf">\
+                                    </i>\
+                                </a>\
+                                ';
+                            }
+
+                            case 11:{
+                                return '\
+                               <a href="#" data-toggle="modal"  data-target="#inquiryModal"  class="btn btn-sm btn-clean btn-icon" title="استخراج">\
+                                    <i class="far fa-file-pdf">\
+                                    </i>\
+                                </a>\
+                                ';
+                            }
+
+                            case 12:{
+                                return '\
+                               <a href="#" data-toggle="modal"  data-target="#requestModal"  class="btn btn-sm btn-clean btn-icon" title="استخراج">\
+                                    <i class="far fa-file-pdf">\
+                                    </i>\
+                                </a>\
+                                ';
+                            }
+
+
+
                         }
+
 
 
 
@@ -107,10 +200,26 @@
         $('#paiementModal').on('show.bs.modal', function (e) {
             //get data-id attribute of the clicked element
 
-
-            //populate the textbox
             $(e.currentTarget).find('#exampleModalFormTitle').text('هل تريد حقا استخراج محضر تقاضي المستحقات؟');
-            //$(e.currentTarget).find('#deleteForm').attr('action', 'dash/security/assistance/' + user_id);
+        });
+
+        $('#informationModal').on('show.bs.modal', function (e) {
+            //get data-id attribute of the clicked element
+
+            $(e.currentTarget).find('#exampleModalFormTitle').text('هل تريد حقا استخراج بطاقة المعلومات ؟');
+        });
+
+
+        $('#businessCertificateModal').on('show.bs.modal', function (e) {
+            //get data-id attribute of the clicked element
+
+            $(e.currentTarget).find('#exampleModalFormTitle').text('هل تريد حقا استخراج شهادة عمل ؟');
+        });
+
+        $('#clothesModal').on('show.bs.modal', function (e) {
+            //get data-id attribute of the clicked element
+
+            $(e.currentTarget).find('#exampleModalFormTitle').text('هل تريد حقا استخراج بطاقة فردية خاصة بالملابس ؟');
         });
 
         //delete multi modal
@@ -165,13 +274,136 @@
 
 
     <div class="modal fade" id="paiementModal" tabindex="-1" aria-labelledby="exampleModalFormTitle"
-         aria-hidden="true" style="display: none;">
+                aria-hidden="true" style="display: none;">
         <div class="modal-dialog" role="document">
             <form id="deleteForm" action="dash/papers/5/export" method="post">
                 @csrf
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalFormTitle">هل تريد حقا استخراج محضر تقاضي المستحقات؟</h5>
+                    </div>
+
+                    <div class="form-group col-sm-12 col-md-12">
+                        <label>الموظف : </label>
+                        <select class="form-control" id="employee_id" name="employee_id" autocomplete="city" required>
+                            @foreach($employees as $employee)
+                                <option value="{{$employee->id}}" {{old('employee') == $employee->id ? 'selected':''}}>{{$employee->name." ".$employee->surname}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">
+                            اغلق
+                        </button>
+                        <button type="submit" class="btn btn-danger font-weight-bold">نعم</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="informationModal" tabindex="-1" aria-labelledby="exampleModalFormTitle"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog" role="document">
+            <form id="deleteForm" action="dash/papers/8/export" method="post">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalFormTitle">هل تريد حقا استخراج بطاقة المعلومات ؟</h5>
+                    </div>
+
+                    <div class="form-group col-sm-12 col-md-12">
+                        <label>الموظف : </label>
+                        <select class="form-control" id="employee_id" name="employee_id" autocomplete="city" required>
+                            @foreach($employees as $employee)
+                                <option value="{{$employee->id}}" {{old('employee') == $employee->id ? 'selected':''}}>{{$employee->name." ".$employee->surname}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">
+                            اغلق
+                        </button>
+                        <button type="submit" class="btn btn-danger font-weight-bold">نعم</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal fade" id="businessCertificateModal" tabindex="-1" aria-labelledby="exampleModalFormTitle"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog" role="document">
+            <form id="deleteForm" action="dash/papers/8/export" method="post">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalFormTitle">هل تريد حقا استخراج شهادة عمل ؟</h5>
+                    </div>
+
+                    <div class="form-group col-sm-12 col-md-12">
+                        <label>الموظف : </label>
+                        <select class="form-control" id="employee_id" name="employee_id" autocomplete="city" required>
+                            @foreach($employees as $employee)
+                                <option value="{{$employee->id}}" {{old('employee') == $employee->id ? 'selected':''}}>{{$employee->name." ".$employee->surname}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">
+                            اغلق
+                        </button>
+                        <button type="submit" class="btn btn-danger font-weight-bold">نعم</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal fade" id="clothesModal" tabindex="-1" aria-labelledby="exampleModalFormTitle"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog" role="document">
+            <form id="deleteForm" action="dash/papers/9/export" method="post">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalFormTitle">هل تريد حقا استخراج بطاقة فردية خاصة بالملابس
+                            ؟</h5>
+                    </div>
+
+                    <div class="form-group col-sm-12 col-md-12">
+                        <label>الموظف : </label>
+                        <select class="form-control" id="employee_id" name="employee_id" autocomplete="city" required>
+                            @foreach($employees as $employee)
+                                <option value="{{$employee->id}}" {{old('employee') == $employee->id ? 'selected':''}}>{{$employee->name." ".$employee->surname}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">
+                            اغلق
+                        </button>
+                        <button type="submit" class="btn btn-danger font-weight-bold">نعم</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal fade" id="clothesModal" tabindex="-1" aria-labelledby="exampleModalFormTitle"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog" role="document">
+            <form id="deleteForm" action="dash/papers/9/export" method="post">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalFormTitle">هل تريد حقا استخراج بطاقة فردية خاصة بالملابس
+                            ؟</h5>
                     </div>
 
                     <div class="form-group col-sm-12 col-md-12">
