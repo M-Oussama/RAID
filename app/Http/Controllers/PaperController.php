@@ -48,8 +48,16 @@ class PaperController extends Controller
         }
 
         $employees = Employees::all();
+        $mutation_employees = Employees::whereIN('id',function ($query){
+            $query->select('employee_id')->from(with (new Contract)->getTable())->where('end_date','>=',date('Y-m-d'))->pluck('employee_id')->toArray();
+        })->get();
 
-        return view('dashboard.paper.index')->with('papers',json_encode($papers))->with('employees',$employees);
+        $business_paper_employees = Employees::whereIN('id',function ($query){
+            $query->select('employee_id')->from(with (new Contract)->getTable())->pluck('employee_id')->toArray();
+        })->get();
+
+
+        return view('dashboard.paper.index')->with('papers',json_encode($papers))->with('employees',$employees)->with('MEmployees',$mutation_employees)->with('business_paper_employees',$business_paper_employees);
     }
 
     public function papersList()
@@ -106,7 +114,7 @@ class PaperController extends Controller
             }
             case 5: {
                 // محضر تقاضي المستحقات
-                $view = "dashboard.paper.papers.get_all_paiements";
+
 
                 $paper = new Paper();
                 $paper->paper_type_id = $id;
@@ -114,22 +122,29 @@ class PaperController extends Controller
                 $paper->save();
 
                 return redirect("/dash/papers/list");
-                //$employee = Employees::find($request->employee_id);
-
-                //return view($view)->with('employee',$employee)->with('paper',$paper);
 
                 break;
             }
             case 6: {
-
+                $paper = new Paper();
+                $paper->paper_type_id = $id;
+                $paper->employee_id = $request->employee_id;
+                $paper->save();
                 // قرار تحويل
-                $view = "dashboard.paper.papers.mutation";
 
+                return redirect("/dash/papers/list");
                 break;
             }
             case 7: {
                 // شهادة عمل
-                $view = "dashboard.paper.papers.business_certificate";
+
+                $paper = new Paper();
+                $paper->paper_type_id = $id;
+                $paper->employee_id = $request->employee_id;
+                $contract = Contract::where('employee_id',$request->employee_id)->get()->last();
+                $paper->contract_id = $contract->id;
+                $paper->save();
+                return redirect("/dash/papers/list");
 
                 break;
             }
@@ -223,20 +238,30 @@ class PaperController extends Controller
             }
             case 6: {
 
+                $paper = Paper::find($id);
+                $contract = Contract::where('employee_id',$paper->employee_id)->get()->last();
                 // قرار تحويل
                 $view = "dashboard.paper.papers.mutation";
-
+                return view($view)->with('paper',$paper)->with('contract',$contract);
                 break;
             }
             case 7: {
                 // شهادة عمل
                 $view = "dashboard.paper.papers.business_certificate";
 
+                $paper = Paper::find($id);
+                $contract = Contract::where('employee_id',$paper->employee_id)->get()->last();
+                return view($view)->with('paper',$paper)->with('contract',$contract);
+
                 break;
             }
             case 8: {
                 // بطاقـــــة معلومــــات
+                $paper = Paper::find($id);
                 $view = "dashboard.paper.papers.information_card";
+                $contract = Contract::where('employee_id',$paper->employee_id)->get()->last();
+                return view($view)->with('paper',$paper)->with('contract',$contract);
+
                 break;
             }
             case 9: {

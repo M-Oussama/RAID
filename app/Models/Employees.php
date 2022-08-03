@@ -45,6 +45,9 @@ class Employees extends Model
     public function address(){
         return $this->belongsTo(Address::class,'birthplace_id');
     }
+    public function livingAddress(){
+        return $this->belongsTo(Address::class,'address__id');
+    }
 
     public function documentAddress(){
         return $this->belongsTo(Address::class,'document_address');

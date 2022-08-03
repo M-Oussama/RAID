@@ -222,6 +222,12 @@
             $(e.currentTarget).find('#exampleModalFormTitle').text('هل تريد حقا استخراج بطاقة فردية خاصة بالملابس ؟');
         });
 
+        $('#mutationModal').on('show.bs.modal', function (e) {
+            //get data-id attribute of the clicked element
+
+            $(e.currentTarget).find('#exampleModalFormTitle').text('هل تريد حقا استخراج قرار تحويل ؟');
+        });
+
         //delete multi modal
         $('#deleteMultiModal').on('show.bs.modal', function (e) {
             $(e.currentTarget).find('#deleteMultiSubmit').click(function (eclick) {
@@ -337,7 +343,7 @@
     <div class="modal fade" id="businessCertificateModal" tabindex="-1" aria-labelledby="exampleModalFormTitle"
          aria-hidden="true" style="display: none;">
         <div class="modal-dialog" role="document">
-            <form id="deleteForm" action="dash/papers/8/export" method="post">
+            <form id="deleteForm" action="dash/papers/7/export" method="post">
                 @csrf
                 <div class="modal-content">
                     <div class="modal-header">
@@ -347,7 +353,7 @@
                     <div class="form-group col-sm-12 col-md-12">
                         <label>الموظف : </label>
                         <select class="form-control" id="employee_id" name="employee_id" autocomplete="city" required>
-                            @foreach($employees as $employee)
+                            @foreach($business_paper_employees as $employee)
                                 <option value="{{$employee->id}}" {{old('employee') == $employee->id ? 'selected':''}}>{{$employee->name." ".$employee->surname}}</option>
                             @endforeach
                         </select>
@@ -364,21 +370,21 @@
         </div>
     </div>
 
-    <div class="modal fade" id="clothesModal" tabindex="-1" aria-labelledby="exampleModalFormTitle"
+    <div class="modal fade" id="mutationModal" tabindex="-1" aria-labelledby="exampleModalFormTitle"
          aria-hidden="true" style="display: none;">
         <div class="modal-dialog" role="document">
-            <form id="deleteForm" action="dash/papers/9/export" method="post">
+            <form id="deleteForm" action="dash/papers/6/export" method="post">
                 @csrf
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalFormTitle">هل تريد حقا استخراج بطاقة فردية خاصة بالملابس
+                        <h5 class="modal-title" id="exampleModalFormTitle">هل تريد حقا استخراج قرار تحويل ؟
                             ؟</h5>
                     </div>
 
                     <div class="form-group col-sm-12 col-md-12">
                         <label>الموظف : </label>
                         <select class="form-control" id="employee_id" name="employee_id" autocomplete="city" required>
-                            @foreach($employees as $employee)
+                            @foreach($MEmployees as $employee)
                                 <option value="{{$employee->id}}" {{old('employee') == $employee->id ? 'selected':''}}>{{$employee->name." ".$employee->surname}}</option>
                             @endforeach
                         </select>

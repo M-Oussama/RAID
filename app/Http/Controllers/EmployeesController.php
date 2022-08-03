@@ -47,6 +47,11 @@ class EmployeesController extends Controller
         $birthdplace->daira_id = $request->daira_id;
         $birthdplace->save();
 
+        $living_address = new Address();
+        $living_address->address = $request->address;
+        $living_address->wilaya_id = $request->wilaya_address;
+        $living_address->save();
+
 
         $employee = new Employees();
 
@@ -57,6 +62,7 @@ class EmployeesController extends Controller
         $employee->family_status = $request->family_status;
         $employee->children_number = $request->children_number;
         $employee->wife_name = $request->wife_name;
+        $employee->address_id = $request->$living_address;
         $employee->birthday_document_number = $request->birthday_document_number;
         $employee->father_name = $request->father_name;
         $employee->mother_fullname = $request->mother_fullname;

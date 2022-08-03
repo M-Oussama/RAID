@@ -20,6 +20,7 @@ class CreateEmployeesTable extends Migration
             $table->string('surname')->nullable();
             $table->date('birthdate')->nullable();
             $table->unsignedBigInteger('birthplace_id')->nullable();
+            $table->unsignedBigInteger('address_id')->nullable();
             $table->string('family_status')->nullable();
             $table->string('father_name')->nullable();
             $table->string('mother_fullname')->nullable();

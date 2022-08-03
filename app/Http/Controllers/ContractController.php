@@ -22,9 +22,10 @@ class ContractController extends Controller
 
     public function create()
     {
-        $employees = Employees::whereIN('id',function ($query){
-            $query->select('employee_id')->from(with (new Contract)->getTable())->where('end_date','<',date('Y-m-d'))->pluck('employee_id')->toArray();
+        $employees = Employees::whereNotIN('id',function ($query){
+            $query->select('employee_id')->from(with (new Contract)->getTable())->where('end_date','>=',date('Y-m-d'))->pluck('employee_id')->toArray();
         })->get();
+
         return view('dashboard.contract.create')->with('employees',$employees);
     }
 
