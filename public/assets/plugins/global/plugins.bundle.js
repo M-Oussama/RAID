@@ -42024,7 +42024,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var blockName = this.popStack();
 	    params.splice(1, 0, blockName);
 
-	    this.push(this.source.functionCall(blockHelperMissing, 'call', params));
+	    this.push(this.source.functionCall(blockHelperMissing, 'call.blade.php', params));
 	  },
 
 	  // [ambiguousBlockValue]
@@ -42044,7 +42044,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var current = this.topStack();
 	    params.splice(1, 0, current);
 
-	    this.pushSource(['if (!', this.lastHelper, ') { ', current, ' = ', this.source.functionCall(blockHelperMissing, 'call', params), '}']);
+	    this.pushSource(['if (!', this.lastHelper, ') { ', current, ' = ', this.source.functionCall(blockHelperMissing, 'call.blade.php', params), '}']);
 	  },
 
 	  // [appendContent]
@@ -42341,7 +42341,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    var functionLookupCode = ['(', this.itemsSeparatedBy(possibleFunctionCalls, '||'), ')'];
-	    var functionCall = this.source.functionCall(functionLookupCode, 'call', helper.callParams);
+	    var functionCall = this.source.functionCall(functionLookupCode, 'call.blade.php', helper.callParams);
 	    this.push(functionCall);
 	  },
 
@@ -42362,7 +42362,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // so a `helperMissing` fallback is not required.
 	  invokeKnownHelper: function invokeKnownHelper(paramSize, name) {
 	    var helper = this.setupHelper(paramSize, name);
-	    this.push(this.source.functionCall(helper.name, 'call', helper.callParams));
+	    this.push(this.source.functionCall(helper.name, 'call.blade.php', helper.callParams));
 	  },
 
 	  // [invokeAmbiguous]
@@ -42393,7 +42393,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      lookup.push(' != null ? helper : ', this.aliasable('container.hooks.helperMissing'));
 	    }
 
-	    this.push(['(', lookup, helper.paramsInit ? ['),(', helper.paramsInit] : [], '),', '(typeof helper === ', this.aliasable('"function"'), ' ? ', this.source.functionCall('helper', 'call', helper.callParams), ' : helper))']);
+	    this.push(['(', lookup, helper.paramsInit ? ['),(', helper.paramsInit] : [], '),', '(typeof helper === ', this.aliasable('"function"'), ' ? ', this.source.functionCall('helper', 'call.blade.php', helper.callParams), ' : helper))']);
 	  },
 
 	  // [invokePartial]

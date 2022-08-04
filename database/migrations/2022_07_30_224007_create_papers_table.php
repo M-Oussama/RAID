@@ -18,6 +18,8 @@ class CreatePapersTable extends Migration
             $table->unsignedInteger('paper_type_id')->nullable();
             $table->unsignedInteger('employee_id')->nullable();
             $table->unsignedInteger('contract_id')->nullable();
+            $table->string('vacation_length')->nullable();
+            $table->date('vacation_start')->nullable();
             $table->date('date')->nullable();
             $table->timestamps();
         });

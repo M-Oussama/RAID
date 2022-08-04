@@ -162,12 +162,24 @@ class PaperController extends Controller
             }
             case 9: {
                 // بطاقة فردية خاصة بالملابس
-                $view = "dashboard.paper.papers.clothes_card";
+
+                $paper = new Paper();
+                $paper->paper_type_id = $id;
+                $paper->employee_id = $request->employee_id;
+                $paper->save();
+                return redirect("/dash/papers/list");
+
                 break;
             }
             case 10: {
                 // العطلة
-                $view = "dashboard.paper.papers.vacation";
+                $paper = new Paper();
+                $paper->paper_type_id = $id;
+                $paper->employee_id = $request->employee_id;
+                $paper->vacation_length = $request->employee_id;
+                $paper->vacation_start = $request->vacation_start_date;
+                $paper->save();
+                return redirect("/dash/papers/list");
                 break;
             }
             case 11: {
@@ -266,17 +278,28 @@ class PaperController extends Controller
             }
             case 9: {
                 // بطاقة فردية خاصة بالملابس
+                $paper = Paper::find($id);
                 $view = "dashboard.paper.papers.clothes_card";
+                $contract = Contract::where('employee_id',$paper->employee_id)->get()->last();
+                return view($view)->with('paper',$paper)->with('contract',$contract);
+
                 break;
             }
             case 10: {
                 // العطلة
+
+                $paper = Paper::find($id);
+                $contract = Contract::where('employee_id',$paper->employee_id)->get()->last();
                 $view = "dashboard.paper.papers.vacation";
+                return view($view)->with('paper',$paper)->with('contract',$contract);
                 break;
             }
             case 11: {
                 // إستفسار
+                $paper = Paper::find($id);
                 $view = "dashboard.paper.papers.inquiry";
+                return view($view)->with('paper',$paper);
+
                 break;
             }
             case 12: {

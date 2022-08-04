@@ -415,12 +415,61 @@
                     <div class="form-group col-sm-12 col-md-12">
                         <label>الموظف : </label>
                         <select class="form-control" id="employee_id" name="employee_id" autocomplete="city" required>
-                            @foreach($employees as $employee)
+                            @foreach($business_paper_employees as $employee)
                                 <option value="{{$employee->id}}" {{old('employee') == $employee->id ? 'selected':''}}>{{$employee->name." ".$employee->surname}}</option>
                             @endforeach
                         </select>
                     </div>
 
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">
+                            اغلق
+                        </button>
+                        <button type="submit" class="btn btn-danger font-weight-bold">نعم</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal fade" id="vacationModal" tabindex="-1" aria-labelledby="exampleModalFormTitle"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog" role="document">
+            <form id="deleteForm" action="dash/papers/10/export" method="post">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalFormTitle">هل تريد حقا استخراج وثيقة العطلة
+                            ؟</h5>
+                    </div>
+
+                    <div class="form-group col-sm-12 col-md-12">
+                        <label>الموظف : </label>
+                        <select class="form-control" id="employee_id" name="employee_id" autocomplete="city" required>
+                            @foreach($business_paper_employees as $employee)
+                                <option value="{{$employee->id}}" {{old('employee') == $employee->id ? 'selected':''}}>{{$employee->name." ".$employee->surname}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-12 col-md-12">
+                        <label>المدة : </label>
+                        <select class="form-control" id="vacation_length" name="vacation_length" autocomplete="city" required>
+
+                                <option value="10" >10 أيام</option>
+                                <option value="15" >15 أيام</option>
+                                <option value="20" >20 أيام</option>
+                                <option value="25" >25 أيام</option>
+                                <option value="30" >30 أيام</option>
+
+                        </select>
+                    </div>
+
+                    <div class="form-group col-sm-12 col-md-12">
+                        <label>تاريح بداية العطلة :</label>
+                        <input type="date" name="vacation_start_date" value="{{old('birthdate')}}" autocomplete="bday"
+                               class="form-control form-control-solid" placeholder="أدخل تاريخ بداية العطلة"/>
+                        <span class="form-text text-muted">الرجاء إدخال تاريخ بداية العطلة</span>
+                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">
                             اغلق
