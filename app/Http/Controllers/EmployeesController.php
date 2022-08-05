@@ -42,9 +42,9 @@ class EmployeesController extends Controller
 
         $birthdplace = new Address();
         $birthdplace->address = $request->birthplace;
-        $birthdplace->wilaya_id = $request->wilaya_id;
-        $birthdplace->baladia_id = $request->baladia_id;
-        $birthdplace->daira_id = $request->daira_id;
+        $birthdplace->wilaya_id = $request->birthplace_wilaya;
+        $birthdplace->baladia_id = $request->birthplace_baladia;
+        $birthdplace->daira_id = $request->birthplace_daira;
         $birthdplace->save();
 
         $living_address = new Address();

@@ -151,7 +151,7 @@
 
                             case 12:{
                                 return '\
-                               <a href="#" data-toggle="modal"  data-target="#requestModal"  class="btn btn-sm btn-clean btn-icon" title="استخراج">\
+                               <a href="#" data-toggle="modal"  data-target="#callModal"  class="btn btn-sm btn-clean btn-icon" title="استخراج">\
                                     <i class="far fa-file-pdf">\
                                     </i>\
                                 </a>\
@@ -470,6 +470,68 @@
                                class="form-control form-control-solid" placeholder="أدخل تاريخ بداية العطلة"/>
                         <span class="form-text text-muted">الرجاء إدخال تاريخ بداية العطلة</span>
                     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">
+                            اغلق
+                        </button>
+                        <button type="submit" class="btn btn-danger font-weight-bold">نعم</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal fade" id="inquiryModal" tabindex="-1" aria-labelledby="exampleModalFormTitle"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog" role="document">
+            <form id="deleteForm" action="dash/papers/11/export" method="post">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalFormTitle">هل تريد حقا استخراج الاستفسار
+                            ؟</h5>
+                    </div>
+
+                    <div class="form-group col-sm-12 col-md-12">
+                        <label>الموظف : </label>
+                        <select class="form-control" id="employee_id" name="employee_id" autocomplete="city" required>
+                            @foreach($employees as $employee)
+                                <option value="{{$employee->id}}" {{old('employee') == $employee->id ? 'selected':''}}>{{$employee->name." ".$employee->surname}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">
+                            اغلق
+                        </button>
+                        <button type="submit" class="btn btn-danger font-weight-bold">نعم</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal fade" id="callModal" tabindex="-1" aria-labelledby="exampleModalFormTitle"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog" role="document">
+            <form id="deleteForm" action="dash/papers/12/export" method="post">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalFormTitle">هل تريد حقا استخراج الاستدعاء
+                            ؟</h5>
+                    </div>
+
+                    <div class="form-group col-sm-12 col-md-12">
+                        <label>الموظف : </label>
+                        <select class="form-control" id="employee_id" name="employee_id" autocomplete="city" required>
+                            @foreach($employees as $employee)
+                                <option value="{{$employee->id}}" {{old('employee') == $employee->id ? 'selected':''}}>{{$employee->name." ".$employee->surname}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">
                             اغلق

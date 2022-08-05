@@ -83,11 +83,24 @@
                     width: '175px',
                     className: 'text-center',
                     render: function (data, type, row) {
+                        console.log(data.employee.name);
+                        var employee = data.employee.surname + " "+ data.employee.name;
+                        var export_contract = "";
+                        if(data.extension)
+                            if( moment().format("YYYY-MM-DD") > data.end_date )
+
+                                export_contract = '<a href=\"#\" data-toggle=\"modal\"  data-target=\"#extensionModal\" data-contract_id=\"' + row.id + '\" data-user_name=\"' + employee + '\" class=\"btn btn-sm btn-clean btn-icon\" title=\"Extension\">\
+                                                                    <i class=\"fas fa-pen-nib\"></i>\
+                                                        </a>\
+                                                        ';
                         return '\
                         \<a href="dash/contracts/' + row.id + '/pdf" class="btn btn-sm btn-clean btn-icon" title="استخراج العقد">\
                             <i class="far fa-file-pdf">\
                             </i>\
                         </a>\
+                        '+
+                        export_contract + '\
+                        \
                         @canany(['edit-contract','delete-contract'])
                             @can('edit-contract')
                             <a href="dash/contract/' + row.id + '/edit" class="btn btn-sm btn-clean btn-icon mr-2" title="Edit details">\
@@ -103,7 +116,7 @@
                                 </a>\
                             @endcan
                             @can('delete-user')
-                                <a href="#" data-toggle="modal"  data-target="#deleteModal" data-user_id="' + row.id + '" data-user_name="' + row.name + '" class="btn btn-sm btn-clean btn-icon" title="Delete">\
+                                <a href="#" data-toggle="modal"  data-target="#deleteModal" data-user_id="' + row.id + '" data-user_name="' + data.employee.name + '" class="btn btn-sm btn-clean btn-icon" title="Delete">\
                                     <span class="svg-icon svg-icon-md">\
                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">\
                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">\
@@ -160,6 +173,18 @@
             $(e.currentTarget).find('#exampleModalFormTitle').text('هل حقا تريد حذف الموظف' + user_name + ' ?');
             $(e.currentTarget).find('#deleteForm').attr('action', 'dash/security/assistance/' + user_id);
         });
+        $('#extensionModal').on('show.bs.modal', function (e) {
+            //get data-id attribute of the clicked element
+            var contract_id = $(e.relatedTarget).data('contract_id');
+            var user_name = $(e.relatedTarget).data('user_name');
+
+            //populate the textbox
+            $(e.currentTarget).find('#exampleModalFormTitle').text(' تمديد عقد العامل: ' + user_name);
+            $(e.currentTarget).find('#extensionForm').attr('action', 'dash/contracts/'+contract_id+'/create');
+
+        });
+
+
 
         //delete multi modal
         $('#deleteMultiModal').on('show.bs.modal', function (e) {
@@ -337,5 +362,64 @@
             </div>
         </div>
         <!-- end::delete multi modal -->
+
+
+        <div class="modal fade" id="extensionModal" tabindex="-1" aria-labelledby="exampleModalFormTitle"
+             aria-hidden="true" style="display: none;">
+            <div class="modal-dialog" role="document">
+                <form id="extensionForm" action="dash/contracts" method="post">
+                    @csrf
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalFormTitle">تمديد عقد العامل :
+                                ؟</h5>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-12">
+                            <label>المنصب* :</label>
+                            <input type="text" name="post" value="{{old('name')}}" autocomplete="family-name"
+                                   class="form-control form-control-solid" placeholder="أدخل المنصب" required/>
+                            <span class="form-text text-muted">الرجاء إدخال المنصب</span>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-12">
+                            <label>الموقع* :</label>
+                            <input type="text" name="post_location" value="{{old('surname')}}" autocomplete="given-name"
+                                   class="form-control form-control-solid" placeholder="أدخل الموقع"
+                                   required/>
+                            <span class="form-text text-muted">الرجاء ادخال الموقع</span>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-12">
+                            <label>تاريح بداية العقد :</label>
+                            <input type="date" name="start_date" value="{{old('start_date')}}" autocomplete="bday"
+                                   class="form-control form-control-solid" placeholder="أدخل تاريخ بداية العقد "/>
+                            <span class="form-text text-muted">الرجاء إدخال تاريخ بداية العقد </span>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-12">
+                            <label>مدة العقد : </label>
+                            <select class="form-control"  name="contract_length" autocomplete="city" required>
+
+                                <option value="1" >عام واحد (12 شهر)</option>
+                                <option value="2" >ستة أشهر  (6 أشهر)</option>
+
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-12">
+                            <label>الراتب   :</label>
+                            <input type="number" name="salary" value="{{old('start_date')}}" autocomplete="bday"
+                                   class="form-control form-control-solid" placeholder="أدخل الراتب "/>
+                            <span class="form-text text-muted">الرجاء إدخال الراتب </span>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">
+                                اغلق
+                            </button>
+                            <button type="submit" class="btn btn-danger font-weight-bold">نعم</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 @endsection

@@ -146,14 +146,14 @@
                             <span class="form-text text-muted">الرجاء إدخال تاريخ التأمين بالشركة </span>
                         </div>--}}
 
-                        <div class="form-group col-sm-12 col-md-6">
+                        <div class="form-group col-sm-12 col-md-4">
                             <label>تاريح بداية العقد :</label>
                             <input type="date" name="start_date" value="{{old('start_date')}}" autocomplete="bday"
                                    class="form-control form-control-solid" placeholder="أدخل تاريخ بداية العقد "/>
                             <span class="form-text text-muted">الرجاء إدخال تاريخ بداية العقد </span>
                         </div>
 
-                        <div class="form-group col-sm-12 col-md-6">
+                        <div class="form-group col-sm-12 col-md-4">
                             <label>مدة العقد : </label>
                             <select class="form-control"  name="contract_length" autocomplete="city" required>
 
@@ -161,6 +161,13 @@
                                     <option value="2" >ستة أشهر  (6 أشهر)</option>
 
                             </select>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-4">
+                            <label>الراتب   :</label>
+                            <input type="number" name="salary" value="{{old('start_date')}}" autocomplete="bday"
+                                   class="form-control form-control-solid" placeholder="أدخل الراتب "/>
+                            <span class="form-text text-muted">الرجاء إدخال الراتب </span>
                         </div>
                         {{--<div class="form-group col-sm-12 col-md-6">
                             <label>تاريح نهاية العقد :</label>

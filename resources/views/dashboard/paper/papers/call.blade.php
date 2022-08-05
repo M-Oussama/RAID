@@ -98,7 +98,7 @@
 <div class=WordSection1>
 
     <p class=MsoNormal align=right style='margin-bottom:0in;text-align:right;
-line-height:106%'><img width=176 height=140 src="إستدعــاء_files/image001.jpg"
+line-height:106%'><img width=176 height=140 src="{{url('/assets/contractFiles/image001.jpg')}}"
                        align=left hspace=12 alt="AUTOCOLLENT 52X62(2pcs)"><b><span lang=AR-DZ dir=RTL
                                                                                    style='font-size:16.0pt;line-height:106%;font-family:AL-Gemah-Almajd'>شركـــــــة
 </span></b><b><span lang=AR-DZ dir=RTL style='font-size:20.0pt;line-height:
@@ -119,11 +119,11 @@ line-height:106%;font-family:"Sultan Medium"'>036447490/036447344 </span></b></p
 line-height:106%'><b><span lang=FR>raedsecurite@gmail.com </span></b><b><span
             lang=AR-DZ dir=RTL style='font-family:"Sultan Medium"'>البريد الالكتروني :</span></b></p>
 
-    <p class=MsoNormal align=right style='margin-bottom:0in;text-align:right;
-line-height:106%'><b><span lang=AR-DZ dir=RTL style='font-size:12.0pt;
-line-height:106%;font-family:"Sultan Medium"'>رقم:              / ش. ذ. م. م /2022</span></b><span
-            lang=AR-DZ dir=RTL style='font-size:14.0pt;line-height:106%;font-family:"Sultan Medium"'>.          
-</span></p>
+    <p class=MsoNormal dir=RTL style='margin-bottom:0in;text-align:right;
+line-height:normal;direction:rtl;unicode-bidi:embed'><b><span lang=AR-DZ
+                                                              style='font-size:12.0pt;font-family:"Arial",sans-serif'>رقم :{{str_pad($paper->id, 3, '0', STR_PAD_LEFT)}}/ ش. ذ.
+م. م /2022</span></b><span lang=AR-DZ style='font-size:14.0pt;font-family:"Arial",sans-serif'>.                            
+</span><b><span lang=AR-DZ style='font-size:18.0pt;font-family:"Sultan Medium"'>        
 
     <p class=MsoNormal align=center style='margin-bottom:0in;text-align:center;
 line-height:normal'><b><span lang=AR-DZ dir=RTL style='font-family:"Sultan Medium"'>&nbsp;</span></b></p>
@@ -145,11 +145,11 @@ line-height:106%;font-family:AL-Gemah-Almajd'>&nbsp;</span></b></p>
 
     <p class=MsoListParagraphCxSpMiddle align=center dir=RTL style='margin-bottom:
 0in;text-align:center;line-height:106%'><b><span lang=AR-DZ style='font-size:
-16.0pt;line-height:106%;font-family:"Sultan Medium"'>إلى السيد: الاسم واللقب</span></b></p>
+16.0pt;line-height:106%;font-family:"Sultan Medium"'>إلى السيد: {{$paper->employee->surname}} {{$paper->employee->name}}</span></b></p>
 
     <p class=MsoListParagraphCxSpMiddle align=center dir=RTL style='margin-bottom:
 0in;text-align:center;line-height:106%'><b><span lang=AR-DZ style='font-size:
-16.0pt;line-height:106%;font-family:"Sultan Medium"'>المنصب بموقع الموقع</span></b></p>
+16.0pt;line-height:106%;font-family:"Sultan Medium"'>{{$contract->post}} بموقع {{$contract->post_location}} </span></b></p>
 
     <p class=MsoListParagraphCxSpMiddle dir=RTL style='margin-bottom:0in;
 text-align:justify;line-height:106%'><b><span lang=FR dir=LTR style='font-size:
@@ -179,7 +179,7 @@ text-align:justify;line-height:106%'><b><span lang=FR dir=LTR style='font-size:
 text-align:justify;line-height:115%'><b><span lang=AR-DZ style='font-size:17.0pt;
 line-height:115%;font-family:"Sultan Medium"'>يطلب منكم الحضور إلى مقر الإدارة
 الكائن بمشروع 160 مسكن ترقوي مدعم بحي الهضاب بالمحل رقم 97 عمارة رقم 06 سطيف
-يوم: &quot;يدوي&quot; على الساعة: يدوي .</span></b></p>
+يوم: .......................... على الساعة: .................... .</span></b></p>
 
     <p class=MsoListParagraphCxSpMiddle dir=RTL style='margin-bottom:0in;
 text-align:justify;line-height:115%'><b><span lang=AR-DZ style='font-size:17.0pt;

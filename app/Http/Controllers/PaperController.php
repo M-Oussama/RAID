@@ -69,20 +69,12 @@ class PaperController extends Controller
 
     public function exportContract($id){
         $contract = Contract::find($id);
+        $paper = Paper::where('contract_id',$id)->get()->first();
 
-        return view('dashboard.paper.papers.contract')->with('contract',$contract);
+        return view('dashboard.paper.papers.contract')->with('contract',$contract)->with('paper',$paper);
     }
 
     public function exportPaper(Request $request,$id){
-
-
-        $view = "";
-
-       // $paper = new Paper();
-       // $paper->paper_type = $request->paper_type;
-       // $paper->employee_id = $request->employee_id;
-       // $paper->save();
-
 
 
         switch ($id){
@@ -184,12 +176,21 @@ class PaperController extends Controller
             }
             case 11: {
                 // إستفسار
-                $view = "dashboard.paper.papers.inquiry";
+                $paper = new Paper();
+                $paper->paper_type_id = $id;
+                $paper->employee_id = $request->employee_id;
+                $paper->date = date('Y-m-d');
+                $paper->save();
+                return redirect("/dash/papers/list");
                 break;
             }
             case 12: {
-                // إستدعاء
-                $view = "dashboard.paper.papers.call";
+                $paper = new Paper();
+                $paper->paper_type_id = $id;
+                $paper->employee_id = $request->employee_id;
+                $paper->date = date('Y-m-d');
+                $paper->save();
+                return redirect("/dash/papers/list");
                 break;
             }
             default: return redirect("/dash/papers");
@@ -304,7 +305,12 @@ class PaperController extends Controller
             }
             case 12: {
                 // إستدعاء
+                $paper = Paper::find($id);
+                $contract = Contract::where('employee_id',$paper->employee_id)->get()->last();
+
                 $view = "dashboard.paper.papers.call";
+                return view($view)->with('paper',$paper)->with('contract',$contract);
+
                 break;
             }
             default: return redirect("/dash/papers");

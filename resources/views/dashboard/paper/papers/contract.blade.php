@@ -87,30 +87,19 @@ line-height:106%;direction:rtl;unicode-bidi:embed'><a name="_Hlk109485043"><b><s
                 href="mailto:raedsecurite@gmail.com"><b><span lang=FR dir=LTR>raedsecurite@gmail.com</span></b></a><b><span
                     lang=FR dir=LTR> </span></b></p>
 
-    <p class=MsoNormal dir=RTL style='text-align:right;line-height:50%;direction:
+    <p class=MsoNormal dir=RTL style='margin-top:20px;text-align:right;line-height:50%;direction:
 rtl;unicode-bidi:embed'>
 
-    <table cellpadding=0 cellspacing=0 align=left>
+    <table cellpadding=0 cellspacing=0 align=center>
+
         <tr>
-            <td width=0 height=1></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><img width=327 height=77
-                     src="{{url('assets/contractFiles/image002.png')}}"
-                     alt="عقد عمــل محـدد المـــدة&#13;&#10;بالتوقيت الكامل رقم:&quot;رقم&quot;/2022&#13;&#10;"></td>
+            <td>
+
+                <u align="center"><h2 align="center">عقد عمل محدد المدة<br/>بالتوقيت الكامل رقم : 2022/{{str_pad($paper->id, 3, '0', STR_PAD_LEFT)}} </h2></u>
+
         </tr>
     </table>
 
-    <b><u><span lang=AR-DZ style='font-size:12.0pt;line-height:50%;font-family:
-"Traditional Arabic",serif'><span style='text-decoration:none'>&nbsp;</span></span></u></b></p>
-
-    <p class=MsoNormal dir=RTL style='text-align:right;line-height:50%;direction:
-rtl;unicode-bidi:embed'><b><u><span lang=FR dir=LTR style='font-size:12.0pt;
-line-height:50%;font-family:"Traditional Arabic",serif'><span style='text-decoration:
- none'>&nbsp;</span></span></u></b></p>
-
-    <br clear=ALL>
 
     <p class=MsoNormal dir=RTL style='text-align:right;line-height:50%;direction:
 rtl;unicode-bidi:embed'><b><u><span lang=AR-DZ style='font-size:12.0pt;

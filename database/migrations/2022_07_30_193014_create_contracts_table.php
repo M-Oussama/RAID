@@ -25,6 +25,7 @@ class CreateContractsTable extends Migration
             $table->string('salary')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
+            $table->boolean('extension')->default(1)->nullable();
             $table->timestamps();
         });
     }

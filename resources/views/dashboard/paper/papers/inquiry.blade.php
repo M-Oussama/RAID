@@ -85,13 +85,13 @@ line-height:normal;direction:rtl;unicode-bidi:embed'><b><span lang=AR-DZ
 
     <p class=MsoNormal dir=RTL style='margin-bottom:0in;text-align:right;
 line-height:normal;direction:rtl;unicode-bidi:embed'><b><span lang=AR-DZ
-                                                              style='font-size:12.0pt;font-family:"Arial",sans-serif'>رقم :         / ش. ذ.
+                                                              style='font-size:12.0pt;font-family:"Arial",sans-serif'>رقم :{{str_pad($paper->id, 3, '0', STR_PAD_LEFT)}}/ ش. ذ.
 م. م /2022</span></b><span lang=AR-DZ style='font-size:14.0pt;font-family:"Arial",sans-serif'>.                            
 </span><b><span lang=AR-DZ style='font-size:18.0pt;font-family:"Sultan Medium"'>                                                                    </span></b></p>
 
     <p class=MsoNormal align=center style='margin-bottom:0in;text-align:center;
 line-height:normal'><b><span lang=AR-DZ dir=RTL style='font-size:18.0pt;
-font-family:"Sultan Medium"'>إلى السيد:</span></b></p>
+font-family:"Sultan Medium"'>إلى السيد:{{$paper->employee->surname}} {{$paper->employee->name}}</span></b></p>
 
     <p class=MsoNormal align=center style='margin-bottom:0in;text-align:center;
 line-height:normal'><b><span lang=AR-DZ dir=RTL style='font-size:18.0pt;
@@ -104,12 +104,9 @@ font-family:AL-Gemah-Almajd'>&nbsp;</span></b></p>
     <p class=MsoNormal align=center style='margin-bottom:0in;text-align:center;
 line-height:normal'>
 
-    <table cellpadding=0 cellspacing=0 align=left>
+    <table cellpadding=0 cellspacing=0 align=center>
+
         <tr>
-            <td width=260 height=0></td>
-        </tr>
-        <tr>
-            <td></td>
             <td><img width=197 height=70 src="{{url('/assets/inquiryFiles/image002.png')}}"
                      alt="إستفسار&#13;&#10;&#13;&#10;&#13;&#10;"></td>
         </tr>
@@ -117,54 +114,12 @@ line-height:normal'>
 
     <b><span lang=AR-DZ dir=RTL style='font-size:4.0pt;font-family:AL-Gemah-Almajd'>&nbsp;</span></b></p>
 
-    <p class=MsoNormal align=center style='margin-bottom:0in;text-align:center;
-line-height:normal'><b><span lang=AR-DZ dir=RTL style='font-size:4.0pt;
-font-family:AL-Gemah-Almajd'>&nbsp;</span></b></p>
 
-    <p class=MsoNormal align=center style='margin-bottom:0in;text-align:center;
-line-height:normal'><b><span lang=AR-DZ dir=RTL style='font-size:4.0pt;
-font-family:AL-Gemah-Almajd'>&nbsp;</span></b></p>
-
-    <p class=MsoNormal align=center style='margin-bottom:0in;text-align:center;
-line-height:normal'><b><span lang=AR-DZ dir=RTL style='font-size:4.0pt;
-font-family:AL-Gemah-Almajd'>&nbsp;</span></b></p>
-
-    <p class=MsoNormal align=center style='margin-bottom:0in;text-align:center;
-line-height:normal'><b><span lang=AR-DZ dir=RTL style='font-size:4.0pt;
-font-family:AL-Gemah-Almajd'>&nbsp;</span></b></p>
-
-    <p class=MsoNormal align=center style='margin-bottom:0in;text-align:center;
-line-height:normal'><b><span lang=AR-DZ dir=RTL style='font-size:4.0pt;
-font-family:AL-Gemah-Almajd'>&nbsp;</span></b></p>
-
-    <p class=MsoNormal align=center style='margin-bottom:0in;text-align:center;
-line-height:normal'><b><span lang=AR-DZ dir=RTL style='font-size:4.0pt;
-font-family:AL-Gemah-Almajd'>&nbsp;</span></b></p>
-
-    <p class=MsoNormal align=center style='margin-bottom:0in;text-align:center;
-line-height:normal'><b><span lang=AR-DZ dir=RTL style='font-size:4.0pt;
-font-family:AL-Gemah-Almajd'>&nbsp;</span></b></p>
-
-    <p class=MsoNormal align=center style='margin-bottom:0in;text-align:center;
-line-height:normal'><b><span lang=AR-DZ dir=RTL style='font-size:4.0pt;
-font-family:AL-Gemah-Almajd'>&nbsp;</span></b></p>
-
-    <p class=MsoNormal align=center style='margin-bottom:0in;text-align:center;
-line-height:normal'><b><span lang=AR-DZ dir=RTL style='font-size:4.0pt;
-font-family:AL-Gemah-Almajd'>&nbsp;</span></b></p>
-
-    <p class=MsoNormal align=center style='margin-bottom:0in;text-align:center;
-line-height:normal'><b><span lang=AR-DZ dir=RTL style='font-size:4.0pt;
-font-family:AL-Gemah-Almajd'>&nbsp;</span></b></p>
-
-    <p class=MsoNormal align=center style='margin-bottom:0in;text-align:center;
-line-height:normal'><b><span lang=AR-DZ dir=RTL style='font-size:4.0pt;
-font-family:AL-Gemah-Almajd'>&nbsp;</span></b></p>
 
     <br clear=ALL>
 
     <p class=MsoNormal align=center style='margin-bottom:0in;text-align:center;
-line-height:normal'><span dir=LTR></span><b><span lang=AR-DZ style='font-size:
+line-height:normal' dir="rtl"><span dir=LTR></span><b><span lang=AR-DZ style='font-size:
 16.0pt;font-family:AL-Gemah-Almajd'><span dir=LTR></span> </span></b><span
             dir=RTL></span><b><span lang=AR-DZ dir=RTL style='font-size:16.0pt;font-family:
 "Sultan Medium"'><span dir=RTL></span>   المطلوب منكم الإجابة عن الأسئلة الموجه
@@ -184,12 +139,12 @@ font-family:AL-Gemah-Almajd'>&nbsp;</span></b></p>
 line-height:normal'><b><span lang=AR-DZ dir=RTL style='font-size:6.0pt;
 font-family:AL-Gemah-Almajd'>&nbsp;</span></b></p>
 
-    <table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 width=716
+    <table class=MsoTableGrid border=1 align="center" cellspacing=0 cellpadding=0 width=716
            style='width:537.0pt;border-collapse:collapse;border:none'>
         <tr style='height:113.4pt'>
             <td width=716 valign=top style='width:537.0pt;border:solid windowtext 1.0pt;
   padding:0in 5.4pt 0in 5.4pt;height:113.4pt'>
-                <p class=MsoNormal align=right style='text-align:right;line-height:normal'><u><span
+                <p class=MsoNormal align=right style='text-align:right;line-height:normal' dir="rtl"><u><span
                         lang=AR-DZ dir=RTL style='font-size:16.0pt;font-family:"Sultan Medium"'>موضوع
   الاستفسار</span></u><span lang=AR-DZ dir=RTL style='font-size:16.0pt;
   font-family:"Arial",sans-serif'> </span><span lang=AR-DZ dir=RTL
@@ -199,7 +154,7 @@ font-family:AL-Gemah-Almajd'>&nbsp;</span></b></p>
         <tr style='height:113.4pt'>
             <td width=716 valign=top style='width:537.0pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0in 5.4pt 0in 5.4pt;height:113.4pt'>
-                <p class=MsoNormal align=right style='text-align:right;line-height:normal'><u><span
+                <p class=MsoNormal align=right style='text-align:right;line-height:normal' dir="rtl"><u><span
                         lang=AR-DZ dir=RTL style='font-size:16.0pt;font-family:"Sultan Medium"'>الإجابة
   عن الاستفسار</span></u></p>
             </td>
@@ -207,7 +162,7 @@ font-family:AL-Gemah-Almajd'>&nbsp;</span></b></p>
         <tr style='height:113.4pt'>
             <td width=716 valign=top style='width:537.0pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0in 5.4pt 0in 5.4pt;height:113.4pt'>
-                <p class=MsoNormal align=right style='text-align:right;line-height:normal'><u><span
+                <p class=MsoNormal align=right style='text-align:right;line-height:normal' dir="rtl"><u><span
                         lang=AR-DZ dir=RTL style='font-size:16.0pt;font-family:"Sultan Medium"'>الإجراء
   المتخذ او المقترح</span></u></p>
             </td>
@@ -234,46 +189,32 @@ font-family:AL-Gemah-Almajd'>&nbsp;</span></b></p>
 
     <p class=MsoNormal dir=RTL style='margin-bottom:0in;text-align:right;
 line-height:normal;direction:rtl;unicode-bidi:embed'><a name="_Hlk109484495"></a><a
-            name="_Hlk109482176"><span lang=AR-DZ style='font-size:12.0pt;font-family:"Arial",sans-serif'>   
-</span></a><u><span lang=AR-DZ style='font-size:16.0pt;font-family:"Arial",sans-serif'>المعنــــــــي</span></u><span
-            lang=AR-DZ style='font-size:16.0pt;font-family:"Traditional Arabic",serif'>            
-                                                                 </span><b><span
-            lang=AR-DZ style='font-size:14.0pt;font-family:"Sultan Medium"'>سطيف في: </span></b><span
-            lang=AR-DZ style='font-size:14.0pt;font-family:"Sultan Medium"'> </span><b><u><span
-            lang=AR-DZ style='font-size:13.0pt;font-family:"Sultan Medium"'>&quot;تاريخ
-كتابة العقد&quot;</span></u></b><b><u><span lang=AR-DZ style='font-size:14.0pt;
-font-family:"Sultan Medium"'> </span></u></b><b><span lang=AR-DZ
-                                                      style='font-size:14.0pt;font-family:"Sultan Medium"'>                               </span></b><b><u><span
-            lang=AR-DZ style='font-size:14.0pt;font-family:"Traditional Arabic",serif'>&quot;الإسم
-واللقب&quot;</span></u></b><b><span lang=AR-DZ style='font-size:14.0pt;
-font-family:"Sultan Medium"'>                                                           
-                                             المسيـــــر</span></b></p>
+                name="_Hlk109482176"><span lang=AR-DZ style='font-size:12.0pt;font-family:"Arial",sans-serif'>   
+</span></a>
 
-    <p class=MsoNormal align=center style='margin-bottom:0in;text-align:center;
-line-height:normal'><b><span lang=AR-DZ dir=RTL style='font-size:4.0pt;
-font-family:AL-Gemah-Almajd'>&nbsp;</span></b></p>
 
-    <p class=MsoNormal align=center style='margin-bottom:0in;text-align:center;
-line-height:normal'><b><span lang=AR-DZ dir=RTL style='font-size:4.0pt;
-font-family:AL-Gemah-Almajd'>&nbsp;</span></b></p>
+        <table style="width: 100%;">
+            <tbody>
+            <tr>
 
-    <p class=MsoNormal align=center style='margin-bottom:0in;text-align:center;
-line-height:normal'><b><span lang=AR-DZ dir=RTL style='font-size:4.0pt;
-font-family:AL-Gemah-Almajd'>&nbsp;</span></b></p>
 
-    <p class=MsoNormal align=center style='margin-bottom:0in;text-align:center;
-line-height:normal'><b><span lang=AR-DZ dir=RTL style='font-size:4.0pt;
-font-family:AL-Gemah-Almajd'>&nbsp;</span></b></p>
 
-    <p class=MsoNormal align=center style='margin-bottom:0in;text-align:center;
-line-height:normal'><b><span lang=AR-DZ dir=RTL style='font-size:4.0pt;
-font-family:AL-Gemah-Almajd'>&nbsp;</span></b></p>
+                <td style="width: 406.688px;">
 
-    <p class=MsoNormal align=center style='margin-bottom:0in;text-align:center;
-line-height:normal'><b><span lang=AR-DZ dir=RTL style='font-size:4.0pt;
-font-family:AL-Gemah-Almajd'>&nbsp;</span></b></p>
 
-    <p class=MsoNormal><span lang=FR>&nbsp;</span></p>
+                  <h3>&nbsp;المعني :<br />{{$paper->employee->surname}} {{$paper->employee->name}}</h3>
+
+                 </td>
+                <td style="width: 460.312px; text-align: left">
+
+                    <h3>&nbsp;{{$paper->employee->date}}سطيف في :<br />المسير</h3>
+                </td>
+    </tr>
+    </tbody>
+    </table>
+
+
+
 
 </div>
 

@@ -89,6 +89,7 @@ Route::get('dash/contracts/{id}/pdf', [PaperController::class, 'exportContract']
 Route::get('dash/contracts/chief/create', [ContractController::class, 'createChiefContract']);
 Route::get('dash/papers/list', [PaperController::class, 'papersList']);
 Route::get('dash/papers/{paper_type}/{id}/exportFile', [PaperController::class, 'export']);
+Route::post('dash/contracts/{id}/create', [ContractController::class, 'extendContract']);
 
 
 

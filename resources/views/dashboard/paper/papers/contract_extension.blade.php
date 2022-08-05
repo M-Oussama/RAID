@@ -90,15 +90,12 @@ line-height:106%;direction:rtl;unicode-bidi:embed'><a name="_Hlk109485043"><b><s
     <p class=MsoNormal dir=RTL style='text-align:right;line-height:50%;direction:
 rtl;unicode-bidi:embed'>
 
-    <table cellpadding=0 cellspacing=0 align=left>
+    <table cellpadding=0 cellspacing=0 align=center>
+
         <tr>
-            <td width=0 height=1></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><img width=327 height=77
-                     src="{{url('assets/contractFiles/image002.png')}}"
-                     alt="عقد عمــل محـدد المـــدة&#13;&#10;بالتوقيت الكامل رقم:&quot;رقم&quot;/2022&#13;&#10;"></td>
+
+            <td>                <u align="center"><h2 align="center">عقد عمل محدد المدة<br/>بالتوقيت الكامل رقم : 2022/{{str_pad($paper->id, 3, '0', STR_PAD_LEFT)}} </h2></u>
+
         </tr>
     </table>
 
