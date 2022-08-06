@@ -163,7 +163,7 @@
         });
 
 
-        $('#birthplace_daira').on('change',function () {
+       /* $('#birthplace_daira').on('change',function () {
 
             KTApp.blockPage({
                 overlayColor: '#000000',
@@ -249,7 +249,7 @@
                     KTApp.unblockPage();
                 }
             })
-        });
+        });*/
 
     </script>
 @endsection
@@ -495,7 +495,7 @@
 
                         <div class="form-group col-sm-12 col-md-4" id="national_card_block">
                             <label>رقم بطاقة التعريف الوطنية * :</label>
-                            <input type="text" name="document_number" value="{{old('surname')}}" autocomplete="given-name"
+                            <input type="text" name="document_number1" value="{{old('surname')}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل رقم بطاقة التعريف الوطنية"
                                    required/>
                             <span class="form-text text-muted">الرجاء إدخال رقم بطاقة التعريف الوطنية</span>
@@ -504,7 +504,7 @@
 
                         <div class="form-group col-sm-12 col-md-4" id="driver_license_block">
                             <label> رقم رخصة السياقة * :</label>
-                            <input type="text" name="document_number" value="{{old('surname')}}" autocomplete="given-name"
+                            <input type="text" name="document_number2" value="{{old('surname')}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل رقم رخصة السياقة"
                                    />
                             <span class="form-text text-muted">الرجاء إدخال رقم رخصة السياقة</span>

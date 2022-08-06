@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('page_meta')
-    <title>إضافة موظف</title>
+    <title> تعديل بيانات موظف</title>
     <meta name="keywords" content="Rozaric"/>
     <meta name="description" content="Rozaric">
     <meta name="author" content="Rozaric">
@@ -9,6 +9,11 @@
 
 @section('styles')
     <!-- Page styles -->
+    <style>
+        .hideE{
+            display:none
+        }
+            </style>
 @endsection
 
 @section('scripts')
@@ -18,7 +23,7 @@
         var password = $('input[name="password"]');
         var password2 = $('input[name="password2"]');
 
-        $("#driver_license_block").hide();
+      //  $("#driver_license_block").hide();
 
         password2.on('keyup', function () {
             if (password.val()) {
@@ -163,7 +168,7 @@
         });
 
 
-        $('#birthplace_daira').on('change',function () {
+       /* $('#birthplace_daira').on('change',function () {
 
             KTApp.blockPage({
                 overlayColor: '#000000',
@@ -249,7 +254,7 @@
                     KTApp.unblockPage();
                 }
             })
-        });
+        });*/
 
     </script>
 @endsection
@@ -262,8 +267,9 @@
                 <h3 class="card-title"> معلومات الموظف</h3>
             </div>
             <!--begin::Form-->
-            <form class="form" method="post" action="dash/security/assistance" enctype="multipart/form-data">
+            <form class="form" method="post" action="dash/security/assistance/{{$employee->id}}" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12 col-md-6">
@@ -471,14 +477,14 @@
                             <label>فصيلة الدم : </label>
                             <select class="form-control" id="blood_type" name="blood_type" autocomplete="city">
 
-                                <option value="A+">A+</option>
-                                <option value="A-">A-</option>
-                                <option value="B+">B+</option>
-                                <option value="B-">B-</option>
-                                <option value="AB+">AB+</option>
-                                <option value="AB-">AB-</option>
-                                <option value="O+">O+</option>
-                                <option value="O-">O-</option>
+                                <option value="A+" {{old('blood_type',$employee->blood_type) == "A+" ? 'selected':''}}>A+</option>
+                                <option value="A-" {{old('blood_type',$employee->blood_type) == "A-" ? 'selected':''}}>A-</option>
+                                <option value="B+" {{old('blood_type',$employee->blood_type) == "B+" ? 'selected':''}}>B+</option>
+                                <option value="B-" {{old('blood_type',$employee->blood_type) == "B-" ? 'selected':''}}>B-</option>
+                                <option value="AB+" {{old('blood_type',$employee->blood_type) == "AB+" ? 'selected':''}}>AB+</option>
+                                <option value="AB-" {{old('blood_type',$employee->blood_type) == "AB-" ? 'selected':''}}>AB-</option>
+                                <option value="O+" {{old('blood_type',$employee->blood_type) == "O+" ? 'selected':''}}>O+</option>
+                                <option value="O-" {{old('blood_type',$employee->blood_type) == "O-" ? 'selected':''}}>O-</option>
 
                             </select>
                         </div>
@@ -486,25 +492,25 @@
                             <label>بطاقة التعريف الوطنية/رخصة السياقة</label>
                             <select class="form-control" id="document_select" name="document_type" autocomplete="city">
 
-                                <option value="NC">بطاقة التعريف الوطنية</option>
-                                <option value="DL">رخصة السياقة</option>
+                                <option value="NC" {{old('national_card',$employee->national_card) == 1 ? 'selected':''}}>بطاقة التعريف الوطنية</option>
+                                <option value="DL" {{old('driver_license',$employee->driver_license) == 1 ? 'selected':''}}>رخصة السياقة</option>
 
 
                             </select>
                         </div>
 
-                        <div class="form-group col-sm-12 col-md-4" id="national_card_block">
+                        <div class="form-group col-sm-12 col-md-4 {{old('national_card',$employee->national_card) == 0 ? 'hideE':''}}" id="national_card_block">
                             <label>رقم بطاقة التعريف الوطنية * :</label>
-                            <input type="text" name="document_number" value="{{old('document_number',$employee->document_number)}}" autocomplete="given-name"
+                            <input type="text" name="document_number1" value="{{old('document_number',$employee->document_number)}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل رقم بطاقة التعريف الوطنية"
                                    required/>
                             <span class="form-text text-muted">الرجاء إدخال رقم بطاقة التعريف الوطنية</span>
                         </div>
 
 
-                        <div class="form-group col-sm-12 col-md-4" id="driver_license_block">
+                        <div class="form-group col-sm-12 col-md-4 {{old('driver_license',$employee->driver_license) == 0 ? 'hideE':''}}" id="driver_license_block">
                             <label> رقم رخصة السياقة * :</label>
-                            <input type="text" name="document_number" value="{{old('document_number',$employee->document_number)}}" autocomplete="given-name"
+                            <input type="text" name="document_number2" value="{{old('document_number',$employee->document_number)}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل رقم رخصة السياقة"
                             />
                             <span class="form-text text-muted">الرجاء إدخال رقم رخصة السياقة</span>
@@ -569,7 +575,7 @@
 
                 </div>
                 <div class="card-footer d-flex justify-content-end">
-                    <button type="submit" class="btn btn-primary mr-2">إضافة</button>
+                    <button type="submit" class="btn btn-primary mr-2">تعديل</button>
                     <a href="dash/security/assistance" class="btn btn-secondary">إلغاء</a>
                 </div>
             </form>

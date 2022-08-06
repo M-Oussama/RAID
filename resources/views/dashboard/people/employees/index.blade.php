@@ -185,11 +185,10 @@
                 <div class="card-toolbar">
                     <!--begin::Dropdown-->
                     @canany(['delete-user','list-user'])
-                        <div class="dropdown dropdown-inline mr-2">
+                        <!-- <div class="dropdown dropdown-inline mr-2">
                             <button type="button" class="btn btn-light-primary font-weight-bolder dropdown-toggle"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="svg-icon svg-icon-md">
-                                    <!--begin::Svg Icon | path:assets/media/svg/icons/Design/PenAndRuller.svg-->
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                          width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -205,19 +204,18 @@
                                             ></path>
                                         </g>
                                     </svg>
-                                    <!--end::Svg Icon-->
+
                                 </span>
                                 إجراءات
                             </button>
-                            <!--begin::Dropdown Menu-->
-                            <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-                                <!--begin::Navigation-->
+
+                              <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
                                 <ul class="navi flex-column navi-hover py-2">
                                     <li class="navi-header font-weight-bolder text-uppercase font-size-sm text-primary pb-2">
                                         Choose an action:
                                     </li>
                                     @can('delete-employee')
-                                        <li class="navi-item">
+                                <li class="navi-item">
                                             <a href="#" data-toggle="modal" data-target="#deleteMultiModal"
                                                class="navi-link">
                                                 <span class="navi-icon">
@@ -228,7 +226,7 @@
                                         </li>
                                     @endcan
                                     @can('list-user')
-                                        <li class="navi-item">
+                                          <li class="navi-item">
                                             <a href="dash/security/assistance/export" class="navi-link">
                                                 <span class="navi-icon">
                                                     <i class="la la-file-excel"></i>
@@ -238,8 +236,8 @@
                                         </li>
                                     @endcan
                                 </ul>
-                                <!--end::Navigation-->
-                            </div>
+
+                            </div>-->
                             <!--end::Dropdown Menu-->
                         </div>
                     @endcanany
@@ -297,7 +295,7 @@
         <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalFormTitle"
              aria-hidden="true" style="display: none;">
             <div class="modal-dialog" role="document">
-                <form id="deleteForm" action="dash/security/assistance/{id}" method="post">
+                <form id="deleteForm" action="dash/security/assistance" method="post">
                     @csrf
                     @method('delete')
                     <div class="modal-content">

@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\UsersExport;
 use App\Models\Address;
 use App\Models\Baladia;
+use App\Models\Contract;
 use App\Models\Daira;
 use App\Models\Employees;
+use App\Models\Paper;
 use App\Models\User;
 use App\Models\Wilaya;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use PDF;
 use Spatie\Permission\Models\Role;
 
 class EmployeesController extends Controller
@@ -52,6 +57,12 @@ class EmployeesController extends Controller
         $living_address->wilaya_id = $request->wilaya_address;
         $living_address->save();
 
+        $document_address = new Address();
+        $document_address->address = $request->document_address;
+        $document_address->wilaya_id = $request->document_wilaya;
+        $document_address->daira_id = $request->document_daira;
+        $document_address->baladia_id =$request->document_baladia;
+        $document_address->save();
 
         $employee = new Employees();
 
@@ -76,21 +87,20 @@ class EmployeesController extends Controller
         $employee->national_service_rank = $request->national_service_rank;
         $employee->phone = $request->phone;
 
-        if($request->document_type == "NC")
+        if($request->document_type == "NC"){
             $employee->national_card = true;
-        else
-            $employee->driver_license = false;
+            $employee->document_number = $request->document_number1;
+        }
+        else{
+            $employee->driver_license = true;
+            $employee->document_number = $request->document_number2;
+        }
 
-        $document_address = new Address();
-        $document_address->address = $request->document_address;
-        $document_address->wilaya_id = $request->document_wilaya;
-        $document_address->daira_id = $request->document_daira;
-        $document_address->baladia_id =$request->document_baladia;
-        $document_address->save();
 
         $employee->document_address = $document_address->id;
         $employee->document_date = $request->document_date;
-        $employee->document_number = $request->document_number;
+
+
 
         $employee->save();
 
@@ -138,13 +148,110 @@ class EmployeesController extends Controller
             ->with('dairas',$dairas);
     }
 
-    public function destroy($id){
-        $paper = Employees::find($id);
-        $paper->delete();
+    public function update(Request $request,$id){
 
+
+
+        $employee = Employees::find($id);
+
+        $birthdplace = Address::find($employee->birthplace_id);
+        $birthdplace->address = $request->birthplace;
+        $birthdplace->wilaya_id = $request->wilaya_id;
+        $birthdplace->baladia_id = $request->baladia_id;
+        $birthdplace->daira_id = $request->daira_id;
+        $birthdplace->save();
+
+        $living_address = Address::find($employee->address_id);
+        $living_address->address = $request->address;
+        $living_address->wilaya_id = $request->wilaya_address;
+        $living_address->save();
+
+        $document_address = Address::find($employee->document_address);
+        $document_address->address = $request->document_address;
+        $document_address->wilaya_id = $request->document_wilaya;
+        $document_address->daira_id = $request->document_daira;
+        $document_address->baladia_id =$request->document_baladia;
+        $document_address->save();
+
+        $employee->name = $request->name;
+        $employee->surname = $request->surname;
+        $employee->birthdate = $request->birthdate;
+
+        $employee->family_status = $request->family_status;
+        $employee->children_number = $request->children_number;
+        $employee->wife_name = $request->wife_name;
+
+        $employee->birthday_document_number = $request->birthday_document_number;
+        $employee->father_name = $request->father_name;
+        $employee->mother_fullname = $request->mother_fullname;
+        $employee->education_level = $request->education_level;
+        $employee->blood_type = $request->blood_type;
+        $employee->postal_account_number = $request->postal_account_number;
+        $employee->social_security_number = $request->social_security_number;
+        $employee->recruitment_date = $request->recruitment_date;
+        $employee->insurance_date = $request->insurance_date;
+        $employee->national_service = $request->national_service;
+        $employee->national_service_rank = $request->national_service_rank;
+        $employee->phone = $request->phone;
+
+        if($request->document_type == "NC"){
+            $employee->national_card = true;
+            $employee->driver_license = false;
+            $employee->document_number = $request->document_number1;
+        }
+        else{
+            $employee->driver_license = true;
+            $employee->national_card = false;
+
+            $employee->document_number = $request->document_number2;
+        }
+
+        $employee->document_date = $request->document_date;
+
+
+
+        $employee->save();
+
+        $employee->save();
+
+        session()->flash('type', "success");
+        session()->flash('message', "تم تعديل معلومات الموظف بنجاح");
+        return redirect("/dash/security/assistance");
+    }
+    public function destroy($id){
+        $employee = Employees::find($id);
+        $papers = Paper::where('employee_id',$id)->get();
+        foreach($papers as $paper){
+            $paper->delete();
+        }
+        $contracts = Contract::where('employee_id',$employee->id)->get();
+            foreach($contracts as $contract){
+                $contract->delete();
+            }
         session()->flash('type', "success");
         session()->flash('message', "تمت عملية حذف الموظف بنجاح");
 
         return redirect()->back();
+    }
+
+
+    public function deleteMulti(Request $request){
+        $ids = $request->input('ids');
+        foreach ($ids as $id){
+            User::find($id)->delete();
+        }
+        session()->flash('type', 'success');
+        session()->flash('message', 'تمت عملية حذف الموظفين بنجاح');
+        return redirect()->back();
+    }
+
+
+
+    public function generatePdf(User $user){
+        $data = [
+            'user' => $user,
+        ];
+        $pdf = PDF::loadView('dashboard.people.users.pdf.pdf', $data);
+        return $pdf->download($user->name.' '.$user->surname.' file.pdf');
     }
 }

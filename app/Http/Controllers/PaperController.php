@@ -59,7 +59,7 @@ class PaperController extends Controller
 
     public function papersList()
     {
-        $papers = Paper::all();
+        $papers = Paper::orderby('created_at','desc')->get();
 
         return view('dashboard.paper.list_of_papers')->with('papers',$papers);
     }

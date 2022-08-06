@@ -16,7 +16,7 @@ class ContractController extends Controller
 
     public function index()
     {
-        $contracts = Contract::all();
+        $contracts = Contract::orderby('created_at','desc')->get();
         return view('dashboard.contract.index')->with('contracts',$contracts);
     }
 
@@ -40,7 +40,7 @@ class ContractController extends Controller
         else
             $employees = Employees::all();
 
-        return view('dashboard.contract.create')->with('employees',$employees);
+        return view('dashboard.contract.createChief')->with('employees',$employees);
     }
 
 
@@ -85,7 +85,7 @@ class ContractController extends Controller
         $contract->save();
 
         $paper = new Paper();
-        //$paper->paper_type = "contract";
+        $paper->paper_type_id =$request->paper_type_id;
         $paper->employee_id = $request->employee_id;
         $paper->contract_id = $contract->id;
             if($request->paper_type_id == 3)
@@ -93,5 +93,17 @@ class ContractController extends Controller
         $paper->date = date('Y-m-d');
         $paper->save();
         return redirect("/dash/contracts");
+    }
+
+    public function destroy($id){
+        $contract = Contract::find($id);
+        $paper = Paper::where('contract_id',$id)->get();
+        $paper->delete();
+        $contract->delete();
+
+        session()->flash('type', "success");
+        session()->flash('message', "تمت عملية حذف العقد بنجاح");
+
+        return redirect()->back();
     }
 }

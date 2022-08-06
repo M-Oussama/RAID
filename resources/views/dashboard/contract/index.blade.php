@@ -170,8 +170,8 @@
             var user_name = $(e.relatedTarget).data('user_name');
 
             //populate the textbox
-            $(e.currentTarget).find('#exampleModalFormTitle').text('هل حقا تريد حذف الموظف' + user_name + ' ?');
-            $(e.currentTarget).find('#deleteForm').attr('action', 'dash/security/assistance/' + user_id);
+            $(e.currentTarget).find('#exampleModalFormTitle').text('هل أنت متأكد من حذف العقد؟');
+            $(e.currentTarget).find('#deleteForm').attr('action', 'dash/contracts/' + user_id);
         });
         $('#extensionModal').on('show.bs.modal', function (e) {
             //get data-id attribute of the clicked element
@@ -213,11 +213,11 @@
                 <div class="card-toolbar">
                     <!--begin::Dropdown-->
                     @canany(['delete-user','list-user'])
-                        <div class="dropdown dropdown-inline mr-2">
+                        <!--  <div class="dropdown dropdown-inline mr-2">
                             <button type="button" class="btn btn-light-primary font-weight-bolder dropdown-toggle"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="svg-icon svg-icon-md">
-                                    <!--begin::Svg Icon | path:assets/media/svg/icons/Design/PenAndRuller.svg-->
+
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                          width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -233,13 +233,13 @@
                                             ></path>
                                         </g>
                                     </svg>
-                                    <!--end::Svg Icon-->
+
                                 </span>
                                 إجراءات
                             </button>
-                            <!--begin::Dropdown Menu-->
-                            <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-                                <!--begin::Navigation-->
+
+                             <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+
                                 <ul class="navi flex-column navi-hover py-2">
                                     <li class="navi-header font-weight-bolder text-uppercase font-size-sm text-primary pb-2">
                                         اختر اجراء:
@@ -266,10 +266,10 @@
                                         </li>
                                     @endcan
                                 </ul>
-                                <!--end::Navigation-->
+
                             </div>
-                            <!--end::Dropdown Menu-->
-                        </div>
+
+                        </div>-->
                     @endcanany
                     <!--end::Dropdown-->
                     <!--begin::Button-->

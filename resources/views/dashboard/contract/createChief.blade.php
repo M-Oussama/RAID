@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('page_meta')
-    <title>إنشاء عقد عمل لعون الأمن </title>
+    <title>  إنشاء عقدعقد عمل رئيس موقع ورئيس فوج </title>
     <meta name="keywords" content="Rozaric"/>
     <meta name="description" content="Rozaric">
     <meta name="author" content="Rozaric">
@@ -13,7 +13,7 @@
         .hideE{
             display:none !important;
         }
-    </style>
+     </style>
 @endsection
 
 @section('scripts')
@@ -122,8 +122,10 @@
                                 @endforeach
                             </select>
                         </div>
-                        <input type="number" name="paper_type_id" value=2 autocomplete="family-name"
+
+                        <input type="number" name="paper_type_id" value=1 autocomplete="family-name"
                                class="form-control form-control-solid hideE"  required/>
+
                         <div class="form-group col-sm-12 col-md-4">
                             <label>المنصب* :</label>
                             <input type="text" name="post" value="{{old('name')}}" autocomplete="family-name"
