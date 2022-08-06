@@ -35,16 +35,15 @@
             data: {!! $papers !!},
 
             // Order settings
-            order: [[2, 'desc']],
+            order: [[0, 'asc']],
 
             columns: [
                 {
-                  data:"id"
+                  data:"index"
                 },
                 {
-                    data: 'title'
+                    data: 'name'
                 },
-
 
                 {
                     data: null,

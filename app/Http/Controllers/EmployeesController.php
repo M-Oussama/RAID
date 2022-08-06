@@ -42,9 +42,9 @@ class EmployeesController extends Controller
 
         $birthdplace = new Address();
         $birthdplace->address = $request->birthplace;
-        $birthdplace->wilaya_id = $request->birthplace_wilaya;
-        $birthdplace->baladia_id = $request->birthplace_baladia;
-        $birthdplace->daira_id = $request->birthplace_daira;
+        $birthdplace->wilaya_id = $request->wilaya_id;
+        $birthdplace->baladia_id = $request->baladia_id;
+        $birthdplace->daira_id = $request->daira_id;
         $birthdplace->save();
 
         $living_address = new Address();
@@ -62,7 +62,7 @@ class EmployeesController extends Controller
         $employee->family_status = $request->family_status;
         $employee->children_number = $request->children_number;
         $employee->wife_name = $request->wife_name;
-        $employee->address_id = $request->$living_address;
+        $employee->address_id = $living_address->id;
         $employee->birthday_document_number = $request->birthday_document_number;
         $employee->father_name = $request->father_name;
         $employee->mother_fullname = $request->mother_fullname;
@@ -111,8 +111,40 @@ class EmployeesController extends Controller
 
         $employee->MATRICULE = $matricule;
         $employee->save();
+
+        session()->flash('type', "success");
+        session()->flash('message', "تمت اضافة الموظف بنجاح");
         return redirect("/dash/security/assistance");
 
 
+    }
+
+    public function edit($id)
+    {
+
+        $employee = Employees::find($id);
+        $wilayas = Wilaya::all();
+
+        $dairas = Daira::where('wilaya_id',$wilayas->first()->id)->get();
+
+        $baladias = Baladia::whereIn('daira_id',function ($query) use ($wilayas){
+            $query->select('id')->from(with(new Daira)->getTable())->where('wilaya_id',$wilayas->first()->id)->pluck('id')->toArray();
+        })->get();
+
+        return view('dashboard.people.employees.edit')
+            ->with('employee',$employee)
+            ->with('wilayas',$wilayas)
+            ->with('baladias',$baladias)
+            ->with('dairas',$dairas);
+    }
+
+    public function destroy($id){
+        $paper = Employees::find($id);
+        $paper->delete();
+
+        session()->flash('type', "success");
+        session()->flash('message', "تمت عملية حذف الموظف بنجاح");
+
+        return redirect()->back();
     }
 }

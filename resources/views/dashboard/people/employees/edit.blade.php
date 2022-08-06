@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('page_meta')
-    <title>Edit user</title>
+    <title>إضافة موظف</title>
     <meta name="keywords" content="Rozaric"/>
     <meta name="description" content="Rozaric">
     <meta name="author" content="Rozaric">
@@ -14,10 +14,11 @@
 @section('scripts')
     <!-- Page scripts -->
     <script>
-
         //Password check
         var password = $('input[name="password"]');
         var password2 = $('input[name="password2"]');
+
+        $("#driver_license_block").hide();
 
         password2.on('keyup', function () {
             if (password.val()) {
@@ -33,37 +34,222 @@
 
         //Image uploader
         var avatar = new KTImageInput('kt_avatar');
-        avatar.on('cancel', function(imageInput) {
-            swal.fire({
-                title: 'Image successfully canceled !',
-                type: 'success',
-                buttonsStyling: false,
-                confirmButtonText: 'Awesome!',
-                confirmButtonClass: 'btn btn-primary font-weight-bold'
-            });
+
+        //Select2
+        $('#kt_select2_1').select2();
+
+        $('#document_select').on('change',function () {
+            if($(this).val() == "NC"){
+                $("#driver_license_block").hide();
+                $("#national_card_block").show();
+            }else{
+                $("#driver_license_block").show();
+                $("#national_card_block").hide();
+            }
+
         });
 
-        avatar.on('change', function(imageInput) {
-            swal.fire({
-                title: 'Image successfully changed !',
-                type: 'success',
-                buttonsStyling: false,
-                confirmButtonText: 'Awesome!',
-                confirmButtonClass: 'btn btn-primary font-weight-bold'
+        $('#document_wilaya').on('change',function () {
+
+            KTApp.blockPage({
+                overlayColor: '#000000',
+                opacity: 0.1,
+                size: 'lg',
+                state: 'danger',
+                message: 'الرجاء الانتظار...'
             });
+            $.ajaxSetup({
+                headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content') }
+            });
+
+            var id = $(this).val();
+
+            $('#document_baladia').find('option').remove();
+
+            $.ajax({
+                url:'dash/wilayas/'+id+'/get_baladias',
+                type:'GET',
+                dataType:'json',
+                success:function (response) {
+                    var leng = 0;
+                    if (response.baladias != null) {
+                        leng = response.baladias.length;
+                    }
+
+                    if (leng>0) {
+                        for (var i = 0; i<leng; i++) {
+                            var id = response.baladias[i].id;
+                            var name = response.baladias[i].name_ar;
+                            var BALADIA = response.baladias[i].BALADIA;
+
+                            var option = "<option value='"+id+"'>"+BALADIA+"-"+name+"</option>";
+
+                            $("#document_baladia").append(option);
+                        }
+                    }
+
+                    if (leng>0) {
+                        for (var i = 0; i<leng; i++) {
+                            var id = response.baladias[i].id;
+                            var name = response.baladias[i].name_ar;
+                            var DAIRA = response.baladias[i].BALADIA;
+
+                            var option = "<option value='"+id+"'>"+BALADIA+"-"+name+"</option>";
+
+                            $("#birthplace_daira").append(option);
+                        }
+                    }
+
+                    KTApp.unblockPage();
+                }
+            })
         });
 
-        avatar.on('remove', function(imageInput) {
-            swal.fire({
-                title: 'Image successfully removed !',
-                type: 'error',
-                buttonsStyling: false,
-                confirmButtonText: 'Got it!',
-                confirmButtonClass: 'btn btn-primary font-weight-bold'
+        $('#birthplace_wilaya').on('change',function () {
+
+            KTApp.blockPage({
+                overlayColor: '#000000',
+                opacity: 0.1,
+                size: 'lg',
+                state: 'danger',
+                message: 'الرجاء الانتظار...'
             });
+            $.ajaxSetup({
+                headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content') }
+            });
+
+            var id = $(this).val();
+
+            $('#birthplace_daira').find('option').remove();
+            $('#birthplace_baladia').find('option').remove();
+
+            $.ajax({
+                url:'dash/wilayas/'+id+'/get_baladias_dairas',
+                type:'GET',
+                dataType:'json',
+                success:function (response) {
+                    var leng = 0;
+                    if (response.baladias != null) {
+                        leng = response.baladias.length;
+                    }
+
+                    if (leng>0) {
+                        for (var i = 0; i<leng; i++) {
+                            var id = response.baladias[i].id;
+                            var name = response.baladias[i].name_ar;
+                            var BALADIA = response.baladias[i].BALADIA;
+
+                            var option = "<option value='"+id+"'>"+BALADIA+"-"+name+"</option>";
+
+                            $("#birthplace_baladia").append(option);
+                        }
+                    }
+
+                    if (leng>0) {
+                        for (var i = 0; i<leng; i++) {
+                            var id = response.baladias[i].id;
+                            var name = response.baladias[i].name_ar;
+                            var DAIRA = response.baladias[i].BALADIA;
+
+                            var option = "<option value='"+id+"'>"+BALADIA+"-"+name+"</option>";
+
+                            $("#birthplace_daira").append(option);
+                        }
+                    }
+
+                    KTApp.unblockPage();
+                }
+            })
         });
 
-                $('#kt_select2_1').select2();
+
+        $('#birthplace_daira').on('change',function () {
+
+            KTApp.blockPage({
+                overlayColor: '#000000',
+                opacity: 0.1,
+                size: 'lg',
+                state: 'danger',
+                message: 'الرجاء الانتظار...'
+            });
+            $.ajaxSetup({
+                headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content') }
+            });
+
+            var id = $(this).val();
+
+            $('#birthplace_baladia').find('option').remove();
+
+            $.ajax({
+                url:'dash/dairas/'+id+'/get_baladias_from_dairas',
+                type:'GET',
+                dataType:'json',
+                success:function (response) {
+                    var leng = 0;
+                    if (response.baladias != null) {
+                        leng = response.baladias.length;
+                    }
+
+                    if (leng>0) {
+                        for (var i = 0; i<leng; i++) {
+                            var id = response.baladias[i].id;
+                            var name = response.baladias[i].name_ar;
+                            var BALADIA = response.baladias[i].BALADIA;
+
+                            var option = "<option value='"+id+"'>"+BALADIA+"-"+name+"</option>";
+
+                            $("#birthplace_baladia").append(option);
+                        }
+                    }
+
+                    KTApp.unblockPage();
+                }
+            })
+        });
+
+        $('#document_daira').on('change',function () {
+
+            KTApp.blockPage({
+                overlayColor: '#000000',
+                opacity: 0.1,
+                size: 'lg',
+                state: 'danger',
+                message: 'الرجاء الانتظار...'
+            });
+            $.ajaxSetup({
+                headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content') }
+            });
+
+            var id = $(this).val();
+
+            $('#document_baladia').find('option').remove();
+
+            $.ajax({
+                url:'dash/dairas/'+id+'/get_baladias_from_dairas',
+                type:'GET',
+                dataType:'json',
+                success:function (response) {
+                    var leng = 0;
+                    if (response.baladias != null) {
+                        leng = response.baladias.length;
+                    }
+
+                    if (leng>0) {
+                        for (var i = 0; i<leng; i++) {
+                            var id = response.baladias[i].id;
+                            var name = response.baladias[i].name_ar;
+                            var BALADIA = response.baladias[i].BALADIA;
+
+                            var option = "<option value='"+id+"'>"+BALADIA+"-"+name+"</option>";
+
+                            $("#document_baladia").append(option);
+                        }
+                    }
+
+                    KTApp.unblockPage();
+                }
+            })
+        });
 
     </script>
 @endsection
@@ -73,26 +259,24 @@
         <!--begin::Card-->
         <div class="card card-custom gutter-b example example-compact">
             <div class="card-header">
-                <h3 class="card-title">User</h3>
+                <h3 class="card-title"> معلومات الموظف</h3>
             </div>
             <!--begin::Form-->
-            <form class="form" method="post" action="dash/users/{{$user->id}}" enctype="multipart/form-data">
+            <form class="form" method="post" action="dash/security/assistance" enctype="multipart/form-data">
                 @csrf
-                @method('PUT')
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12 col-md-6">
-                            <div class="image-input {{empty($user->getFirstMedia('avatars')) ? 'image-input-empty' : ''}}  image-input-outline d-contents" id="kt_avatar"
+                            <div class="image-input image-input-empty image-input-outline d-contents" id="kt_avatar"
                                  style="background-image: url(assets/media/users/blank.png);margin-left: 36%;">
-                                <div class="image-input-wrapper" style="background-image: url({{ !empty($user->getFirstMedia('avatars')) ? $user->getFirstMedia('avatars')->getUrl() : '' }})"></div>
+                                <div class="image-input-wrapper"></div>
 
                                 <label
-                                    class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
-                                    data-action="change" data-toggle="tooltip" title=""
-                                    data-original-title="Change avatar">
+                                        class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                                        data-action="change" data-toggle="tooltip" title=""
+                                        data-original-title="Change avatar">
                                     <i class="fa fa-pen icon-sm text-muted"></i>
-                                    <input type="file" name="avatar" accept=".png, .jpg, .jpeg" autocomplete="photo"
-                                           value=""/>
+                                    <input type="file" name="avatar" accept=".png, .jpg, .jpeg" autocomplete="photo"/>
                                     <input type="hidden" name="avatar_remove"/>
                                 </label>
 
@@ -106,80 +290,287 @@
                                     <i class="ki ki-bold-close icon-xs text-muted"></i>
                                 </span>
                             </div>
-                            <span class="form-text text-muted" style="margin-left: 27%;">Allowed file types: png, jpg,
-                                jpeg.</span>
+                            <span class="form-text text-muted" style="margin-left: 27%;">أنواع الملفات المسموح بها: png، jpg، jpeg.</span>
                         </div>
 
                         <div class="col-sm-12 col-md-6 row">
                             <div class="form-group col-sm-12 col-md-12">
-                                <label>Name* :</label>
-                                <input type="text" name="name" value="{{old('name',$user->name)}}"
-                                       autocomplete="family-name"
-                                       class="form-control form-control-solid" placeholder="Enter user name" required/>
-                                <span class="form-text text-muted">Please enter the user's name</span>
+                                <label>الإسم* :</label>
+                                <input type="text" name="name" value="{{old('name',$employee->name)}}" autocomplete="family-name"
+                                       class="form-control form-control-solid" placeholder="أدخل اسم الموظف" required/>
+                                <span class="form-text text-muted">الرجاء إدخال اسم الموظف</span>
                             </div>
                             <div class="form-group col-sm-12 col-md-12">
-                                <label>Surname* :</label>
-                                <input type="text" name="surname" value="{{old('surname',$user->surname)}}" autocomplete="given-name"
-                                       class="form-control form-control-solid" placeholder="Enter user surname"
+                                <label>اللقب* :</label>
+                                <input type="text" name="surname" value="{{old('surname',$employee->surname)}}" autocomplete="given-name"
+                                       class="form-control form-control-solid" placeholder="أدخل لقب الموظف"
                                        required/>
-                                <span class="form-text text-muted">Please enter the user's surname</span>
+                                <span class="form-text text-muted">الرجاء إدخال لقب الموظف</span>
                             </div>
                         </div>
 
                     </div>
                     <div class="row">
+
                         <div class="form-group col-sm-12 col-md-6">
-                            <label>Email* :</label>
-                            <input type="email" name="email" autocomplete="email" value="{{old('email',$user->email)}}"
-                                   class="form-control form-control-solid @error('email') is-invalid @enderror"
-                                   placeholder="Enter user email" required/>
-                            @error('email')
-                            <div class="invalid-feedback">{{$message}}</div>
-                            @enderror
-                            <span class="form-text text-muted">Please enter the user's email</span>
+                            <label>تاريح الميلاد :</label>
+                            <input type="date" name="birthdate" value="{{old('birthdate',$employee->birthdate)}}" autocomplete="bday"
+                                   class="form-control form-control-solid" placeholder="أدخل تاريخ ميلاد الموظف"/>
+                            <span class="form-text text-muted">الرجاء إدخال تاريخ ميلاد الموظف</span>
                         </div>
+
                         <div class="form-group col-sm-12 col-md-6">
-                            <label>Birthdate :</label>
-                            <input type="date" name="birthdate" value="{{old('birthdate',$user->birthdate)}}" autocomplete="bday"
-                                   class="form-control form-control-solid" placeholder="Enter user birthdate"/>
-                            <span class="form-text text-muted">Please enter the user's birthdate</span>
+                            <label>مكان الميلاد * :</label>
+                            <input type="text" name="birthplace" value="{{old('birthplace',$employee->address->address)}}" autocomplete="given-name"
+                                   class="form-control form-control-solid" placeholder="أدخل مكان الميلاد"
+                                   required/>
+                            <span class="form-text text-muted">الرجاء إدخال مكان الميلاد</span>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-12 col-md-6">
-                            <label>New password* :</label>
-                            <input type="password" name="password" autocomplete="new-password"
-                                   class="form-control form-control-solid @error('password') is-invalid @enderror"
-                                   placeholder="Enter user password" required/>
-                            @error('password')
-                            <div class="invalid-feedback">{{$message}}</div>
-                            @enderror
-                            <span class="form-text text-muted">Please enter the new user's password</span>
-                        </div>
-                        <div class="form-group col-sm-12 col-md-6">
-                            <label>Repeat password* :</label>
-                            <input type="password" name="password2" autocomplete="new-password"
-                                   class="form-control form-control-solid @error('password2') is-invalid @enderror"
-                                   placeholder="Repeat user password" required/>
-                            <div class="invalid-feedback">The repeated password does not match the first password.</div>
-                            <div class="valid-feedback">Passwords match !</div>
-                            <span class="form-text text-muted">Please repeat the user's password</span>
-                        </div>
-                        <div class="form-group col-sm-12 col-md-6">
-                            <label>Choose a role : </label>
-                            <select class="form-control" id="kt_select2_1" name="param">
-                                @foreach($roles as $role)
-                                    <option value="{{$role->id}}" {{$user->role == $role->name ? 'selected':''}}>{{$role->name}}</option>
+
+                        <div class="form-group col-sm-12 col-md-4">
+                            <label>الولاية : </label>
+                            <select class="form-control" id="birthplace_wilaya" name="wilaya_id" autocomplete="city">
+                                @foreach($wilayas as $wilaya)
+                                    <option value="{{$wilaya->id}}" {{old('wilaya_id',$employee->address->WILAYA->id) == $wilaya->id ? 'selected':''}}>{{$wilaya->WILAYA."- ".$wilaya->name_ar}}</option>
                                 @endforeach
                             </select>
                         </div>
-                    </div>
-                </div>
 
+                        <div class="form-group col-sm-12 col-md-4">
+                            <label>الدائرة : </label>
+                            <select class="form-control" id="birthplace_daira" name="daira_id" autocomplete="city">
+                                @foreach($dairas as $daira)
+                                    <option value="{{$daira->id}}" {{old('daira_id',$employee->address->daira_id) == $daira->id ? 'selected':''}}>{{$daira->DAIRA."- ".$daira->name_ar}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-4">
+                            <label>البلدية : </label>
+                            <select class="form-control" id="birthplace_baladia" name="baladia_id" autocomplete="city">
+                                @foreach($baladias as $baladia)
+                                    <option value="{{$baladia->id}}" {{old('baladia_id',$employee->address->baladia_id) == $baladia->id ? 'selected':''}}>{{$baladia->BALADIA."- ".$baladia->name_ar}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6">
+                            <label>إسم الأب* :</label>
+                            <input type="text" name="father_name" value="{{old('father_name',$employee->father_name)}}" autocomplete="given-name"
+                                   class="form-control form-control-solid" placeholder="أدخل إسم الأب"
+                                   required/>
+                            <span class="form-text text-muted">الرجاء إدخال إسم الأب</span>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-6">
+                            <label>إسم ولقب الأم* :</label>
+                            <input type="text" name="mother_fullname" value="{{old('mother_fullname',$employee->mother_fullname)}}" autocomplete="given-name"
+                                   class="form-control form-control-solid" placeholder="أدخل إسم ولقب الأم"
+                                   required/>
+                            <span class="form-text text-muted">الرجاء إدخال إسم ولقب الأم</span>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-4">
+                            <label>الحالة العائلية* :</label>
+                            <input type="text" name="family_status" value="{{old('family_status',$employee->family_status)}}" autocomplete="given-name"
+                                   class="form-control form-control-solid" placeholder="أدخل الحالة العائلية"
+                                   required/>
+                            <span class="form-text text-muted">الرجاء إدخال الحالة العائلية</span>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-4">
+                            <label> عدد الأولاد * :</label>
+                            <input type="number" name="children_number" value="{{old('children_number',$employee->children_number)}}"
+                                   class="form-control form-control-solid" placeholder="ادخل عدد الأولاد"
+                                   min="0" />
+                            <span class="form-text text-muted">الرجاء ادخال عدد الأولاد </span>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-4">
+                            <label>إسم الزوجة* :</label>
+                            <input type="text" name="wife_name" value="{{old('wife_name',$employee->wife_name)}}" autocomplete="given-name"
+                                   class="form-control form-control-solid" placeholder="أدخل إسم الزوجة"
+                                   required/>
+                            <span class="form-text text-muted">الرجاء إدخال إسم الزوجة</span>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-6">
+                            <label> العنوان * :</label>
+                            <input type="text" name="address" value="{{old('address',$employee->livingAddress->address)}}" autocomplete="given-name"
+                                   class="form-control form-control-solid" placeholder="أدخل العنوان"
+                                   required/>
+                            <span class="form-text text-muted">الرجاء إدخال العنوان</span>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-6">
+                            <label>الولاية : </label>
+                            <select class="form-control" id="wilaya_address" name="wilaya_address" autocomplete="city">
+                                @foreach($wilayas as $wilaya)
+                                    <option value="{{$wilaya->id}}" {{old('wilaya_id',$employee->livingAddress->wilaya_id) == $wilaya->id ? 'selected':''}}>{{$wilaya->WILAYA."- ".$wilaya->name_ar}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+
+
+
+                        <div class="form-group col-sm-12 col-md-6">
+                            <label> رقم عقد الإزدياد * :</label>
+                            <input type="text" name="birthday_document_number" value="{{old('birthday_document_number',$employee->birthday_document_number)}}" autocomplete="given-name"
+                                   class="form-control form-control-solid" placeholder="أدخل رقم عقد الإزدياد"
+                                   required/>
+                            <span class="form-text text-muted">الرجاء إدخال رقم عقد الإزدياد</span>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-6">
+                            <label> المستوى الدراسي * :</label>
+                            <input type="text" name="education_level" value="{{old('education_level',$employee->education_level)}}" autocomplete="given-name"
+                                   class="form-control form-control-solid" placeholder="أدخل المستوى الدراسي"
+                                   required/>
+                            <span class="form-text text-muted">الرجاء إدخال المستوى الدراسي</span>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-6">
+                            <label> ـ رقم الحساب البريدي الجاري * :</label>
+                            <input type="text" name="postal_account_number" value="{{old('postal_account_number',$employee->postal_account_number)}}" autocomplete="given-name"
+                                   class="form-control form-control-solid" placeholder="أدخل ـ رقم الحساب البريدي الجاري"
+                                   required/>
+                            <span class="form-text text-muted">الرجاء إدخال رقم الحساب البريدي الجاري</span>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-6">
+                            <label> رقم الضمان الإجتماعي * :</label>
+                            <input type="text" name="social_security_number" value="{{old('social_security_number',$employee->social_security_number)}}" autocomplete="given-name"
+                                   class="form-control form-control-solid" placeholder="أدخل رقم الضمان الإجتماعي"
+                                   required/>
+                            <span class="form-text text-muted">الرجاء إدخال رقم الضمان الإجتماعي</span>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-6">
+                            <label> الوضعية تجاه الخدمة الوطنية * :</label>
+                            <input type="text" name="national_service" value="{{old('national_service',$employee->social_security_number)}}" autocomplete="given-name"
+                                   class="form-control form-control-solid" placeholder="أدخل الوضعية تجاه الخدمة الوطنية"
+                                   required/>
+                            <span class="form-text text-muted">الرجاء إدخال الوضعية تجاه الخدمة الوطنية</span>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-6">
+                            <label> الرتبة * :</label>
+                            <input type="text" name="national_service_rank" value="{{old('national_service_rank',$employee->national_service_rank)}}" autocomplete="given-name"
+                                   class="form-control form-control-solid" placeholder="أدخل الرتبة"
+                                   required/>
+                            <span class="form-text text-muted">الرجاء إدخال الرتبة</span>
+                        </div>
+
+
+                        <div class="form-group col-sm-12 col-md-6">
+                            <label> رقم الهاتف * :</label>
+                            <input type="text" name="phone" value="{{old('phone',$employee->phone)}}" autocomplete="given-name"
+                                   class="form-control form-control-solid" placeholder="أدخل رقم الهاتف"
+                                   required/>
+                            <span class="form-text text-muted">الرجاء إدخال رقم الهاتف</span>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6">
+                            <label>فصيلة الدم : </label>
+                            <select class="form-control" id="blood_type" name="blood_type" autocomplete="city">
+
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-4">
+                            <label>بطاقة التعريف الوطنية/رخصة السياقة</label>
+                            <select class="form-control" id="document_select" name="document_type" autocomplete="city">
+
+                                <option value="NC">بطاقة التعريف الوطنية</option>
+                                <option value="DL">رخصة السياقة</option>
+
+
+                            </select>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-4" id="national_card_block">
+                            <label>رقم بطاقة التعريف الوطنية * :</label>
+                            <input type="text" name="document_number" value="{{old('document_number',$employee->document_number)}}" autocomplete="given-name"
+                                   class="form-control form-control-solid" placeholder="أدخل رقم بطاقة التعريف الوطنية"
+                                   required/>
+                            <span class="form-text text-muted">الرجاء إدخال رقم بطاقة التعريف الوطنية</span>
+                        </div>
+
+
+                        <div class="form-group col-sm-12 col-md-4" id="driver_license_block">
+                            <label> رقم رخصة السياقة * :</label>
+                            <input type="text" name="document_number" value="{{old('document_number',$employee->document_number)}}" autocomplete="given-name"
+                                   class="form-control form-control-solid" placeholder="أدخل رقم رخصة السياقة"
+                            />
+                            <span class="form-text text-muted">الرجاء إدخال رقم رخصة السياقة</span>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-4">
+                            <label> الصادرة بتاريخ * :</label>
+                            <input type="date" name="document_date" value="{{old('document_date',$employee->document_date)}}"
+                                   class="form-control form-control-solid" placeholder="أدخل  التاريخ"
+                            />
+                            <span class="form-text text-muted">الرجاء إدخال التاريخ</span>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="form-group col-sm-12 col-md-4">
+                            <label>الولاية : </label>
+                            <select class="form-control" id="document_wilaya" name="document_wilaya" autocomplete="city">
+                                @foreach($wilayas as $wilaya)
+                                    <option value="{{$wilaya->id}}" {{old('document_wilaya',$employee->documentAddress->wilaya_id) == $wilaya->id ? 'selected':''}}>{{$wilaya->WILAYA."- ".$wilaya->name_ar}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-4">
+                            <label>الدائرة : </label>
+                            <select class="form-control" id="document_daira" name="document_daira" autocomplete="city">
+                                @foreach($dairas as $daira)
+                                    <option value="{{$daira->id}}" {{old('document_daira',$employee->documentAddress->daira_id) == $daira->id ? 'selected':''}}>{{$daira->DAIRA."- ".$daira->name_ar}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-4">
+                            <label>البلدية : </label>
+                            <select class="form-control" id="document_baladia" name="document_baladia" autocomplete="city">
+                                @foreach($baladias as $baladia)
+                                    <option value="{{$baladia->id}}" {{old('document_baladia',$employee->documentAddress->baladia_ia) == $baladia->id ? 'selected':''}}>{{$baladia->BALADIA."- ".$baladia->name_ar}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+
+
+
+                        <div class="form-group col-sm-12 col-md-6">
+                            <label> تاريخ التوظيف * :</label>
+                            <input type="date" name="recruitment_date" value="{{old('recruitment_date',$employee->recruitment_date)}}"
+                                   class="form-control form-control-solid" placeholder="أدخل  التاريخ"
+                            />
+                            <span class="form-text text-muted">الرجاء إدخال التاريخ</span>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-6">
+                            <label> تاريخ التأمين * :</label>
+                            <input type="date" name="insurance_date"
+                                   class="form-control form-control-solid" value="{{old('insurance_date',$employee->insurance_date)}}" placeholder="أدخل  التاريخ"
+                            />
+                            <span class="form-text text-muted">الرجاء إدخال التاريخ</span>
+                        </div>
+                    </div>
+
+                </div>
                 <div class="card-footer d-flex justify-content-end">
-                    <button id="subbutton" type="submit" class="btn btn-primary mr-2">Submit</button>
-                    <a href="dash/users" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-primary mr-2">إضافة</button>
+                    <a href="dash/security/assistance" class="btn btn-secondary">إلغاء</a>
                 </div>
             </form>
             <!--end::Form-->

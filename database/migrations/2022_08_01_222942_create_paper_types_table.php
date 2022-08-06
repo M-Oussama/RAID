@@ -16,6 +16,7 @@ class CreatePaperTypesTable extends Migration
         Schema::create('paper_types', function (Blueprint $table) {
             $table->id();
             $table->string("name")->nullable();
+            $table->boolean("active")->default(1)->nullable();
             $table->timestamps();
         });
     }

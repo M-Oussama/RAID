@@ -32,10 +32,14 @@ class PaperTypeSeeder extends Seeder
 
         );
 
+        $i = 1;
         foreach($papers_type as $item){
             $paper = new PaperType();
             $paper->name = $item;
+            if($i== 3 || $i== 4)
+                $paper->active = false;
             $paper->save();
+            $i++;
         }
     }
 }

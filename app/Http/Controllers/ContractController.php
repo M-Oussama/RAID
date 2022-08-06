@@ -49,6 +49,7 @@ class ContractController extends Controller
         $contract->extension = false;
         $contract->save();
         $request->employee_id = $contract->employee_id;
+        $request->paper_type_id = 3;
 
         $this->store($request);
         return redirect("/dash/contracts");
@@ -86,6 +87,9 @@ class ContractController extends Controller
         $paper = new Paper();
         //$paper->paper_type = "contract";
         $paper->employee_id = $request->employee_id;
+        $paper->contract_id = $contract->id;
+            if($request->paper_type_id == 3)
+                $paper->paper_type_id = $request->paper_type_id;
         $paper->date = date('Y-m-d');
         $paper->save();
         return redirect("/dash/contracts");

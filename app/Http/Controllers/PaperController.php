@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Contract;
 use App\Models\Employees;
 use App\Models\Paper;
+use App\Models\PaperType;
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\Cast\Object_;
 
@@ -18,11 +19,10 @@ class PaperController extends Controller
     public function index()
     {
 
+
         $papers_type = array(
             "عقد عمل رئيس موقع ورئيس فوج & محضر تنصب",
             "عقد عمل لعون الأمن & محضر تنصب",
-            "تمديد عقد رئيس موقع فوج",
-            "تمديد عقد عون أمن",
             "محضر تقاضي المستحقات",
             "قرار تحويل",
             "شهادة عمل",
@@ -31,21 +31,15 @@ class PaperController extends Controller
             "العطلة",
             "إستفسار",
             "إستدعاء",
-
-
         );
 
-        $papers = [];
+        $papers = PaperType::where('active',true)->get();
+            $counter = 1;
+            foreach ($papers as $paper){
+                $paper->index = $counter;
+                $counter++;
+            }
 
-             $counter = 1;
-        foreach($papers_type as $item){
-
-          $paper =  new \stdClass();
-          $paper->id = $counter;
-          $paper->title = $item;
-          array_push($papers,$paper);
-            $counter++;
-        }
 
         $employees = Employees::all();
         $mutation_employees = Employees::whereIN('id',function ($query){
@@ -57,7 +51,10 @@ class PaperController extends Controller
         })->get();
 
 
-        return view('dashboard.paper.index')->with('papers',json_encode($papers))->with('employees',$employees)->with('MEmployees',$mutation_employees)->with('business_paper_employees',$business_paper_employees);
+        return view('dashboard.paper.index')
+            ->with('papers',json_encode($papers))
+            ->with('employees',$employees)->with('MEmployees',$mutation_employees)
+            ->with('business_paper_employees',$business_paper_employees);
     }
 
     public function papersList()
@@ -319,5 +316,15 @@ class PaperController extends Controller
 
 
         return view($view);
+    }
+
+    public function destroy($id){
+        $paper = Paper::find($id);
+        $paper->delete();
+
+        session()->flash('type', "success");
+        session()->flash('message', "تمت عملية حذف الوثيقة بنجاح");
+
+        return redirect()->back();
     }
 }
