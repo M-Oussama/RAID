@@ -23,7 +23,8 @@ class ContractController extends Controller
     public function create()
     {
         $employees = Employees::whereNotIN('id',function ($query){
-            $query->select('employee_id')->from(with (new Contract)->getTable())->where('end_date','>=',date('Y-m-d'))->pluck('employee_id')->toArray();
+            $query->select('employee_id')->from(with (new Contract)->getTable())->where('cancel',0)->where('end_date','>=',date('Y-m-d'))
+                ->pluck('employee_id')->toArray();
         })->get();
 
         return view('dashboard.contract.create')->with('employees',$employees);
@@ -49,8 +50,6 @@ class ContractController extends Controller
         $contract->extension = false;
         $contract->save();
         $request->employee_id = $contract->employee_id;
-        $request->paper_type_id = 3;
-
         $this->store($request);
         return redirect("/dash/contracts");
 
@@ -86,10 +85,8 @@ class ContractController extends Controller
 
         $paper = new Paper();
         $paper->paper_type_id =$request->paper_type_id;
-        $paper->employee_id = $request->employee_id;
         $paper->contract_id = $contract->id;
-            if($request->paper_type_id == 3)
-                $paper->paper_type_id = $request->paper_type_id;
+        $paper->employee_id = $request->employee_id;
         $paper->date = date('Y-m-d');
         $paper->save();
         return redirect("/dash/contracts");
@@ -103,6 +100,26 @@ class ContractController extends Controller
 
         session()->flash('type', "success");
         session()->flash('message', "تمت عملية حذف العقد بنجاح");
+
+        return redirect()->back();
+    }
+
+    public function cancelContract($id){
+        $contract = Contract::find($id);
+
+        $paper = new Paper();
+        $paper->paper_type_id = 13;
+        $paper->employee_id = $contract->employee_id;
+        $paper->contract_id =  $contract->contract_id;
+        $paper->save();
+
+        $contract->paper_id = $paper->id;
+        $contract->cancel = true;
+        $contract->save();
+
+
+        session()->flash('type', "success");
+        session()->flash('message', "تمت عملية الغاء العقد بنجاح");
 
         return redirect()->back();
     }

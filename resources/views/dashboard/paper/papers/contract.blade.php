@@ -50,6 +50,16 @@
             padding:24.0pt 24.0pt 24.0pt 24.0pt;}
         div.WordSection1
         {page:WordSection1;}
+        @media print {
+            .pagebreak {
+                clear: both;
+                page-break-after: always;
+            }
+            #image2{
+                margin-left: 205px !important;
+
+            }
+        }
         -->
     </style>
 
@@ -95,10 +105,16 @@ rtl;unicode-bidi:embed'>
         <tr>
             <td>
 
-                <u align="center"><h2 align="center">عقد عمل محدد المدة<br/>بالتوقيت الكامل رقم : 2022/{{str_pad($paper->id, 3, '0', STR_PAD_LEFT)}} </h2></u>
 
         </tr>
     </table>
+
+    <p class=MsoNormal align=center dir=RTL style='margin-bottom:0in;text-align:
+center;line-height:normal;direction:rtl;unicode-bidi:embed'><span id="image2"
+                                                                  style='position:absolute;z-index:-1895825920;left:0px;margin-left: 41%;
+margin-top:2px;width:355px;height:89px'><img width=455
+                                             src="{{url('/assets/contractFiles/image003.png')}}"></span><span lang=AR-DZ style='font-size:
+31.0pt;font-family:"Traditional Arabic",serif'>عقد عمل محدد المدة<br/>بالتوقيت الكامل رقم : 2022/{{str_pad($paper->id, 3, '0', STR_PAD_LEFT)}} </span></p>
 
 
     <p class=MsoNormal dir=RTL style='text-align:right;line-height:50%;direction:
@@ -666,6 +682,11 @@ margin-bottom:0in;margin-left:56.65pt;text-align:center;line-height:normal'><spa
 "Traditional Arabic",serif'><span dir=RTL></span>03/03</span></b></p>
 
 </div>
+<div class="page-break">
+
+</div>
+
+@include('dashboard.paper.papers.contract_2')
 
 </body>
 

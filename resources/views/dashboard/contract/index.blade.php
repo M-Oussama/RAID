@@ -83,33 +83,40 @@
                     width: '175px',
                     className: 'text-center',
                     render: function (data, type, row) {
-                        console.log(data.employee.name);
                         var employee = data.employee.surname + " "+ data.employee.name;
+
                         var export_contract = "";
                         var cancel_contract = "";
+                        var paiement_pdf = "";
+
 
                         if(data.cancel === 0)
-                            cancel_contract = '<a href=\"#\" data-toggle=\"modal\"  data-target=\"#cancelModal\" data-contract_id=\"' + row.id + '\" data-user_name=\"' + employee + '\" class=\"btn btn-sm btn-clean btn-icon\" title=\"تمديد العقد\">\
+                            cancel_contract = '<a href=\"#\" data-toggle=\"modal\"  data-target=\"#cancelModal\" data-contract_id=\"' + data.id + '\" data-user_name=\"' + employee + '\" class=\"btn btn-sm btn-clean btn-icon\" title=\"الغاء العقد\">\
                                                                     <i class=\"fas fa-times\"></i>\
                                                         </a>\
                                                         ';
                         if(data.extension)
                             if( moment().format("YYYY-MM-DD") > data.end_date )
-                                export_contract = '<a href=\"#\" data-toggle=\"modal\"  data-target=\"#extensionModal\" data-contract_id=\"' + row.id + '\" data-user_name=\"' + employee + '\" class=\"btn btn-sm btn-clean btn-icon\" title=\"الغاء العقد\">\
+                                export_contract = '<a href=\"#\" data-toggle=\"modal\"  data-target=\"#extensionModal\" data-contract_id=\"' + data.id + '\" data-user_name=\"' + employee + '\" class=\"btn btn-sm btn-clean btn-icon\" title=\"تمديد العقد\">\
                                                                     <i class=\"fas fa-pen-nib\"></i>\
                                                         </a>\
                                                         ';
-                        return '\
+                        paiement_pdf = '<a href=\"#\" data-toggle=\"modal\"  data-target=\"#paiementModal\" data-contract_id=\"' + data.id + '\" data-user_name=\"' + employee + '\" class=\"btn btn-sm btn-clean btn-icon\" title=\"محضر تقاضي المستحقات \">\
+                                                                    <i class=\"fas fa-dollar\"></i>\
+                                                        </a>\
+                                                        ';
+
+                        var return_value = '\
                         \<a href="dash/contracts/' + row.id + '/pdf" class="btn btn-sm btn-clean btn-icon" title="استخراج العقد">\
                             <i class="far fa-file-pdf">\
                             </i>\
                         </a>\
                         '+
-                        export_contract + cancel_contract+ '\
+                            export_contract + cancel_contract+ paiement_pdf+'\
                         \
                         @canany(['edit-contract','delete-contract'])
-                            @can('edit-contract')
-                            <a href="dash/contract/' + row.id + '/edit" class="btn btn-sm btn-clean btn-icon mr-2" title="Edit details">\
+                                        @can('edit-contract')
+                                <a href="dash/contract/' + row.id + '/edit" class="btn btn-sm btn-clean btn-icon mr-2" title="Edit details">\
                                     <span class="svg-icon svg-icon-md">\
                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">\
                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">\
@@ -121,7 +128,7 @@
                                     </span>\
                                 </a>\
                             @endcan
-                            @can('delete-user')
+                                        @can('delete-user')
                                 <a href="#" data-toggle="modal"  data-target="#deleteModal" data-user_id="' + row.id + '" data-user_name="' + data.employee.name + '" class="btn btn-sm btn-clean btn-icon" title="Delete">\
                                     <span class="svg-icon svg-icon-md">\
                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">\
@@ -134,10 +141,25 @@
                                     </span>\
                                 </a>\
                             @endcan
-                        @else
-                                <i>No Actions Available </i>\
+                                        @else
+                                <i>لايوجد اجراءات </i>\
                         @endcanany
-                        ';
+                                ';
+
+
+
+                                if(data.cancel === 1){
+
+                                    cancel_contract_pdf = '<a href=\"dash/contracts/cancel/' + data.paper_id + '/pdf\" class=\"btn btn-sm btn-clean btn-icon\" title=\"وثيقة فسخ العقد\">\
+                                                                    <i class=\"far fa-file-pdf\"></i>\
+                                                        </a>\
+                                                        ';
+                                    var cancel_contract_pdf = "";
+                                    return '<i>العقد ملغى </i>' +cancel_contract_pdf;
+                                }
+
+
+                        return return_value;
                     },
                 },
             ],
@@ -178,6 +200,22 @@
             //populate the textbox
             $(e.currentTarget).find('#exampleModalFormTitle').text('هل أنت متأكد من حذف العقد؟');
             $(e.currentTarget).find('#deleteForm').attr('action', 'dash/contracts/' + user_id);
+        });
+        $('#cancelModal').on('show.bs.modal', function (e) {
+            //get data-id attribute of the clicked element
+            var contract_id = $(e.relatedTarget).data('contract_id');
+
+            //populate the textbox
+            $(e.currentTarget).find('#exampleModalFormTitle').text('هل أنت متأكد من الغاء العقد؟');
+            $(e.currentTarget).find('#deleteForm').attr('action', 'dash/contracts/'+contract_id+'/cancel' );
+        });
+        $('#paiementModal').on('show.bs.modal', function (e) {
+            //get data-id attribute of the clicked element
+            var contract_id = $(e.relatedTarget).data('contract_id');
+
+            //populate the textbox
+            $(e.currentTarget).find('#exampleModalFormTitle').text('هل أنت متأكد من استخراج محضر تقاضي المستحقات؟');
+            $(e.currentTarget).find('#deleteForm').attr('action', 'dash/contracts/'+contract_id+'/pdf/5' );
         });
         $('#extensionModal').on('show.bs.modal', function (e) {
             //get data-id attribute of the clicked element
@@ -348,6 +386,27 @@
                 </form>
             </div>
         </div>
+
+        <div class="modal fade" id="paiementModal" tabindex="-1" aria-labelledby="exampleModalFormTitle"
+             aria-hidden="true" style="display: none;">
+            <div class="modal-dialog" role="document">
+                <form id="deleteForm" action="dash/contracts/{id}" method="post">
+                    @csrf
+                    @method('delete')
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalFormTitle">هل أنت متأكد من استخراج محضر تقاضي المستحقات؟</h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">
+                                إغلاق
+                            </button>
+                            <button type="submit" class="btn btn-bg-primary font-weight-bold">نعم</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
         <!-- end::delete modal -->
         <!-- start::delete multi modal -->
         <div class="modal fade" id="deleteMultiModal" tabindex="-1" aria-labelledby="exampleModalFormTitle"
@@ -365,6 +424,27 @@
                         </button>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="exampleModalFormTitle"
+             aria-hidden="true" style="display: none;">
+            <div class="modal-dialog" role="document">
+                <form id="deleteForm" action="dash/contracts/{id}" method="post">
+                    @csrf
+                    @method('post')
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalFormTitle">هل أنت متأكد من الغاء العقد؟</h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">
+                                إغلاق
+                            </button>
+                            <button type="submit" class="btn btn-danger font-weight-bold">نعم</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
         <!-- end::delete multi modal -->
@@ -386,6 +466,16 @@
                             <input type="text" name="post" value="{{old('name')}}" autocomplete="family-name"
                                    class="form-control form-control-solid" placeholder="أدخل المنصب" required/>
                             <span class="form-text text-muted">الرجاء إدخال المنصب</span>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-12">
+                            <label>نوع عقد العمل : </label>
+                            <select class="form-control"  name="paper_type_id" autocomplete="city" required>
+
+                                <option value="3" >تمديد عقد عمل رئيس موقع ورئيس فوج</option>
+                                <option value="4">تمديد غقد عمل لعون الأمن</option>
+
+                            </select>
                         </div>
                         <div class="form-group col-sm-12 col-md-12">
                             <label>الموقع* :</label>

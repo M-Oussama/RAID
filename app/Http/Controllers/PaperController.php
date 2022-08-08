@@ -64,9 +64,34 @@ class PaperController extends Controller
         return view('dashboard.paper.list_of_papers')->with('papers',$papers);
     }
 
+    function arabize_date($date) {
+        # دالة كتابة التاريخ بالكلمات العربية ||
+        # برمجة علي س. النعيمي                ||
+        # www.the-ghost.com                   ||
+        //$day = number_format(substr($date,0,2),null,null,null);
+        $day = (int)date('d', strtotime($date));
+       // $month = number_format(substr($date,3,2),null,null,null);
+        $month =  (int)date('m', strtotime($date));
+        $year = date('Y', strtotime($date));
+      //  $year = substr($date,6,4);
+
+        $text = "";
+        #اليوم
+        $days_array = array("الصفر","الأول","الثاني","الثالث","الرابع","الخامس","السادس","السابع","الثامن","التاسع","العاشر","الحادي عشر","الثاني عشر","الثالث عشر","الرابع عشر","الخامس عشر","السادس عشر","السابع عشر","الثامن عشر","التاسع عشر","العشرين","الحادي و العشرين","الثاني و العشرين","الثالث و العشرين","الرابع و العشرين","الخامس و العشرين","السادس و العشرين","السابع و العشرين","الثامن و العشرين","التاسع و العشرين","الثلاثين","الحادي و الثلاثين","الثاني و الثلاثين","الثالث و الثلاثين");
+        $text.= $days_array[$day];
+        #الشهر
+        $text.=' من شهر ';
+        $months_array = array("جانفي","فيفري","مارس","أفريل","ماي","جوان","جويلية","أوت","سبتمبر","أكتوبر","نوفمبر","ديسمبر");
+        $text.= $months_array[$month-1];
+        #السنة
+        $text.= ' عام '.$year;
+        return $text;
+    }
     public function exportContract($id){
         $contract = Contract::find($id);
         $paper = Paper::where('contract_id',$id)->get()->first();
+        $contract->start_date_ar = $this->arabize_date($contract->start_date);
+
 
         return view('dashboard.paper.papers.contract')->with('contract',$contract)->with('paper',$paper);
     }
@@ -78,7 +103,7 @@ class PaperController extends Controller
             case 1: {
                 // عقد عمل رئيس موقع ورئيس فوج & محضر تنصب
 
-                 return redirect("/dash/contracts/chief/create");
+                 return redirect("/dash/contracts/create");
             }
 
             case 2: {
@@ -109,6 +134,7 @@ class PaperController extends Controller
                 $paper->paper_type_id = $id;
                 $paper->employee_id = $request->employee_id;
                 $paper->save();
+
 
                 return redirect("/dash/papers/list");
 
@@ -241,8 +267,9 @@ class PaperController extends Controller
                 // محضر تقاضي المستحقات
                 $view = "dashboard.paper.papers.get_all_paiements";
                 $paper = Paper::find($id);
+                $contract = Contract::where('employee_id',$paper->employee_id)->where('cancel',0)->where('extension',1)->get()->first();
 
-                return view($view)->with('paper',$paper);
+                return view($view)->with('paper',$paper)->with('contract',$contract);
 
                 break;
             }
@@ -326,5 +353,28 @@ class PaperController extends Controller
         session()->flash('message', "تمت عملية حذف الوثيقة بنجاح");
 
         return redirect()->back();
+    }
+
+    public function exportCancelPDF($id){
+        $paper = Paper::find($id);
+        $contract = Contract::where('employee_id',$paper->employee_id)->get()->last();
+
+        $view = "dashboard.paper.papers.contract_termination";
+        return view($view)->with('paper',$paper)->with('contract',$contract);
+    }
+
+    public function exportPaiementPDF($id){
+        $contract = Contract::find($id);
+        $paper = new Paper();
+        $paper->paper_type_id = $id;
+        $paper->employee_id = $contract->employee_id;
+        $paper->contract_id = $contract->id;
+        $paper->save();
+
+        $view = "dashboard.paper.papers.get_all_paiements";
+        $paper = Paper::find($id);
+        $contract = Contract::where('employee_id',$paper->employee_id)->where('cancel',0)->where('extension',1)->get()->first();
+
+        return view($view)->with('paper',$paper)->with('contract',$contract);
     }
 }

@@ -184,8 +184,8 @@
                 </div>
                 <div class="card-toolbar">
                     <!--begin::Dropdown-->
-                    @canany(['delete-user','list-user'])
-                        <!-- <div class="dropdown dropdown-inline mr-2">
+                <!-- @canany(['delete-user','list-user'])
+                        <div class="dropdown dropdown-inline mr-2">
                             <button type="button" class="btn btn-light-primary font-weight-bolder dropdown-toggle"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="svg-icon svg-icon-md">
@@ -237,9 +237,9 @@
                                     @endcan
                                 </ul>
 
-                            </div>-->
-                            <!--end::Dropdown Menu-->
-                        </div>
+                            </div>
+
+                        </div>-->
                     @endcanany
                     <!--end::Dropdown-->
                     <!--begin::Button-->

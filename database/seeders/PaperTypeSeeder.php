@@ -28,6 +28,7 @@ class PaperTypeSeeder extends Seeder
             "العطلة",
             "إستفسار",
             "إستدعاء",
+            "الغاء العقد",
 
 
         );
@@ -36,7 +37,7 @@ class PaperTypeSeeder extends Seeder
         foreach($papers_type as $item){
             $paper = new PaperType();
             $paper->name = $item;
-            if($i== 3 || $i== 4)
+            if($i== 3 || $i== 4 || $i == 5 || $i == 13)
                 $paper->active = false;
             $paper->save();
             $i++;

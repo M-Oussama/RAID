@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('page_meta')
-    <title>إنشاء عقد عمل لعون الأمن </title>
+    <title>إنشاء عقد عمل  </title>
     <meta name="keywords" content="Rozaric"/>
     <meta name="description" content="Rozaric">
     <meta name="author" content="Rozaric">
@@ -114,7 +114,7 @@
                 <div class="card-body">
                     <div class="row">
 
-                        <div class="form-group col-sm-12 col-md-4">
+                        <div class="form-group col-sm-12 col-md-6">
                             <label>الموظف : </label>
                             <select class="form-control"  name="employee_id" autocomplete="city" required>
                                 @foreach($employees as $employee)
@@ -122,15 +122,24 @@
                                 @endforeach
                             </select>
                         </div>
-                        <input type="number" name="paper_type_id" value=2 autocomplete="family-name"
-                               class="form-control form-control-solid hideE"  required/>
-                        <div class="form-group col-sm-12 col-md-4">
+
+                        <div class="form-group col-sm-12 col-md-6">
+                            <label>نوع عقد العمل : </label>
+                            <select class="form-control"  name="paper_type_id" autocomplete="city" required>
+
+                                <option value="1" >عقد عمل رئيس موقع ورئيس فوج</option>
+                                <option value="2">غقد عمل لعون الأمن</option>
+
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-6">
+
                             <label>المنصب* :</label>
                             <input type="text" name="post" value="{{old('name')}}" autocomplete="family-name"
                                    class="form-control form-control-solid" placeholder="أدخل المنصب" required/>
                             <span class="form-text text-muted">الرجاء إدخال المنصب</span>
                         </div>
-                        <div class="form-group col-sm-12 col-md-4">
+                        <div class="form-group col-sm-12 col-md-6">
                             <label>الموقع* :</label>
                             <input type="text" name="post_location" value="{{old('surname')}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل الموقع"

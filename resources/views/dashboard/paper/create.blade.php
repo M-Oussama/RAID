@@ -56,7 +56,7 @@
                 <div class="card-body">
                     <div class="row">
 
-                        <div class="form-group col-sm-12 col-md-6">
+                        <div class="form-group col-sm-12 col-md-4">
                             <label>الموظف : </label>
                             <select class="form-control"  name="employee_id" autocomplete="city" required>
                                 @foreach($employees as $employee)
@@ -65,7 +65,17 @@
                             </select>
                         </div>
 
-                        <div class="form-group col-sm-12 col-md-6">
+                        <div class="form-group col-sm-12 col-md-4">
+                            <label>نوع عقد العمل : </label>
+                            <select class="form-control"  name="paper_type_id" autocomplete="city" required>
+
+                                    <option value=1" >عقد عمل رئيس موقع ورئيس فوج</option>
+                                    <option value="2">غقد عمل لعون الأمن</option>
+
+                            </select>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-4">
                             <label>المنصب* :</label>
                             <input type="text" name="post" value="{{old('name')}}" autocomplete="family-name"
                                    class="form-control form-control-solid" placeholder="أدخل المنصب" required/>

@@ -86,10 +86,14 @@ Route::get('dash/papers/{id}/create', [PaperController::class, 'exportPaper']);
 Route::get('dash/papers/{id}/create', [PaperController::class, 'exportPaper']);
 Route::post('dash/papers/{id}/export', [PaperController::class, 'exportPaper']);
 Route::get('dash/contracts/{id}/pdf', [PaperController::class, 'exportContract']);
-Route::get('dash/contracts/chief/create', [ContractController::class, 'createChiefContract']);
+Route::get('dash/contracts/chief/create', [ContractController::class, 'createChiefContract'])->name('chief');
 Route::get('dash/papers/list', [PaperController::class, 'papersList']);
 Route::get('dash/papers/{paper_type}/{id}/exportFile', [PaperController::class, 'export']);
 Route::post('dash/contracts/{id}/create', [ContractController::class, 'extendContract']);
+Route::post('dash/contracts/{id}/cancel', [ContractController::class, 'cancelContract']);
+Route::post('dash/contracts/cancel/{id}/pdf', [PaperController::class, 'exportCancelPDF']);
+Route::post('dash/contracts/cancel/{id}/pdf', [PaperController::class, 'exportCancelPDF']);
+Route::post('dash/contracts/{id}/pdf/5', [PaperController::class, 'exportPaiementPDF']);
 
 
 
