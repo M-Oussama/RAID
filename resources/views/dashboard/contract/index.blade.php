@@ -86,10 +86,16 @@
                         console.log(data.employee.name);
                         var employee = data.employee.surname + " "+ data.employee.name;
                         var export_contract = "";
+                        var cancel_contract = "";
+
+                        if(data.cancel === 0)
+                            cancel_contract = '<a href=\"#\" data-toggle=\"modal\"  data-target=\"#cancelModal\" data-contract_id=\"' + row.id + '\" data-user_name=\"' + employee + '\" class=\"btn btn-sm btn-clean btn-icon\" title=\"تمديد العقد\">\
+                                                                    <i class=\"fas fa-times\"></i>\
+                                                        </a>\
+                                                        ';
                         if(data.extension)
                             if( moment().format("YYYY-MM-DD") > data.end_date )
-
-                                export_contract = '<a href=\"#\" data-toggle=\"modal\"  data-target=\"#extensionModal\" data-contract_id=\"' + row.id + '\" data-user_name=\"' + employee + '\" class=\"btn btn-sm btn-clean btn-icon\" title=\"Extension\">\
+                                export_contract = '<a href=\"#\" data-toggle=\"modal\"  data-target=\"#extensionModal\" data-contract_id=\"' + row.id + '\" data-user_name=\"' + employee + '\" class=\"btn btn-sm btn-clean btn-icon\" title=\"الغاء العقد\">\
                                                                     <i class=\"fas fa-pen-nib\"></i>\
                                                         </a>\
                                                         ';
@@ -99,7 +105,7 @@
                             </i>\
                         </a>\
                         '+
-                        export_contract + '\
+                        export_contract + cancel_contract+ '\
                         \
                         @canany(['edit-contract','delete-contract'])
                             @can('edit-contract')

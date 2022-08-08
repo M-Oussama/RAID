@@ -26,6 +26,7 @@ class CreateContractsTable extends Migration
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->boolean('extension')->default(1)->nullable();
+            $table->boolean('cancel')->default(0)->nullable();
             $table->timestamps();
         });
     }
