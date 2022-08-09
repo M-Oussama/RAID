@@ -4,6 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Permission\Traits\HasRoles;
 
 /**
  * App\Models\Employees
@@ -38,9 +42,11 @@ use Illuminate\Database\Eloquent\Model;
  *
  **/
 
-class Employees extends Model
+class Employees extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory, Notifiable, HasRoles, InteractsWithMedia;
+
+
 
     public function address(){
         return $this->belongsTo(Address::class,'birthplace_id');

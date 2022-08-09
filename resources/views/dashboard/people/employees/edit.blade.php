@@ -95,13 +95,16 @@
 
                     if (leng>0) {
                         for (var i = 0; i<leng; i++) {
-                            var id = response.baladias[i].id;
-                            var name = response.baladias[i].name_ar;
-                            var DAIRA = response.baladias[i].BALADIA;
+                            if(response.dairas[i] != undefined){
+                                var id = response.dairas[i].id;
+                                var name_ = response.dairas[i].name_ar;
+                                var DAIRA = response.dairas[i].DAIRA;
 
-                            var option = "<option value='"+id+"'>"+BALADIA+"-"+name+"</option>";
+                                var option = "<option value='"+id+"'>"+DAIRA+"-"+name_+"</option>";
 
-                            $("#birthplace_daira").append(option);
+                                $("#document_daira").append(option);
+                            }
+
                         }
                     }
 
@@ -152,13 +155,15 @@
 
                     if (leng>0) {
                         for (var i = 0; i<leng; i++) {
-                            var id = response.baladias[i].id;
-                            var name = response.baladias[i].name_ar;
-                            var DAIRA = response.baladias[i].BALADIA;
+                            if(response.dairas[i] != undefined){
+                                var id = response.dairas[i].id;
+                                var name_ = response.dairas[i].name_ar;
+                                var DAIRA = response.dairas[i].BALADIA;
 
-                            var option = "<option value='"+id+"'>"+BALADIA+"-"+name+"</option>";
+                                var option = "<option value='"+id+"'>"+DAIRA+"-"+name_+"</option>";
 
-                            $("#birthplace_daira").append(option);
+                                $("#birthplace_daira").append(option);
+                            }
                         }
                     }
 
@@ -274,8 +279,8 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-6">
                             <div class="image-input image-input-empty image-input-outline d-contents" id="kt_avatar"
-                                 style="background-image: url(assets/media/users/blank.png);margin-left: 36%;">
-                                <div class="image-input-wrapper"></div>
+                                 style="margin-left: 36%;background-image: url({{ !empty($employee->getFirstMedia('avatars')) ? $employee->getFirstMedia('avatars')->getUrl() : 'assets/media/users/blank.png' }})">
+                                <div class="image-input-wrapper" ></div>
 
                                 <label
                                         class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
@@ -346,7 +351,7 @@
                             <label>الدائرة : </label>
                             <select class="form-control" id="birthplace_daira" name="daira_id" autocomplete="city">
                                 @foreach($dairas as $daira)
-                                    <option value="{{$daira->id}}" {{old('daira_id',$employee->address->daira_id) == $daira->id ? 'selected':''}}>{{$daira->DAIRA."- ".$daira->name_ar}}</option>
+                                    <option value="{{$daira->id}}" {{$employee->address->daira_id == $daira->id ? 'selected':''}}>{{$daira->DAIRA."- ".$daira->name_ar}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -548,7 +553,7 @@
                             <label>البلدية : </label>
                             <select class="form-control" id="document_baladia" name="document_baladia" autocomplete="city">
                                 @foreach($baladias as $baladia)
-                                    <option value="{{$baladia->id}}" {{old('document_baladia',$employee->documentAddress->baladia_ia) == $baladia->id ? 'selected':''}}>{{$baladia->BALADIA."- ".$baladia->name_ar}}</option>
+                                    <option value="{{$baladia->id}}" {{old('document_baladia',$employee->documentAddress->baladia_id) == $baladia->id ? 'selected':''}}>{{$baladia->BALADIA."- ".$baladia->name_ar}}</option>
                                 @endforeach
                             </select>
                         </div>

@@ -65,9 +65,10 @@
             var id = $(this).val();
 
             $('#document_baladia').find('option').remove();
+            $('#document_daira').find('option').remove();
 
             $.ajax({
-                url:'dash/wilayas/'+id+'/get_baladias',
+                url:'dash/wilayas/'+id+'/get_baladias_dairas',
                 type:'GET',
                 dataType:'json',
                 success:function (response) {
@@ -75,6 +76,7 @@
                     if (response.baladias != null) {
                         leng = response.baladias.length;
                     }
+                    console.log(response);
 
                     if (leng>0) {
                         for (var i = 0; i<leng; i++) {
@@ -90,13 +92,16 @@
 
                     if (leng>0) {
                         for (var i = 0; i<leng; i++) {
-                            var id = response.baladias[i].id;
-                            var name = response.baladias[i].name_ar;
-                            var DAIRA = response.baladias[i].BALADIA;
+                            if(response.dairas[i] != undefined){
+                                var id = response.dairas[i].id;
+                                var name_ = response.dairas[i].name_ar;
+                                var DAIRA = response.dairas[i].DAIRA;
 
-                            var option = "<option value='"+id+"'>"+BALADIA+"-"+name+"</option>";
+                                var option = "<option value='"+id+"'>"+DAIRA+"-"+name_+"</option>";
 
-                            $("#birthplace_daira").append(option);
+                                $("#document_daira").append(option);
+                            }
+
                         }
                     }
 
@@ -147,13 +152,16 @@
 
                     if (leng>0) {
                         for (var i = 0; i<leng; i++) {
-                            var id = response.baladias[i].id;
-                            var name = response.baladias[i].name_ar;
-                            var DAIRA = response.baladias[i].BALADIA;
+                            if(response.dairas[i] != undefined){
+                                var id = response.dairas[i].id;
+                                var name_ = response.dairas[i].name_ar;
+                                var DAIRA = response.dairas[i].DAIRA;
 
-                            var option = "<option value='"+id+"'>"+BALADIA+"-"+name+"</option>";
+                                var option = "<option value='"+id+"'>"+DAIRA+"-"+name_+"</option>";
 
-                            $("#birthplace_daira").append(option);
+                                $("#birthplace_daira").append(option);
+                            }
+
                         }
                     }
 

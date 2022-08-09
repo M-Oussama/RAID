@@ -100,9 +100,13 @@ class EmployeesController extends Controller
         $employee->document_address = $document_address->id;
         $employee->document_date = $request->document_date;
 
-
-
         $employee->save();
+
+        if (!empty($request->avatar)) {
+            $employee->addMediaFromRequest('avatar')
+                ->toMediaCollection('avatars');
+        }
+
 
         $employee_id = "";
         if($employee->id < 10){
@@ -135,10 +139,10 @@ class EmployeesController extends Controller
         $employee = Employees::find($id);
         $wilayas = Wilaya::all();
 
-        $dairas = Daira::where('wilaya_id',$wilayas->first()->id)->get();
+        $dairas = Daira::where('wilaya_id',$employee->address->wilaya_id)->get();
 
-        $baladias = Baladia::whereIn('daira_id',function ($query) use ($wilayas){
-            $query->select('id')->from(with(new Daira)->getTable())->where('wilaya_id',$wilayas->first()->id)->pluck('id')->toArray();
+        $baladias = Baladia::whereIn('daira_id',function ($query) use ($employee){
+            $query->select('id')->from(with(new Daira)->getTable())->where('wilaya_id',$employee->address->wilaya_id)->pluck('id')->toArray();
         })->get();
 
         return view('dashboard.people.employees.edit')
@@ -212,7 +216,18 @@ class EmployeesController extends Controller
 
         $employee->save();
 
-        $employee->save();
+        if (!empty($request->avatar)) {
+            if (!empty($employee->getFirstMedia('avatars'))) {
+                $employee->getFirstMedia('avatars')->delete();
+            }
+            $employee->addMediaFromRequest('avatar')
+                ->toMediaCollection('avatars');
+        }
+
+        if (!empty($request->avatar_remove)){
+            $employee->getFirstMedia('avatars')->delete();
+        }
+
 
         session()->flash('type', "success");
         session()->flash('message', "تم تعديل معلومات الموظف بنجاح");
