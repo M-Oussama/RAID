@@ -381,9 +381,19 @@
                         </div>
                         <div class="form-group col-sm-12 col-md-4">
                             <label>الحالة العائلية* :</label>
-                            <input type="text" name="family_status" value="{{old('family_status',$employee->family_status)}}" autocomplete="given-name"
+
+                            <select class="form-control" id="family_status" name="family_status" autocomplete="city">
+
+                                <option value="متزوج" {{$employee->family_status == "متزوج" ? 'selected' : ''}}>متزوج</option>
+                                <option value="اعزب" {{$employee->family_status == "اعزب" ? 'selected' : ''}}>اعزب</option>
+                                <option value="مطلق" {{$employee->family_status == "مطلق" ? 'selected' : ''}}>مطلق</option>
+                                <option value="أرمل" {{$employee->family_status == "أرمل" ? 'selected' : ''}}>أرمل</option>
+
+
+                            </select>
+                          {{--  <input type="text" name="family_status" value="{{old('family_status',$employee->family_status)}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل الحالة العائلية"
-                                   required/>
+                                   />--}}
                             <span class="form-text text-muted">الرجاء إدخال الحالة العائلية</span>
                         </div>
                         <div class="form-group col-sm-12 col-md-4">
@@ -398,7 +408,7 @@
                             <label>إسم الزوجة* :</label>
                             <input type="text" name="wife_name" value="{{old('wife_name',$employee->wife_name)}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل إسم الزوجة"
-                                   required/>
+                                   />
                             <span class="form-text text-muted">الرجاء إدخال إسم الزوجة</span>
                         </div>
 
@@ -434,15 +444,16 @@
                             <label> المستوى الدراسي * :</label>
                             <input type="text" name="education_level" value="{{old('education_level',$employee->education_level)}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل المستوى الدراسي"
-                                   required/>
+                                   />
                             <span class="form-text text-muted">الرجاء إدخال المستوى الدراسي</span>
                         </div>
 
                         <div class="form-group col-sm-12 col-md-6">
-                            <label> ـ رقم الحساب البريدي الجاري * :</label>
+                            <label>  رقم الحساب البريدي الجاري * :</label>
                             <input type="text" name="postal_account_number" value="{{old('postal_account_number',$employee->postal_account_number)}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل ـ رقم الحساب البريدي الجاري"
-                                   required/>
+                                   pattern=".{0}|.{20,}"   title="20 nombres minimum"
+                                   oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/>
                             <span class="form-text text-muted">الرجاء إدخال رقم الحساب البريدي الجاري</span>
                         </div>
 
@@ -450,15 +461,26 @@
                             <label> رقم الضمان الإجتماعي * :</label>
                             <input type="text" name="social_security_number" value="{{old('social_security_number',$employee->social_security_number)}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل رقم الضمان الإجتماعي"
-                                   required/>
+                                   pattern=".{0}|.{12,}"   title="12 nombres minimum"
+                                   oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/>
                             <span class="form-text text-muted">الرجاء إدخال رقم الضمان الإجتماعي</span>
                         </div>
 
                         <div class="form-group col-sm-12 col-md-6">
                             <label> الوضعية تجاه الخدمة الوطنية * :</label>
-                            <input type="text" name="national_service" value="{{old('national_service',$employee->social_security_number)}}" autocomplete="given-name"
+
+                            <select class="form-control" id="national_service" name="national_service" autocomplete="city">
+
+                                <option value="مؤدي" {{$employee->national_service == "مؤدي" ? "selected":''}}>مؤدي</option>
+                                <option value="مؤجل" {{$employee->national_service == "مؤجل" ? "selected":''}}>مؤجل</option>
+                                <option value="معفى" {{$employee->national_service == "معفى" ? "selected":''}}>معفى</option>
+
+
+                            </select>
+
+                           {{-- <input type="text" name="national_service" value="{{old('national_service',$employee->national_service)}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل الوضعية تجاه الخدمة الوطنية"
-                                   required/>
+                                   required/>--}}
                             <span class="form-text text-muted">الرجاء إدخال الوضعية تجاه الخدمة الوطنية</span>
                         </div>
 
@@ -466,7 +488,7 @@
                             <label> الرتبة * :</label>
                             <input type="text" name="national_service_rank" value="{{old('national_service_rank',$employee->national_service_rank)}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل الرتبة"
-                                   required/>
+                                   />
                             <span class="form-text text-muted">الرجاء إدخال الرتبة</span>
                         </div>
 
@@ -475,7 +497,7 @@
                             <label> رقم الهاتف * :</label>
                             <input type="text" name="phone" value="{{old('phone',$employee->phone)}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل رقم الهاتف"
-                                   required/>
+                                   />
                             <span class="form-text text-muted">الرجاء إدخال رقم الهاتف</span>
                         </div>
                         <div class="form-group col-sm-12 col-md-6">
@@ -508,7 +530,7 @@
                             <label>رقم بطاقة التعريف الوطنية * :</label>
                             <input type="text" name="document_number1" value="{{old('document_number',$employee->document_number)}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل رقم بطاقة التعريف الوطنية"
-                                   required/>
+                                   />
                             <span class="form-text text-muted">الرجاء إدخال رقم بطاقة التعريف الوطنية</span>
                         </div>
 

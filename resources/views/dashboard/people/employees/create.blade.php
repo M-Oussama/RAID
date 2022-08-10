@@ -378,16 +378,23 @@
                         </div>
                         <div class="form-group col-sm-12 col-md-4">
                             <label>الحالة العائلية* :</label>
-                            <input type="text" name="family_status" value="{{old('surname')}}" autocomplete="given-name"
-                                   class="form-control form-control-solid" placeholder="أدخل الحالة العائلية"
-                                   required/>
+
+                            <select class="form-control" id="family_status" name="family_status" autocomplete="city">
+
+                                <option value="متزوج">متزوج</option>
+                                <option value="اعزب">اعزب</option>
+                                <option value="مطلق">مطلق</option>
+                                <option value="أرمل">أرمل</option>
+
+
+                            </select>
                             <span class="form-text text-muted">الرجاء إدخال الحالة العائلية</span>
                         </div>
                         <div class="form-group col-sm-12 col-md-4">
                             <label> عدد الأولاد * :</label>
-                            <input type="number" name="children_number" value="{{old('children_number')}}"
+                            <input type="text" name="children_number" value="{{old('children_number')}}"
                                    class="form-control form-control-solid" placeholder="ادخل عدد الأولاد"
-                                   min="0" />
+                                   oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" min="0" />
                             <span class="form-text text-muted">الرجاء ادخال عدد الأولاد </span>
                         </div>
 
@@ -395,7 +402,7 @@
                             <label>إسم الزوجة* :</label>
                             <input type="text" name="wife_name" value="{{old('surname')}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل إسم الزوجة"
-                                   required/>
+                                   />
                             <span class="form-text text-muted">الرجاء إدخال إسم الزوجة</span>
                         </div>
 
@@ -431,15 +438,16 @@
                             <label> المستوى الدراسي * :</label>
                             <input type="text" name="education_level" value="{{old('surname')}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل المستوى الدراسي"
-                                   required/>
+                                   />
                             <span class="form-text text-muted">الرجاء إدخال المستوى الدراسي</span>
                         </div>
 
                         <div class="form-group col-sm-12 col-md-6">
                             <label> ـ رقم الحساب البريدي الجاري * :</label>
                             <input type="text" name="postal_account_number" value="{{old('surname')}}" autocomplete="given-name"
-                                   class="form-control form-control-solid" placeholder="أدخل ـ رقم الحساب البريدي الجاري"
-                                   required/>
+                                   class="form-control form-control-solid" placeholder="أدخل رقم الحساب البريدي الجاري"
+                                   pattern=".{0}|.{20,}"   title="20 nombres minimum"
+                                   oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" />
                             <span class="form-text text-muted">الرجاء إدخال رقم الحساب البريدي الجاري</span>
                         </div>
 
@@ -447,15 +455,25 @@
                             <label> رقم الضمان الإجتماعي * :</label>
                             <input type="text" name="social_security_number" value="{{old('surname')}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل رقم الضمان الإجتماعي"
-                                   required/>
+                                   pattern=".{0}|.{12,}"   title="12 nombres minimum"
+                                   oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/>
                             <span class="form-text text-muted">الرجاء إدخال رقم الضمان الإجتماعي</span>
                         </div>
 
                         <div class="form-group col-sm-12 col-md-6">
                             <label> الوضعية تجاه الخدمة الوطنية * :</label>
-                            <input type="text" name="national_service" value="{{old('surname')}}" autocomplete="given-name"
+            {{--                <input type="text" name="national_service" value="{{old('surname')}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل الوضعية تجاه الخدمة الوطنية"
-                                   required/>
+                                   />--}}
+
+                            <select class="form-control" id="national_service" name="national_service" autocomplete="city">
+
+                                <option value="مؤدي">مؤدي</option>
+                                <option value="مؤجل">مؤجل</option>
+                                <option value="معفى">معفى</option>
+
+
+                            </select>
                             <span class="form-text text-muted">الرجاء إدخال الوضعية تجاه الخدمة الوطنية</span>
                         </div>
 
@@ -463,7 +481,7 @@
                             <label> الرتبة * :</label>
                             <input type="text" name="national_service_rank" value="{{old('surname')}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل الرتبة"
-                                   required/>
+                                   />
                             <span class="form-text text-muted">الرجاء إدخال الرتبة</span>
                         </div>
 
@@ -472,7 +490,7 @@
                             <label> رقم الهاتف * :</label>
                             <input type="text" name="phone" value="{{old('surname')}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل رقم الهاتف"
-                                   required/>
+                                   />
                             <span class="form-text text-muted">الرجاء إدخال رقم الهاتف</span>
                         </div>
                         <div class="form-group col-sm-12 col-md-6">
