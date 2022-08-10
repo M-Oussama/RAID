@@ -154,7 +154,7 @@
             var user_name = $(e.relatedTarget).data('user_name');
 
             //populate the textbox
-            $(e.currentTarget).find('#exampleModalFormTitle').text('هل حقا تريد حذف الموظف' + user_name + ' ?');
+            $(e.currentTarget).find('#exampleModalFormTitle').text(' هل حقا تريد حذف الموظف ' + user_name + ' ?');
             $(e.currentTarget).find('#deleteForm').attr('action', 'dash/security/assistance/' + user_id);
         });
 

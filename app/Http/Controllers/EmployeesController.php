@@ -243,6 +243,8 @@ class EmployeesController extends Controller
             foreach($contracts as $contract){
                 $contract->delete();
             }
+
+        $employee->delete();
         session()->flash('type', "success");
         session()->flash('message', "تمت عملية حذف الموظف بنجاح");
 
