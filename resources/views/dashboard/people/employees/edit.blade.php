@@ -172,7 +172,38 @@
             })
         });
 
+        $('#postal_account_msg').hide();
+        $('#social_security_msg').hide();
+        $('#postal_account').on('input',function () {
 
+
+            var val = $(this).val();
+            console.log(val.length);
+            if(val.length <= 20) {
+                $('#postal_account_msg').hide();
+                $('#postal_account_msg1').show();
+            } else{
+                $('#postal_account_msg').show();
+                $('#postal_account_msg1').hide();
+            }
+
+
+        });
+        $('#social_security').on('input',function () {
+
+
+            var val = $(this).val();
+            console.log(val.length);
+            if(val.length <= 12) {
+                $('#social_security_msg').hide();
+                $('#social_security_msg1').show();
+            } else{
+                $('#social_security_msg').show();
+                $('#social_security_msg1').hide();
+            }
+
+
+        });
        /* $('#birthplace_daira').on('change',function () {
 
             KTApp.blockPage({
@@ -450,20 +481,23 @@
 
                         <div class="form-group col-sm-12 col-md-6">
                             <label>  رقم الحساب البريدي الجاري * :</label>
-                            <input type="text" name="postal_account_number" value="{{old('postal_account_number',$employee->postal_account_number)}}" autocomplete="given-name"
+                            <input type="text" id="postal_account" name="postal_account_number" value="{{old('postal_account_number',$employee->postal_account_number)}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل ـ رقم الحساب البريدي الجاري"
                                    pattern=".{0}|.{20,}"   title="20 nombres minimum"
                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/>
-                            <span class="form-text text-muted">الرجاء إدخال رقم الحساب البريدي الجاري</span>
+
+                            <span id="postal_account_msg1" class="form-text text-muted">الرجاء إدخال رقم الحساب البريدي الجاري</span>
+                            <span id="postal_account_msg" class="form-text  text-danger">رقم الحساب البريدي الجاري يجب أن يتكون من 20 رقم تحديدا</span>
                         </div>
 
                         <div class="form-group col-sm-12 col-md-6">
                             <label> رقم الضمان الإجتماعي * :</label>
-                            <input type="text" name="social_security_number" value="{{old('social_security_number',$employee->social_security_number)}}" autocomplete="given-name"
+                            <input type="text" id="social_security" name="social_security_number" value="{{old('social_security_number',$employee->social_security_number)}}" autocomplete="given-name"
                                    class="form-control form-control-solid" placeholder="أدخل رقم الضمان الإجتماعي"
                                    pattern=".{0}|.{12,}"   title="12 nombres minimum"
                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/>
-                            <span class="form-text text-muted">الرجاء إدخال رقم الضمان الإجتماعي</span>
+                            <span id="social_security_msg1" class="form-text text-muted">الرجاء إدخال رقم الضمان الإجتماعي</span>
+                            <span id="social_security_msg" class="form-text  text-danger">رقم الضمان الإجتماعي يجب أن يتكون من 12 رقم تحديدا</span>
                         </div>
 
                         <div class="form-group col-sm-12 col-md-6">
