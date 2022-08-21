@@ -146,7 +146,13 @@ line-height:normal;direction:rtl;unicode-bidi:embed'><b><span lang=AR-DZ
 line-height:normal;direction:rtl;unicode-bidi:embed'><b><span lang=AR-DZ
                                                               style='font-size:14.0pt;font-family:"Traditional Arabic",serif'>ـــــــ</span></b><span
                 lang=AR-DZ style='font-size:14.0pt;font-family:"Traditional Arabic",serif'>
-{{$contract->employee->name}}<b><u>:&quot;الإسم</u>&quot; ــــــ </b>اللقب:<b> <u>&quot;{{$contract->employee->surname}}&quot;</u>،
+<b>
+        الاسم:
+    <u>:&quot;{{$contract->employee->name}} </u>
+    &quot;
+    ــــــ </b>
+            اللقب:<b>
+                <u>&quot;{{$contract->employee->surname}}&quot;</u>،
 ـــــــ </b>تاريخ ومكان الميلاد: <b><u>&quot;{{$contract->employee->birthdate}}&quot;</u></b></span><b><span
                     lang=AR-DZ style='font-size:13.0pt;font-family:"Traditional Arabic",serif'>، بــــــــ</span></b><span
                 lang=AR-DZ style='font-size:14.0pt;font-family:"Traditional Arabic",serif'>:<b>
@@ -291,8 +297,8 @@ line-height:normal;direction:rtl;unicode-bidi:embed'><b><u><span lang=AR-DZ
     line-height:normal;direction:rtl;unicode-bidi:embed'><b><span lang=AR-DZ
                                                                   style='font-size:14.0pt;font-family:"Traditional Arabic",serif'>ــــــ</span></b><span
                     lang=AR-DZ style='font-size:14.0pt;font-family:"Traditional Arabic",serif'> 
-    يخضع العامل لفترة تجريبية لمدة: <u>&quot;<b>(</b></u></span><b><u><span
-                            lang=AR-DZ style='font-size:13.0pt;font-family:"Arial",sans-serif'>03</span></u></b><b><u><span
+    يخضع العامل لفترة تجريبية لمدة: <u>&quot;<b></b></u></span><b><u><span
+                            lang=AR-DZ style='font-size:13.0pt;font-family:"Arial",sans-serif'></span></u></b><b><u><span
                             lang=AR-DZ style='font-size:14.0pt;font-family:"Traditional Arabic",serif'>
      شهرين &quot;</span></u></b><b><span lang=AR-DZ
                                                                    style='font-size:14.0pt;font-family:"Traditional Arabic",serif'> </span></b><span
@@ -641,37 +647,32 @@ line-height:106%;direction:rtl;unicode-bidi:embed'><b><span lang=AR-DZ
                                                             style='font-size:14.0pt;line-height:106%;font-family:"Traditional Arabic",serif'>         
 العـامل (يسبق الإمضاء بملاحظة قرأ وصودق عليه)  </span></b></p>
 
-    <p class=MsoNormal dir=RTL style='margin-bottom:0in;text-align:right;
-line-height:106%;direction:rtl;unicode-bidi:embed'><b><span lang=AR-DZ
-                                                            style='font-size:14.0pt;line-height:106%;font-family:"Traditional Arabic",serif'>&nbsp;</span></b></p>
+    <p class=MsoNormal dir=RTL style='margin-top:0in;margin-right:0in;margin-bottom:
+0in;margin-left:-14.2pt;text-align:right;line-height:normal;direction:rtl;
+unicode-bidi:embed'><span lang=AR-DZ style='font-size:18.0pt;font-family:"Traditional Arabic",serif'>&nbsp;</span></p>
 
-    <p class=MsoNormal dir=RTL style='margin-bottom:0in;text-align:right;
-line-height:106%;direction:rtl;unicode-bidi:embed'><a name="_Hlk109484634"><b><span
-                        lang=AR-DZ style='font-size:14.0pt;line-height:106%;font-family:"Traditional Arabic",serif'>&nbsp;</span></b></a></p>
+    <p class=MsoNormal dir=RTL style='margin-top:0in;margin-right:0in;margin-bottom:
+0in;margin-left:-14.2pt;text-align:right;line-height:normal;direction:rtl;
+unicode-bidi:embed'></p>
 
-    <p class=MsoNormal dir=RTL style='margin-bottom:0in;text-align:right;
-line-height:106%;direction:rtl;unicode-bidi:embed'><a name="_Hlk109484495"></a><a
-                name="_Hlk109482176"><span lang=AR-DZ style='font-size:12.0pt;line-height:106%;
-font-family:"Arial",sans-serif'>    <u>المعنــــــــي</u></span></a><span
-                lang=AR-DZ style='font-size:12.0pt;line-height:106%;font-family:"Traditional Arabic",serif'>            
-                                                                                         </span><b><span
-                    lang=AR-DZ style='font-size:12.0pt;line-height:106%;font-family:"Sultan Medium"'>سطيف
-في: </span></b><span lang=AR-DZ style='font-size:12.0pt;line-height:106%;
-font-family:"Sultan Medium"'> </span><b><u><span
-                        lang=AR-DZ style='font-family:"Sultan Medium"'>&quot;{{$contract->date}}&quot;</span></u></b><b><u><span
-                        lang=AR-DZ style='font-size:12.0pt;line-height:106%;font-family:"Sultan Medium"'>
-</span></u></b><b><span lang=AR-DZ style='font-size:12.0pt;line-height:106%;
-font-family:"Sultan Medium"'>                               </span></b><b><u><span
-                        lang=AR-DZ style='font-size:14.0pt;line-height:106%;font-family:"Traditional Arabic",serif'>&quot;
-{{$contract->employee->surname}} {{$contract->employee->name}}&quot;</span></u></b><b><span lang=AR-DZ style='font-size:12.0pt;
-line-height:106%;font-family:"Sultan Medium"'>                                                                                                                           
-المسيـــــر</span></b></p>
+    <p class=MsoNormal dir=RTL style='margin-top:0in;margin-right:0in;margin-bottom:
+0in;margin-left:-14.2pt;text-align:right;line-height:normal;direction:rtl;
+unicode-bidi:embed'><span lang=AR-DZ style='font-size:18.0pt;font-family:"Traditional Arabic",serif'>إمضاء
+وبصمة المعني بالأمر                                             حرر  بسطيف يوم</span><b><span
+                    lang=AR-DZ style='font-size:16.0pt;font-family:"Traditional Arabic",serif'>: </span></b><b><span
+                    lang=AR-DZ style='font-size:16.0pt;font-family:"Traditional Arabic",serif'>«{{$contract->start_date}}»</span></b></p>
 
+    <p class=MsoListParagraph dir=RTL style='margin-top:0in;margin-right:13.0pt;
+margin-bottom:0in;margin-left:0in;line-height:normal'><span lang=AR-DZ
+                                                            style='font-size:16.0pt;font-family:"Traditional Arabic",serif'>{{$contract->employee->name}} {{$contract->employee->surname}}
+                                                                                          <b> </b></span><b><span>
+    <p class=MsoListParagraph dir=RTL style='margin-top:0in;margin-right:13.0pt;
+margin-bottom:0in;margin-left:0in;line-height:normal'><span lang=AR-DZ
+                                                            style='font-size:16.0pt;font-family:"Traditional Arabic",serif'>قرأ
+وصودق                                                                                          <b> </b></span><b><span
+                    lang=AR-DZ style='font-size:17.0pt;font-family:"Traditional Arabic",serif'>المسيـــــــــــــــر</span></b></p>
 
-
-
-
-
+    <p class=MsoNormal><span lang=FR>&nbsp;</span></p>
 
 
 
