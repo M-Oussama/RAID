@@ -228,16 +228,27 @@ line-height:normal;direction:rtl;unicode-bidi:embed'><b><u><span lang=AR-DZ
                         lang=AR-DZ style='font-size:13.0pt;font-family:"Arial",sans-serif'>02</span></u></b><b><span
                     lang=AR-DZ style='font-size:14.0pt;font-family:"Traditional Arabic",serif'>: طبيعة
 ومدة العقد</span></b></p>
-    @if($contract->contract_length == 1)
+
     <p class=MsoNormal dir=RTL style='margin-bottom:0in;text-align:right;
 line-height:normal;direction:rtl;unicode-bidi:embed'><b><span lang=AR-DZ
-                                                              style='font-size:14.0pt;font-family:"Traditional Arabic",serif'>ــــــ</span></b><span
-                lang=AR-DZ style='font-size:14.0pt;font-family:"Traditional Arabic",serif'> أبرم
-العقد الحالي وفق نظام العمل التناوبي ولمدة محددة ب: <b><u>&quot;عام واحد (</u></b></span><b><u><span
+                                                              style='font-size:14.0pt;font-family:"Traditional Arabic",serif'>ــــــ</span></b>
+        <span lang=AR-DZ style='font-size:14.0pt;font-family:"Traditional Arabic",serif'> أبرم
+العقد الحالي وفق نظام العمل التناوبي ولمدة محددة ب: <b>
+                @if($contract->contract_length == 1)
+                    <u>&quot;عام واحد (</u>
+                @endif
+            </b>
+        </span>
 
-                        lang=AR-DZ style='font-size:13.0pt;font-family:"Arial",sans-serif'>12 شهرا</span></u></b><b><u><span
-                        lang=AR-DZ style='font-size:14.0pt;font-family:"Traditional Arabic",serif'>)
-&quot;</span></u></b><b><span lang=AR-DZ style='font-size:14.0pt;
+        <b><u>
+
+
+                @if($contract->contract_length == 1)   <span lang=AR-DZ style='font-size:13.0pt;font-family:"Arial",sans-serif'>12 شهرا</span>@else
+               <span lang=AR-DZ style='font-size:13.0pt;font-family:"Arial",sans-serif'>6 أشهر</span>@endif
+
+            </u></b><b><u>
+                @if($contract->contract_length == 1) <span lang=AR-DZ style='font-size:14.0pt;font-family:"Traditional Arabic",serif'>)&quot;</span>@endif
+            </u></b><b><span lang=AR-DZ style='font-size:14.0pt;
 font-family:"Traditional Arabic",serif'> </span></b><span lang=AR-DZ
                                                           style='font-size:14.0pt;font-family:"Traditional Arabic",serif'>بما فيه الحق في
 العطلة السنوية، ويبدأ سريانه إبتداءا من يوم:</span><b><span lang=AR-DZ
@@ -246,10 +257,10 @@ font-family:"Traditional Arabic",serif'>وتنتهي آثاره بمجرد حل�
 المحددة إي بتاريخ :</span><b><span lang=AR-DZ style='font-size:13.0pt;
 font-family:"Arial",sans-serif'> <u>&quot;{{$contract->end_date}}&quot;</u></span></b></p>
 
-    @else
 
 
-    @endif
+
+
 
     <p class=MsoNormal dir=RTL style='margin-bottom:0in;text-align:right;
 line-height:normal;direction:rtl;unicode-bidi:embed'><span lang=AR-DZ
