@@ -161,6 +161,14 @@
                             <span class="form-text text-muted">الرجاء إدخال تاريخ التأمين بالشركة </span>
                         </div>--}}
 
+                        <div class="form-group col-sm-12 col-md-6">
+                            <label>مدة العقد* :</label>
+                            <input type="text" name="contract_length" value="{{old('surname')}}" autocomplete="given-name"
+                                   class="form-control form-control-solid" placeholder="أدخل مدة العقد"
+                                   required/>
+                            <span class="form-text text-muted">الرجاء ادخال مدة العقد</span>
+                        </div>
+
                         <div class="form-group col-sm-12 col-md-4">
                             <label>تاريح بداية العقد :</label>
                             <input type="date" name="start_date" value="{{old('start_date')}}" autocomplete="bday"
@@ -169,13 +177,38 @@
                         </div>
 
                         <div class="form-group col-sm-12 col-md-4">
-                            <label>مدة العقد : </label>
-                            <select class="form-control"  name="contract_length" autocomplete="city" required>
+                            <label>تاريح نهاية العقد :</label>
+                            <input type="date" name="end_date" value="{{old('start_date')}}" autocomplete="bday"
+                                   class="form-control form-control-solid" placeholder="أدخل تاريخ نهاية العقد "/>
+                            <span class="form-text text-muted">الرجاء إدخال تاريخ نهاية العقد </span>
+                        </div>
 
-                                    <option value="1" >عام واحد (12 شهر)</option>
-                                    <option value="2" >ستة أشهر  (6 أشهر)</option>
 
-                            </select>
+
+                        <div class="form-group col-sm-12 col-md-6">
+                            <label>مدة  فترة التجرية* :</label>
+                            <input type="text" name="exp_contract_length" value="{{old('surname')}}" autocomplete="given-name"
+                                   class="form-control form-control-solid" placeholder="أدخل مدة  فترة التجرية"
+                                   required/>
+                            <span class="form-text text-muted">الرجاء ادخال مدة  فترة التجرية</span>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-4">
+                            <label>تاريح نهاية فترة التجرية :</label>
+                            <input type="date" name="exp_end_date" value="{{old('start_date')}}" autocomplete="bday"
+                                   class="form-control form-control-solid" placeholder="أدخل تاريخ نهاية فترة التجرية "/>
+                            <span class="form-text text-muted">الرجاء إدخال تاريخ نهاية فترة التجرية </span>
+                        </div>
+
+
+
+
+                        <div class="form-group col-sm-12 col-md-6">
+                            <label>الموقع* :</label>
+                            <input type="text" name="post_location" value="{{old('surname')}}" autocomplete="given-name"
+                                   class="form-control form-control-solid" placeholder="أدخل الموقع"
+                                   required/>
+                            <span class="form-text text-muted">الرجاء ادخال الموقع</span>
                         </div>
 
                         <div class="form-group col-sm-12 col-md-4">

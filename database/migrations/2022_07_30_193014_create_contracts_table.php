@@ -20,12 +20,14 @@ class CreateContractsTable extends Migration
             $table->date('recruitment_date')->nullable();
             $table->date('insurance_date')->nullable();
             $table->string('post')->nullable();
-            $table->integer('contract_length')->nullable();
+            $table->string('contract_length')->nullable();
+            $table->string('exp_contract_length')->nullable();
             $table->string('post_location')->nullable();
             $table->unsignedInteger('work_address')->nullable();
             $table->string('salary')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
+            $table->date('exp_end_date')->nullable();
             $table->boolean('extension')->default(1)->nullable();
             $table->boolean('cancel')->default(0)->nullable();
             $table->timestamps();
