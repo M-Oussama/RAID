@@ -243,11 +243,11 @@ line-height:normal;direction:rtl;unicode-bidi:embed'><b><span lang=AR-DZ
         <b><u>
 
 
-                @if($contract->contract_length == 1)   <span lang=AR-DZ style='font-size:13.0pt;font-family:"Arial",sans-serif'>12 شهرا</span>@else
-               <span lang=AR-DZ style='font-size:13.0pt;font-family:"Arial",sans-serif'>6 أشهر</span>@endif
+                <span lang=AR-DZ style='font-size:13.0pt;font-family:"Arial",sans-serif'> {{$contract->contract_length}}</span>
+
 
             </u></b><b><u>
-                @if($contract->contract_length == 1) <span lang=AR-DZ style='font-size:14.0pt;font-family:"Traditional Arabic",serif'>)&quot;</span>@endif
+               <span lang=AR-DZ style='font-size:14.0pt;font-family:"Traditional Arabic",serif'></span>
             </u></b><b><span lang=AR-DZ style='font-size:14.0pt;
 font-family:"Traditional Arabic",serif'> </span></b><span lang=AR-DZ
                                                           style='font-size:14.0pt;font-family:"Traditional Arabic",serif'>بما فيه الحق في
@@ -289,33 +289,21 @@ line-height:normal;direction:rtl;unicode-bidi:embed'><b><u><span lang=AR-DZ
                     lang=AR-DZ style='font-size:14.0pt;font-family:"Traditional Arabic",serif'>:
 فترة التجربة</span></b></p>
 
-    @if($contract->contract_length == 1)
-        <p class=MsoNormal dir=RTL style='margin-bottom:0in;text-align:right;
-    line-height:normal;direction:rtl;unicode-bidi:embed'><b><span lang=AR-DZ
-                                                                  style='font-size:14.0pt;font-family:"Traditional Arabic",serif'>ــــــ</span></b><span
-                    lang=AR-DZ style='font-size:14.0pt;font-family:"Traditional Arabic",serif'> 
-    يخضع العامل لفترة تجريبية لمدة: <u>&quot;<b>(</b></u></span><b><u><span
-                            lang=AR-DZ style='font-size:13.0pt;font-family:"Arial",sans-serif'>03</span></u></b><b><u><span
-                            lang=AR-DZ style='font-size:14.0pt;font-family:"Traditional Arabic",serif'>
-    أشهر )&quot;</span></u></b><b><span lang=AR-DZ
-                                                                   style='font-size:14.0pt;font-family:"Traditional Arabic",serif'> </span></b><span
-                    lang=AR-DZ style='font-size:14.0pt;font-family:"Traditional Arabic",serif'>تبدأ
-    من تاريخ توظيفه.</span></p>
-
-    @else
 
         <p class=MsoNormal dir=RTL style='margin-bottom:0in;text-align:right;
     line-height:normal;direction:rtl;unicode-bidi:embed'><b><span lang=AR-DZ
                                                                   style='font-size:14.0pt;font-family:"Traditional Arabic",serif'>ــــــ</span></b><span
                     lang=AR-DZ style='font-size:14.0pt;font-family:"Traditional Arabic",serif'> 
     يخضع العامل لفترة تجريبية لمدة: <u>&quot;<b></b></u></span><b><u><span
-                            lang=AR-DZ style='font-size:13.0pt;font-family:"Arial",sans-serif'></span></u></b><b><u><span
+                            lang=AR-DZ style='font-size:13.0pt;font-family:"Arial",sans-serif'>{{$contract->exp_contract_length}}</span></u></b><b><u><span
                             lang=AR-DZ style='font-size:14.0pt;font-family:"Traditional Arabic",serif'>
-     شهرين &quot;</span></u></b><b><span lang=AR-DZ
+    </span></u></b><b><span lang=AR-DZ
                                                                    style='font-size:14.0pt;font-family:"Traditional Arabic",serif'> </span></b><span
                     lang=AR-DZ style='font-size:14.0pt;font-family:"Traditional Arabic",serif'>تبدأ
     من تاريخ توظيفه.</span></p>
-    @endif
+
+
+
 
     <p class=MsoNormal dir=RTL style='margin-bottom:0in;text-align:right;
 line-height:25.0pt;direction:rtl;unicode-bidi:embed'><b><span lang=AR-DZ
