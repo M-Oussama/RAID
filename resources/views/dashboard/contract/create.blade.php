@@ -163,20 +163,20 @@
 
                         <div class="form-group col-sm-12 col-md-6">
                             <label>مدة العقد* :</label>
-                            <input type="text" name="contract_length" value="{{old('surname')}}" autocomplete="given-name"
+                            <input type="text" name="contract_length" value="{{old('surname')}}" autocomplete="given-name" dir="rtl"
                                    class="form-control form-control-solid" placeholder="أدخل مدة العقد"
                                    required/>
                             <span class="form-text text-muted">الرجاء ادخال مدة العقد</span>
                         </div>
 
-                        <div class="form-group col-sm-12 col-md-4">
+                        <div class="form-group col-sm-12 col-md-6">
                             <label>تاريح بداية العقد :</label>
                             <input type="date" name="start_date" value="{{old('start_date')}}" autocomplete="bday"
                                    class="form-control form-control-solid" placeholder="أدخل تاريخ بداية العقد "/>
                             <span class="form-text text-muted">الرجاء إدخال تاريخ بداية العقد </span>
                         </div>
 
-                        <div class="form-group col-sm-12 col-md-4">
+                        <div class="form-group col-sm-12 col-md-6">
                             <label>تاريح نهاية العقد :</label>
                             <input type="date" name="end_date" value="{{old('start_date')}}" autocomplete="bday"
                                    class="form-control form-control-solid" placeholder="أدخل تاريخ نهاية العقد "/>
@@ -187,13 +187,13 @@
 
                         <div class="form-group col-sm-12 col-md-6">
                             <label>مدة  فترة التجرية* :</label>
-                            <input type="text" name="exp_contract_length" value="{{old('surname')}}" autocomplete="given-name"
+                            <input type="text" name="exp_contract_length" value="{{old('surname')}}" autocomplete="given-name" dir="rtl"
                                    class="form-control form-control-solid" placeholder="أدخل مدة  فترة التجرية"
                                    required/>
                             <span class="form-text text-muted">الرجاء ادخال مدة  فترة التجرية</span>
                         </div>
 
-                        <div class="form-group col-sm-12 col-md-4">
+                        <div class="form-group col-sm-12 col-md-6">
                             <label>تاريح نهاية فترة التجرية :</label>
                             <input type="date" name="exp_end_date" value="{{old('start_date')}}" autocomplete="bday"
                                    class="form-control form-control-solid" placeholder="أدخل تاريخ نهاية فترة التجرية "/>
@@ -203,15 +203,8 @@
 
 
 
-                        <div class="form-group col-sm-12 col-md-6">
-                            <label>الموقع* :</label>
-                            <input type="text" name="post_location" value="{{old('surname')}}" autocomplete="given-name"
-                                   class="form-control form-control-solid" placeholder="أدخل الموقع"
-                                   required/>
-                            <span class="form-text text-muted">الرجاء ادخال الموقع</span>
-                        </div>
 
-                        <div class="form-group col-sm-12 col-md-4">
+                        <div class="form-group col-sm-12 col-md-6">
                             <label>الراتب   :</label>
                             <input type="number" name="salary" value="{{old('start_date')}}" autocomplete="bday"
                                    class="form-control form-control-solid" placeholder="أدخل الراتب "/>

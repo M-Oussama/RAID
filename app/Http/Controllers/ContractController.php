@@ -58,16 +58,17 @@ class ContractController extends Controller
     public function store(Request $request){
 
         $start_date = date($request->start_date);
+        $end_date = date($request->end_date);
 
-        if($request->contract_length == "1"){
+   /*     if($request->contract_length == "1"){
             // 1 year
-            $end_date = date("Y-m-d",strtotime("+12 months",strtotime($start_date)));
+            $end_date = $request->end_date;
             $contract_length = 1;
         }else{
             // 6 months
             $end_date = date("Y-m-d",strtotime("+6 months",strtotime($start_date)));
             $contract_length = 2;
-        }
+        }*/
 
         $contract = new Contract();
         $contract->employee_id = $request->employee_id;
@@ -76,10 +77,11 @@ class ContractController extends Controller
         $contract->salary = $request->salary;
         $contract->recruitment_date = $request->recruitment_date;
         $contract->insurance_date = $request->insurance_date;
-        $contract->contract_length = $contract_length;
-        $contract->start_date = $request->start_date;
+        $contract->contract_length = $request->contract_length;
+        $contract->exp_contract_length = $request->exp_contract_length;
+        $contract->start_date = $start_date;
         $contract->end_date = $end_date;
-
+        $contract->exp_end_date = date($request->exp_end_date);
 
         $contract->save();
 
