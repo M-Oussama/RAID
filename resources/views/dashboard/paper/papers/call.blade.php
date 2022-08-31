@@ -98,7 +98,7 @@
 <div class=WordSection1>
 
     <p class=MsoNormal align=right style='margin-bottom:0in;text-align:right;
-line-height:106%'><img width=176 height=140 src="{{url('/assets/contractFiles/image001.jpg')}}"
+line-height:106%'><img width=176 height=140 src="{{url('/assets/contractFiles/image001.png')}}"
                        align=left hspace=12 alt="AUTOCOLLENT 52X62(2pcs)"><b><span lang=AR-DZ dir=RTL
                                                                                    style='font-size:16.0pt;line-height:106%;font-family:AL-Gemah-Almajd'>شركـــــــة
 </span></b><b><span lang=AR-DZ dir=RTL style='font-size:20.0pt;line-height:

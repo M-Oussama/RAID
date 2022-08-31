@@ -59,6 +59,16 @@
                 margin-left: 205px !important;
 
             }
+            #title{
+                margin-right: 30% !important;
+            }
+            #logo{
+                margin-top: -21px;
+            }
+        }
+
+        #title{
+            margin-right: 13%;
         }
         -->
     </style>
@@ -70,8 +80,8 @@
 <div class=WordSection1>
 
     <p class=MsoNormal dir=RTL style='margin-bottom:0in;text-align:right;
-line-height:106%;direction:rtl;unicode-bidi:embed'><img width=176 height=140
-                                                        src="{{url('/assets/contractFiles/image001.jpg')}}" align=left
+line-height:106%;direction:rtl;unicode-bidi:embed'><img width=176 height=140 id="logo"
+                                                        src="{{url('/assets/contractFiles/image001.png')}}" align=left
                                                         hspace=12 alt="AUTOCOLLENT 52X62(2pcs)"><a name="_Hlk109482634"></a><b><span
                     lang=AR-DZ style='font-size:16.0pt;line-height:106%;font-family:AL-Gemah-Almajd'>شركـــــــة
 </span></b><b><span lang=AR-DZ style='font-size:20.0pt;line-height:106%;
@@ -113,7 +123,7 @@ rtl;unicode-bidi:embed'>
 center;line-height:normal;direction:rtl;unicode-bidi:embed'><span id="image2"
                                                                   style='position:absolute;z-index:-1895825920;left:0px;margin-left: 41%;
 margin-top:2px;width:355px;height:89px'><img width=455
-                                             src="{{url('/assets/contractFiles/image003.png')}}"></span><span lang=AR-DZ style='font-size:
+                                             src="{{url('/assets/contractFiles/image003.png')}}"></span><span id="title" lang=AR-DZ style='font-size:
 31.0pt;font-family:"Traditional Arabic",serif'>عقد عمل محدد المدة<br/>بالتوقيت الكامل رقم : 2022/{{str_pad($paper->id, 3, '0', STR_PAD_LEFT)}} </span></p>
 
 
@@ -301,9 +311,9 @@ line-height:normal;direction:rtl;unicode-bidi:embed'><b><u><span lang=AR-DZ
                                                                    style='font-size:14.0pt;font-family:"Traditional Arabic",serif'> </span></b><span
                     lang=AR-DZ style='font-size:14.0pt;font-family:"Traditional Arabic",serif'>تبدأ
     من تاريخ توظيفه.</span></p>
-
-
-
+    <p class=MsoNormal align=center dir=RTL style='margin-bottom:0in;text-align:
+center;line-height:25.0pt;direction:rtl;unicode-bidi:embed'><b><span
+                    lang=AR-DZ style='font-size:16.0pt;font-family:"Traditional Arabic",serif'>01/03</span></b></p>
 
     <p class=MsoNormal dir=RTL style='margin-bottom:0in;text-align:right;
 line-height:25.0pt;direction:rtl;unicode-bidi:embed'><b><span lang=AR-DZ
@@ -316,13 +326,9 @@ line-height:25.0pt;direction:rtl;unicode-bidi:embed'><b><span lang=AR-DZ
                 lang=AR-DZ style='font-size:14.0pt;font-family:"Traditional Arabic",serif'>
 أيام.  </span></p>
 
-    <p class=MsoNormal dir=RTL style='margin-bottom:0in;text-align:right;
-line-height:25.0pt;direction:rtl;unicode-bidi:embed'><span lang=AR-DZ
-                                                           style='font-size:14.0pt;font-family:"Traditional Arabic",serif'>&nbsp;</span></p>
 
-    <p class=MsoNormal align=center dir=RTL style='margin-bottom:0in;text-align:
-center;line-height:25.0pt;direction:rtl;unicode-bidi:embed'><b><span
-                    lang=AR-DZ style='font-size:16.0pt;font-family:"Traditional Arabic",serif'>01/03</span></b></p>
+
+
 
     <p class=MsoNormal dir=RTL style='margin-bottom:0in;text-align:right;
 line-height:25.0pt;direction:rtl;unicode-bidi:embed'><b><u><span lang=AR-DZ
@@ -493,7 +499,10 @@ line-height:normal;direction:rtl;unicode-bidi:embed'><b><span lang=AR-DZ
 center;line-height:normal;direction:rtl;unicode-bidi:embed'><b><span
                     lang=AR-DZ style='font-size:16.0pt;font-family:"Traditional Arabic",serif'>02/03</span></b></p>
 
-
+<br>
+<br>
+<br>
+<br>
 
     <p class=MsoNormal dir=RTL style='margin-bottom:0in;text-align:right;
 line-height:normal;direction:rtl;unicode-bidi:embed'><b><u><span lang=AR-DZ

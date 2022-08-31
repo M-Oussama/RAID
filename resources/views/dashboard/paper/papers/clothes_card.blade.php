@@ -61,7 +61,7 @@ center;line-height:normal;direction:rtl;unicode-bidi:embed'><b><u><span
 
     <p class=MsoNormal dir=RTL style='margin-bottom:0in;text-align:right;
 line-height:106%;direction:rtl;unicode-bidi:embed'><img width=146 height=116
-                                                        src="{{url('/assets/contractFiles/image001.jpg')}}" align=left hspace=12
+                                                        src="{{url('/assets/contractFiles/image001.png')}}" align=left hspace=12
                                                         alt="AUTOCOLLENT 52X62(2pcs)"><span dir=RTL></span><span lang=FR
                                                                                                                  style='font-family:"Traditional Arabic",serif'><span dir=RTL></span> </span><b><span
             lang=AR-DZ style='font-size:16.0pt;line-height:106%;font-family:AL-Gemah-Almajd'>شركـــــــة
