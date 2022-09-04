@@ -85,17 +85,18 @@
                     render: function (data, type, row) {
                         var employee = data.employee.surname + " "+ data.employee.name;
 
+
                         var export_contract = "";
                         var cancel_contract = "";
                         var paiement_pdf = "";
 
 
-                        if(data.cancel === 0)
+                        if(data.cancel == 0)
                             cancel_contract = '<a href=\"#\" data-toggle=\"modal\"  data-target=\"#cancelModal\" data-contract_id=\"' + data.id + '\" data-user_name=\"' + employee + '\" class=\"btn btn-sm btn-clean btn-icon\" title=\"الغاء العقد\">\
                                                                     <i class=\"fas fa-times\"></i>\
                                                         </a>\
                                                         ';
-                        if(data.extension === 0)
+                        if(data.extension == 0)
                             if( moment().format("YYYY-MM-DD") > data.end_date )
                                 export_contract = '<a href=\"#\" data-toggle=\"modal\"  data-target=\"#extensionModal\" data-contract_id=\"' + data.id + '\" data-user_name=\"' + employee + '\" class=\"btn btn-sm btn-clean btn-icon\" title=\"تمديد العقد\">\
                                                                     <i class=\"fas fa-pen-nib\"></i>\
