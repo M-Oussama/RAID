@@ -17,6 +17,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $post_location
  * @property string|null $start_date
  * @property string|null $end_date
+ * @property string|null $contract_length
+ * @property string|null $exp_end_date
+ * @property string|null $salary
  *
  *
  **/

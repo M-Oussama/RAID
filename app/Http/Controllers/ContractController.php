@@ -46,16 +46,42 @@ class ContractController extends Controller
 
 
     public function extendContract(Request $request,$id){
+
         $contract = Contract::find($id);
         $contract->extension = false;
         $contract->save();
         $request->employee_id = $contract->employee_id;
-        $this->store($request);
+        $start_date = date($request->start_date);
+        $end_date = date($request->end_date);
+
+
+
+        $contract = new Contract();
+        $contract->employee_id = $request->employee_id;
+        $contract->post = $request->post;
+        $contract->post_location = $request->post_location;
+        $contract->salary = $request->salary;
+        $contract->recruitment_date = $request->recruitment_date;
+        $contract->insurance_date = $request->insurance_date;
+        $contract->contract_length = $request->contract_length;
+        $contract->start_date = $start_date;
+        $contract->end_date = $end_date;
+        //$contract->exp_end_date = date($request->exp_end_date);
+
+        $contract->save();
+
+        $paper = new Paper();
+        $paper->paper_type_id = $request->paper_type_id;
+        $paper->contract_id = $contract->id;
+        $paper->employee_id = $request->employee_id;
+        $paper->date = date('Y-m-d');
+        $paper->save();
         return redirect("/dash/contracts");
 
     }
 
     public function store(Request $request){
+
 
         $start_date = date($request->start_date);
         $end_date = date($request->end_date);
@@ -78,6 +104,7 @@ class ContractController extends Controller
         $contract->recruitment_date = $request->recruitment_date;
         $contract->insurance_date = $request->insurance_date;
         $contract->contract_length = $request->contract_length;
+
         $contract->exp_contract_length = $request->exp_contract_length;
         $contract->start_date = $start_date;
         $contract->end_date = $end_date;

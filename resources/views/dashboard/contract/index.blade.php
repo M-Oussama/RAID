@@ -95,14 +95,14 @@
                                                                     <i class=\"fas fa-times\"></i>\
                                                         </a>\
                                                         ';
-                        if(data.extension)
+                        if(data.extension === 0)
                             if( moment().format("YYYY-MM-DD") > data.end_date )
                                 export_contract = '<a href=\"#\" data-toggle=\"modal\"  data-target=\"#extensionModal\" data-contract_id=\"' + data.id + '\" data-user_name=\"' + employee + '\" class=\"btn btn-sm btn-clean btn-icon\" title=\"تمديد العقد\">\
                                                                     <i class=\"fas fa-pen-nib\"></i>\
                                                         </a>\
                                                         ';
                         paiement_pdf = '<a href=\"#\" data-toggle=\"modal\"  data-target=\"#paiementModal\" data-contract_id=\"' + data.id + '\" data-user_name=\"' + employee + '\" class=\"btn btn-sm btn-clean btn-icon\" title=\"محضر تقاضي المستحقات \">\
-                                                                    <i class=\"fas fa-dollar\"></i>\
+                                                                    <i class=\"fas fa-dollar-sign\"></i>\
                                                         </a>\
                                                         ';
 
@@ -128,7 +128,7 @@
                                     </span>\
                                 </a>\
                             @endcan
-                                        @can('delete-user')
+                                        @can('delete-contract')
                                 <a href="#" data-toggle="modal"  data-target="#deleteModal" data-user_id="' + row.id + '" data-user_name="' + data.employee.name + '" class="btn btn-sm btn-clean btn-icon" title="Delete">\
                                     <span class="svg-icon svg-icon-md">\
                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">\
@@ -392,7 +392,7 @@
             <div class="modal-dialog" role="document">
                 <form id="deleteForm" action="dash/contracts/{id}" method="post">
                     @csrf
-                    @method('delete')
+                    @method('get')
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalFormTitle">هل أنت متأكد من استخراج محضر تقاضي المستحقات؟</h5>
@@ -484,27 +484,34 @@
                                    required/>
                             <span class="form-text text-muted">الرجاء ادخال الموقع</span>
                         </div>
-
-                        <div class="form-group col-sm-12 col-md-12">
-                            <label>تاريح بداية العقد :</label>
-                            <input type="date" name="start_date" value="{{old('start_date')}}" autocomplete="bday"
-                                   class="form-control form-control-solid" placeholder="أدخل تاريخ بداية العقد "/>
-                            <span class="form-text text-muted">الرجاء إدخال تاريخ بداية العقد </span>
-                        </div>
-
                         <div class="form-group col-sm-12 col-md-12">
                             <label>مدة العقد : </label>
-                            <select class="form-control"  name="contract_length" autocomplete="city" required>
-
-                                <option value="1" >عام واحد (12 شهر)</option>
-                                <option value="2" >ستة أشهر  (6 أشهر)</option>
-
-                            </select>
+                            <input type="text" name="contract_length" value="{{old('contract_length')}}" autocomplete="bday"
+                                   class="form-control form-control-solid" placeholder="أدخل مدة العقد " required/>
+                            <span class="form-text text-muted">الرجاء إدخال أدخل مدة العقد  </span>
                         </div>
+                        <div class="row  col-sm-12 col-md-12">
+                            <div class="form-group col-sm-12 col-md-6">
+                                <label>تاريح بداية تمديد العقد :</label>
+                                <input type="date" name="start_date" value="{{old('start_date')}}" autocomplete="bday"
+                                       class="form-control form-control-solid" placeholder="أدخل تاريخ بداية العقد " required/>
+                                <span class="form-text text-muted">الرجاء إدخال تاريخ بداية العقد </span>
+                            </div>
+
+                            <div class="form-group col-sm-12 col-md-6">
+                                <label>تاريح نهاية فترة تمديد العقد :</label>
+                                <input type="date" name="end_date" value="{{old('start_date')}}" autocomplete="bday"
+                                       class="form-control form-control-solid" placeholder="أدخل تاريخ نهاية فترة تمديد العقد " required/>
+                                <span class="form-text text-muted">الرجاء إدخال تاريخ نهاية فترة تمديد العقد </span>
+                            </div>
+                        </div>
+
+
+
                         <div class="form-group col-sm-12 col-md-12">
                             <label>الراتب   :</label>
                             <input type="number" name="salary" value="{{old('start_date')}}" autocomplete="bday"
-                                   class="form-control form-control-solid" placeholder="أدخل الراتب "/>
+                                   class="form-control form-control-solid" placeholder="أدخل الراتب " required/>
                             <span class="form-text text-muted">الرجاء إدخال الراتب </span>
                         </div>
                         <div class="modal-footer">

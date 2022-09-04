@@ -93,7 +93,7 @@ Route::post('dash/contracts/{id}/create', [ContractController::class, 'extendCon
 Route::post('dash/contracts/{id}/cancel', [ContractController::class, 'cancelContract']);
 Route::post('dash/contracts/cancel/{id}/pdf', [PaperController::class, 'exportCancelPDF']);
 Route::post('dash/contracts/cancel/{id}/pdf', [PaperController::class, 'exportCancelPDF']);
-Route::post('dash/contracts/{id}/pdf/5', [PaperController::class, 'exportPaiementPDF']);
+Route::get('dash/contracts/{id}/pdf/5', [PaperController::class, 'exportPaiementPDF']);
 
 
 

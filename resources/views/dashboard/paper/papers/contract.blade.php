@@ -119,13 +119,25 @@ rtl;unicode-bidi:embed'>
         </tr>
     </table>
 
-    <p class=MsoNormal align=center dir=RTL style='margin-bottom:0in;text-align:
-center;line-height:normal;direction:rtl;unicode-bidi:embed'><span id="image2"
-                                                                  style='position:absolute;z-index:-1895825920;left:0px;margin-left: 41%;
-margin-top:2px;width:355px;height:89px'><img width=455
-                                             src="{{url('/assets/contractFiles/image003.png')}}"></span><span id="title" lang=AR-DZ style='font-size:
-31.0pt;font-family:"Traditional Arabic",serif'>عقد عمل محدد المدة<br/>بالتوقيت الكامل رقم : 2022/{{str_pad($paper->id, 3, '0', STR_PAD_LEFT)}} </span></p>
+    @if($contract->exp_end_date!=null)
 
+        <p class=MsoNormal align=center dir=RTL style='margin-bottom:0in;text-align:
+    center;line-height:normal;direction:rtl;unicode-bidi:embed'><span id="image2"
+                                                                      style='position:absolute;z-index:-1895825920;left:0px;margin-left: 41%;
+    margin-top:2px;width:355px;height:89px'><img width=455
+                                                 src="{{url('/assets/contractFiles/image003.png')}}"></span><span id="title" lang=AR-DZ style='font-size:
+    31.0pt;font-family:"Traditional Arabic",serif'>عقد عمل محدد المدة<br/>بالتوقيت الكامل رقم : 2022/{{str_pad($paper->id, 3, '0', STR_PAD_LEFT)}} </span></p>
+
+    @else
+
+        <p class=MsoNormal align=center dir=RTL style='margin-bottom:0in;text-align:
+    center;line-height:normal;direction:rtl;unicode-bidi:embed'><span id="image2"
+                                                                      style='position:absolute;z-index:-1895825920;left:0px;margin-left: 41%;
+    margin-top:2px;width:355px;height:89px'><img width=455
+                                                 src="{{url('/assets/contractFiles/image003.png')}}"></span><span id="title" lang=AR-DZ style='font-size:
+    31.0pt;font-family:"Traditional Arabic",serif'>تمديد عقد عمل محدد المدة<br/>بالتوقيت الكامل رقم : 2022/{{str_pad($paper->id, 3, '0', STR_PAD_LEFT)}} </span></p>
+
+    @endif
 
     <p class=MsoNormal dir=RTL style='text-align:right;line-height:50%;direction:
 rtl;unicode-bidi:embed'><b><u><span lang=AR-DZ style='font-size:12.0pt;
@@ -299,34 +311,40 @@ line-height:normal;direction:rtl;unicode-bidi:embed'><b><u><span lang=AR-DZ
                     lang=AR-DZ style='font-size:14.0pt;font-family:"Traditional Arabic",serif'>:
 فترة التجربة</span></b></p>
 
-
-        <p class=MsoNormal dir=RTL style='margin-bottom:0in;text-align:right;
-    line-height:normal;direction:rtl;unicode-bidi:embed'><b><span lang=AR-DZ
-                                                                  style='font-size:14.0pt;font-family:"Traditional Arabic",serif'>ــــــ</span></b><span
-                    lang=AR-DZ style='font-size:14.0pt;font-family:"Traditional Arabic",serif'> 
-    يخضع العامل لفترة تجريبية لمدة: <u>&quot;<b></b></u></span><b><u><span
-                            lang=AR-DZ style='font-size:13.0pt;font-family:"Arial",sans-serif'>{{$contract->exp_contract_length}}</span></u></b><b><u><span
-                            lang=AR-DZ style='font-size:14.0pt;font-family:"Traditional Arabic",serif'>
-    </span></u></b><b><span lang=AR-DZ
-                                                                   style='font-size:14.0pt;font-family:"Traditional Arabic",serif'> </span></b><span
-                    lang=AR-DZ style='font-size:14.0pt;font-family:"Traditional Arabic",serif'>تبدأ
-    من تاريخ توظيفه.</span></p>
+    @if($contract->exp_end_date !=null)
+                <p class=MsoNormal dir=RTL style='margin-bottom:0in;text-align:right;
+            line-height:normal;direction:rtl;unicode-bidi:embed'><b><span lang=AR-DZ
+                                                                          style='font-size:14.0pt;font-family:"Traditional Arabic",serif'>ــــــ</span></b><span
+                            lang=AR-DZ style='font-size:14.0pt;font-family:"Traditional Arabic",serif'> 
+            يخضع العامل لفترة تجريبية لمدة: <u>&quot;<b></b></u></span><b><u><span
+                                    lang=AR-DZ style='font-size:13.0pt;font-family:"Arial",sans-serif'>{{$contract->exp_contract_length}}</span></u></b><b><u><span
+                                    lang=AR-DZ style='font-size:14.0pt;font-family:"Traditional Arabic",serif'>
+            </span></u></b><b><span lang=AR-DZ
+                                                                           style='font-size:14.0pt;font-family:"Traditional Arabic",serif'> </span></b><span
+                            lang=AR-DZ style='font-size:14.0pt;font-family:"Traditional Arabic",serif'>تبدأ
+            من تاريخ توظيفه.</span></p>
+    @endif
     <p class=MsoNormal align=center dir=RTL style='margin-bottom:0in;text-align:
 center;line-height:25.0pt;direction:rtl;unicode-bidi:embed'><b><span
                     lang=AR-DZ style='font-size:16.0pt;font-family:"Traditional Arabic",serif'>01/03</span></b></p>
 
-    <p class=MsoNormal dir=RTL style='margin-bottom:0in;text-align:right;
-line-height:25.0pt;direction:rtl;unicode-bidi:embed'><b><span lang=AR-DZ
-                                                              style='font-size:14.0pt;font-family:"Traditional Arabic",serif'>ــــــ</span></b><span
-                lang=AR-DZ style='font-size:14.0pt;font-family:"Traditional Arabic",serif'>
-يوضع العامل أثناء هذه الفترة تحت الرقابة للتأكد من الكفاءة المهنية والانضباط
-وحسن السلوك والأخلاق وفي حالة العكس يفسخ العقد تلقائيا بدون تعويض وإشعار. العامل
-ملزم بالإخطار بذلك بمدة لا تقل عن عشرة </span><b><span lang=AR-DZ
-                                                       style='font-size:13.0pt;font-family:"Arial",sans-serif'>10</span></b><span
-                lang=AR-DZ style='font-size:14.0pt;font-family:"Traditional Arabic",serif'>
-أيام.  </span></p>
+    @if($contract->exp_end_date == null)
+        <br/>
+        <br/>
+    @endif
+    @if($contract->exp_end_date !=null)
+            <p class=MsoNormal dir=RTL style='margin-bottom:0in;text-align:right;
+        line-height:25.0pt;direction:rtl;unicode-bidi:embed'><b><span lang=AR-DZ
+                                                                      style='font-size:14.0pt;font-family:"Traditional Arabic",serif'>ــــــ</span></b><span
+                        lang=AR-DZ style='font-size:14.0pt;font-family:"Traditional Arabic",serif'>
+        يوضع العامل أثناء هذه الفترة تحت الرقابة للتأكد من الكفاءة المهنية والانضباط
+        وحسن السلوك والأخلاق وفي حالة العكس يفسخ العقد تلقائيا بدون تعويض وإشعار. العامل
+        ملزم بالإخطار بذلك بمدة لا تقل عن عشرة </span><b><span lang=AR-DZ
+                                                               style='font-size:13.0pt;font-family:"Arial",sans-serif'>10</span></b><span
+                        lang=AR-DZ style='font-size:14.0pt;font-family:"Traditional Arabic",serif'>
+        أيام.  </span></p>
 
-
+    @endif
 
 
 
@@ -694,9 +712,9 @@ margin-bottom:0in;margin-left:56.65pt;text-align:center;line-height:normal'><spa
 <div class="page-break">
 
 </div>
-
-@include('dashboard.paper.papers.contract_2')
-
+@if($contract->exp_end_date !=null)
+    @include('dashboard.paper.papers.contract_2')
+@endif
 </body>
 
 </html>
